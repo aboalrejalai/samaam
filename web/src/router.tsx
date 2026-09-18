@@ -9,6 +9,7 @@ import GapsPage from '@/routes/GapsPage'
 import KnowledgeBasePage from '@/routes/KnowledgeBasePage'
 import NotFoundPage from '@/routes/NotFoundPage'
 import ReadinessPage from '@/routes/ReadinessPage'
+import SlidesPage from '@/routes/SlidesPage'
 
 /** The six screens of FRONTEND-PLAN Part 1-b, plus Phase 1's gate page. */
 export const router = createBrowserRouter([
@@ -23,6 +24,7 @@ export const router = createBrowserRouter([
       { path: 'gaps', Component: GapsPage },
       { path: 'audit', Component: AuditPage },
       { path: 'readiness', Component: ReadinessPage },
+      { path: 'slides', Component: SlidesPage },
       { path: 'dev/primitives', Component: DevPrimitivesPage },
       { path: '*', Component: NotFoundPage },
     ],

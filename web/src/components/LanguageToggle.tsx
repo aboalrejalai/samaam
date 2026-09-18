@@ -4,11 +4,11 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 import { LANGUAGES, isLanguage, type Language } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
-const LABEL: Record<Language, string> = { en: 'EN', ar: 'AR' }
+const LABEL: Record<Language, string> = { en: 'EN', ar: 'عربي' }
 
 /**
- * English is the default; Arabic flips the document to dir="rtl". Both labels
- * stay visible so a judge can see the toggle exists without hovering it.
+ * English is the default; Arabic flips the document to dir="rtl". Same pill
+ * shape as the deck's Slides | Q&A switch. Labels: EN / عربي.
  */
 export function LanguageToggle({ className, ...props }: React.ComponentProps<'div'>) {
   const { t, i18n } = useTranslation()
@@ -18,7 +18,10 @@ export function LanguageToggle({ className, ...props }: React.ComponentProps<'di
     <div
       role="group"
       aria-label={t('shell.language')}
-      className={cn('inline-flex items-center gap-0.5 rounded-lg bg-muted p-0.5', className)}
+      className={cn(
+        'inline-flex items-center rounded-full border border-border bg-muted p-0.5',
+        className,
+      )}
       {...props}
     >
       {LANGUAGES.map((language) => {
@@ -27,11 +30,15 @@ export function LanguageToggle({ className, ...props }: React.ComponentProps<'di
           <Tooltip key={language}>
             <TooltipTrigger asChild>
               <Button
-                variant={active ? 'secondary' : 'ghost'}
+                variant="ghost"
                 size="xs"
                 aria-pressed={active}
                 onClick={() => void i18n.changeLanguage(language)}
-                className={cn('font-mono', active && 'shadow-ring')}
+                className={cn(
+                  'rounded-full px-2.5 font-semibold tracking-wide shadow-none',
+                  active && 'bg-background text-foreground shadow-sm',
+                  !active && 'text-muted-foreground',
+                )}
               >
                 {LABEL[language]}
               </Button>

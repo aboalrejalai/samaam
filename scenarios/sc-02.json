@@ -1,7 +1,7 @@
 {
   "id": "SC-02",
-  "name": "الانحراف التشغيلي",
-  "name_en": "Operational Drift / Edge Case",
+  "name": "مريضة كليتها ضعيفة — الجرعة أعلى من المسموح",
+  "name_en": "Weak kidneys — dose above the limit",
   "expected_verdict": "VIOLATION",
   "patient": {
     "synthetic": true,

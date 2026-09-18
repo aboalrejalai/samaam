@@ -4,6 +4,7 @@ import {
   Gauge,
   LayoutGrid,
   Library,
+  Presentation,
   ScanLine,
   ScrollText,
   Shapes,
@@ -18,7 +19,16 @@ import {
 export interface RouteEntry {
   path: string
   /** Key under `nav.` in the locale files. */
-  key: 'console' | 'data' | 'connectors' | 'kb' | 'gaps' | 'audit' | 'readiness' | 'primitives'
+  key:
+    | 'console'
+    | 'data'
+    | 'connectors'
+    | 'kb'
+    | 'gaps'
+    | 'audit'
+    | 'readiness'
+    | 'slides'
+    | 'primitives'
   icon: LucideIcon
   endpoint: string
 }
@@ -31,6 +41,7 @@ export const NAV_ROUTES: readonly RouteEntry[] = [
   { path: '/gaps', key: 'gaps', icon: LayoutGrid, endpoint: 'GET /kb/gaps' },
   { path: '/audit', key: 'audit', icon: ScrollText, endpoint: 'GET /audit' },
   { path: '/readiness', key: 'readiness', icon: Gauge, endpoint: 'GET /framework' },
+  { path: '/slides', key: 'slides', icon: Presentation, endpoint: '—' },
 ]
 
 /** Not part of the product. Phase 1's gate: every primitive in every state. */

@@ -10,6 +10,7 @@ regulation.
 `ITU AI Readiness Hackathon — Kingdom of Saudi Arabia` · Health / Radiology track
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+![Award](https://img.shields.io/badge/ITU%20Hackathon-3rd%20Prize-gold)
 ![Standard](https://img.shields.io/badge/ITU--T-Y.3172-0ea5e9)
 ![Data](https://img.shields.io/badge/data-100%25%20synthetic-success)
 ![Keys](https://img.shields.io/badge/API%20keys-none%20in%20repo-success)
@@ -18,6 +19,30 @@ regulation.
 
 > ⚠️ **بيانات محاكاة لأغراض الهاكاثون فقط** — every patient record in this
 > repository is synthetic. No real or realistic patient data exists here.
+
+---
+
+## Award — 3rd Prize (ITU AI Readiness Hackathon)
+
+**Team Samaam** won **3rd Prize** at the
+[ITU AI Readiness Hackathon — Kingdom of Saudi Arabia](https://aiforgood.itu.int/)
+(AI for Good · ITU AI/ML in 5G Challenge), awarded **15 September 2026** by the
+International Telecommunication Union for the innovation **Samaam**.
+
+| | |
+| :--- | :--- |
+| **Team** | Team Samaam |
+| **Leader** | Mohammed Nadher Abo Alrejal |
+| **Members** | Badour Alsehli · Haneen Saleh Alharbi · Norah Abdullah Alsahli |
+| **Hosts / partners** | ITU · SDAIA · UNESCO · ICAIRE |
+
+<p align="center">
+  <img
+    src="docs/awards/itu-ai-readiness-hackathon-3rd-prize-2026.jpg"
+    alt="ITU Winner Certificate — 3rd Prize — Team Samaam"
+    width="720"
+  />
+</p>
 
 ---
 
@@ -284,4 +309,9 @@ docs/         Concept, hackathon guide, knowledge base, research passes
 
 ## License
 
-[MIT](LICENSE).
+[MIT](LICENSE) — Copyright © 2026 Team Samaam
+(Mohammed Nadher Abo Alrejal · Badour Alsehli · Haneen Saleh Alharbi · Norah Abdullah Alsahli).
+
+Open source does **not** mean public domain. The team retains copyright.
+Registration with the Saudi Authority for Intellectual Property (SAIP) is
+compatible with this license and strengthens formal evidence of authorship.

@@ -1,7 +1,7 @@
 {
   "id": "SC-01",
-  "name": "التدفق الطبيعي",
-  "name_en": "Baseline / Compliant Path",
+  "name": "مريضة كليتها سليمة — الجرعة نظامية",
+  "name_en": "Healthy kidneys — dose within limits",
   "expected_verdict": "COMPLIANT",
   "patient": {
     "synthetic": true,

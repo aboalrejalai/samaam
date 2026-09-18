@@ -23,14 +23,10 @@ import { KB_COLLECTIONS, type KbCollection } from '@/types/api'
  * does nothing is worse in a live demo than one that is absent — the first
  * judge to press it finds out. Those two slots take the submit button and the
  * verified-records filter instead, both of which do something.
+ *
+ * Suggested questions follow the UI language and map to judge Q2 / Q4 / Q5 / Q7
+ * so a live KB search can answer the table card without switching scripts.
  */
-
-/** The first is the query the demo script uses; one click and it is ready. */
-const SUGGESTIONS = [
-  'متى يوقف الميتفورمين قبل الصبغة اليودية؟',
-  'What is the national diagnostic reference level for abdomen and pelvis CT?',
-  'هل يجوز نقل بيانات المرضى الصحية خارج المملكة؟',
-] as const
 
 const RESULT_COUNTS = [5, 8, 12] as const
 
@@ -58,6 +54,10 @@ export function SearchComposer({
   const { t } = useTranslation()
   const field = useRef<HTMLTextAreaElement>(null)
   const ready = draft.trim().length > 1
+  const rawExamples = t('kb.examples', { returnObjects: true })
+  const suggestions = Array.isArray(rawExamples)
+    ? rawExamples.filter((s): s is string => typeof s === 'string')
+    : []
 
   function grow(el: HTMLTextAreaElement) {
     el.style.height = 'auto'
@@ -109,7 +109,7 @@ export function SearchComposer({
           </DropdownMenuTrigger>
           <DropdownMenuContent align="start" className="max-w-xs">
             <DropdownMenuLabel>{t('kb.suggestions')}</DropdownMenuLabel>
-            {SUGGESTIONS.map((s) => (
+            {suggestions.map((s) => (
               <DropdownMenuItem
                 key={s}
                 dir={scriptDirection(s)}

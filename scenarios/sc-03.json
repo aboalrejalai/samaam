@@ -1,7 +1,7 @@
 {
   "id": "SC-03",
-  "name": "الانتهاك الجدلي",
-  "name_en": "Controversial Privacy / Ethics Breach",
+  "name": "تصدير سجلات للتسويق خارج المملكة",
+  "name_en": "Export records abroad for marketing",
   "expected_verdict": "VIOLATION",
   "request": {
     "actor": "integration service account",

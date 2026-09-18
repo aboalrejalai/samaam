@@ -27,9 +27,43 @@ export function DecisionPanel({ result, explanation, explaining }: DecisionPanel
   const renalFailed = policy.checks.some(
     (c) => c.rule === 'renal_prophylaxis' && c.status === 'FAIL',
   )
+  const privacyFailed = policy.checks.some((c) =>
+    ['health_data_minimisation', 'lawful_basis', 'cross_border'].includes(c.rule)
+    && c.status === 'FAIL',
+  )
+
+  const doseReading = dose?.readings.find((r) => r.limit != null && r.measured > (r.limit ?? 0))
+    ?? dose?.readings[0]
+
+  let summary: string
+  if (device.overridden_by) {
+    summary = t('console.resultOverride')
+  } else if (!policy.blocked && device.status === 200) {
+    summary = t('console.resultSent')
+  } else if (privacyFailed || device.session_terminated) {
+    summary = t('console.resultBlockedPrivacy')
+  } else if (dose?.status === 'FAIL' && doseReading?.limit != null) {
+    summary = t('console.resultBlockedDose', {
+      measured: doseReading.measured,
+      unit: doseReading.unit,
+      limit: doseReading.limit,
+    })
+  } else {
+    summary = t('console.resultBlocked')
+  }
 
   return (
     <div className="space-y-4">
+      <p
+        className={
+          policy.blocked && !device.overridden_by
+            ? 'rounded-md border border-danger-strong/40 bg-danger/10 px-3 py-2 text-sm font-semibold text-danger-strong'
+            : 'rounded-md border border-border bg-muted px-3 py-2 text-sm font-semibold text-foreground'
+        }
+      >
+        {summary}
+      </p>
+
       <VerdictBanner
         verdict={policy.verdict}
         action={policy.action}

@@ -35,7 +35,7 @@ const EMPTY_REQUEST: Requested = {
 }
 
 export default function ConsolePage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const location = useLocation()
   const transit = usePipelineTransit()
   const { data: scenarios } = useScenarios()
@@ -49,6 +49,8 @@ export default function ConsolePage() {
   const [explanation, setExplanation] = useState<string | null>(null)
   const [explaining, setExplaining] = useState(false)
   const [offline, setOffline] = useState(false)
+
+  const useEnglish = i18n.resolvedLanguage === 'en'
 
   const clinical = (scenarios ?? []).filter(
     (s): s is ClinicalScenario => 'patient' in s && s.patient !== undefined,
@@ -154,7 +156,7 @@ export default function ConsolePage() {
             disabled={pending}
           >
             <span className="font-mono text-xs">{scenario.id}</span>
-            <span className="ms-2">{scenario.name}</span>
+            <span className="ms-2">{useEnglish ? scenario.name_en : scenario.name}</span>
           </Button>
         ))}
       </div>

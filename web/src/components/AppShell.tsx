@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Outlet } from 'react-router'
+import { Outlet, useLocation } from 'react-router'
 import { AppSidebar } from '@/components/app-sidebar'
 import { LanguageToggle } from '@/components/LanguageToggle'
 import { SyntheticNotice } from '@/components/SyntheticNotice'
@@ -15,6 +15,8 @@ import { KbSearchProvider } from '@/lib/kb-search'
  */
 export function AppShell() {
   const { t } = useTranslation()
+  const { pathname } = useLocation()
+  const onSlides = pathname.startsWith('/slides')
 
   return (
     <KbSearchProvider>
@@ -32,8 +34,15 @@ export function AppShell() {
           <ThemeToggle />
         </header>
 
-        {/* SidebarInset is already the page's <main>; this is its padding box. */}
-        <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
+        {/* SidebarInset is already the page's <main>; this is its padding box.
+            Slides drop padding so the deck iframe fills the content pane. */}
+        <div
+          className={
+            onSlides
+              ? 'flex min-h-0 flex-1 flex-col p-0'
+              : 'flex flex-1 flex-col gap-6 p-4 md:p-6'
+          }
+        >
           <Outlet />
         </div>
       </SidebarInset>

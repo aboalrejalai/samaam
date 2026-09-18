@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>صِمَام · Samaam — Slides &amp; Judge Q&amp;A</title>
+  <style>
+@font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2") format("woff2");
+      unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-latin-400-normal.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-latin-ext-400-normal.woff2") format("woff2");
+      unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-arabic-500-normal.woff2") format("woff2");
+      unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-latin-500-normal.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 500;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-latin-ext-500-normal.woff2") format("woff2");
+      unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2") format("woff2");
+      unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-latin-600-normal.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-latin-ext-600-normal.woff2") format("woff2");
+      unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2") format("woff2");
+      unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-latin-700-normal.woff2") format("woff2");
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    @font-face {
+      font-family: "IBM Plex Sans Arabic";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("./fonts/ibm-plex-sans-arabic-latin-ext-700-normal.woff2") format("woff2");
+      unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    
+    :root {
+      --background: oklch(0.99 0.002 95);
+      --foreground: oklch(0.22 0.02 255);
+      --card: oklch(1 0 0);
+      --muted: oklch(0.96 0.005 95);
+      --muted-foreground: oklch(0.45 0.02 255);
+      --border: oklch(0.88 0.01 255);
+      --primary: oklch(0.45 0.12 250);
+      --primary-strong: oklch(0.38 0.14 250);
+      --primary-foreground: oklch(0.99 0 0);
+      --danger: oklch(0.55 0.2 25);
+      --danger-strong: oklch(0.45 0.2 25);
+      --success-strong: oklch(0.42 0.12 150);
+      --warn-strong: oklch(0.55 0.14 75);
+      --radius: 0.625rem;
+      --font: "IBM Plex Sans Arabic", system-ui, sans-serif;
+      --chrome-h: 3.5rem;
+      --nav-btn: 2.75rem;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      background: var(--background);
+      color: var(--foreground);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+    body.mode-slides { overflow: hidden; }
+    body.mode-qa { overflow: auto; padding-bottom: 4.5rem; }
+    body.lang-en .t.ar { display: none !important; }
+    body.lang-ar .t.en { display: none !important; }
+    body.lang-ar { direction: rtl; }
+
+    .top-chrome {
+      position: sticky; top: 0; z-index: 40;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0.75rem; min-height: var(--chrome-h);
+      padding: 0.55rem clamp(0.75rem, 3vw, 2rem);
+      background: color-mix(in oklch, var(--background) 92%, transparent);
+      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 0.65rem;
+      color: inherit; text-decoration: none; flex-shrink: 0;
+    }
+    .mark {
+      display: flex; align-items: center; justify-content: center;
+      width: 2rem; height: 2rem; border-radius: 0.4rem;
+      background: var(--primary); color: var(--primary-foreground); flex-shrink: 0;
+    }
+    .mark svg { width: 1rem; height: 1rem; }
+    .brand-text { display: grid; line-height: 1.15; }
+    .brand-text .ar-name { font-weight: 600; font-size: 1rem; }
+    .brand-text .en-name {
+      font-size: 0.7rem; letter-spacing: 0.14em; font-weight: 500;
+      color: var(--muted-foreground); font-variant-numeric: tabular-nums;
+    }
+    .chrome-end {
+      display: flex; align-items: center; gap: 0.55rem;
+      min-width: 0; justify-content: flex-end; flex: 1; flex-wrap: wrap;
+    }
+    .mode-switch, .lang-switch {
+      display: inline-flex; padding: 0.2rem;
+      border: 1px solid var(--border); border-radius: 999px;
+      background: var(--muted); flex-shrink: 0;
+    }
+    .mode-switch button, .lang-switch button {
+      appearance: none; border: 0; background: transparent;
+      font: inherit; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.04em; padding: 0.35rem 0.85rem;
+      border-radius: 999px; color: var(--muted-foreground); cursor: pointer;
+    }
+    .mode-switch button[aria-pressed="true"],
+    .lang-switch button[aria-pressed="true"] {
+      background: var(--background); color: var(--foreground);
+      box-shadow: 0 0 0 1px var(--border);
+    }
+    .mode-switch button:focus-visible,
+    .lang-switch button:focus-visible {
+      outline: 2px solid var(--primary); outline-offset: 2px;
+    }
+    .notice {
+      font-size: 0.7rem; color: var(--muted-foreground);
+      text-align: end; line-height: 1.3; max-width: 16rem;
+    }
+    .notice strong { color: var(--foreground); font-weight: 600; }
+    .notice .short { display: none; }
+
+    .deck {
+      display: none; height: calc(100% - var(--chrome-h));
+      width: 100%; position: relative; background: var(--background);
+    }
+    body.mode-slides .deck { display: block; }
+
+    .slide {
+      display: none; position: absolute; inset: 0;
+      padding: clamp(1rem, 2.5vh, 1.75rem) clamp(1.5rem, 4vw, 3rem);
+      flex-direction: column; background: var(--background);
+    }
+    .slide.active { display: flex; }
+    .body {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; gap: clamp(0.85rem, 2vh, 1.5rem); min-height: 0;
+    }
+    .eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--primary-strong);
+    }
+    body.lang-ar .eyebrow { letter-spacing: 0; text-transform: none; }
+    h1 {
+      font-size: clamp(1.4rem, 3vw, 2.2rem); font-weight: 700;
+      letter-spacing: -0.02em; line-height: 1.25; max-width: 24ch;
+    }
+    body.lang-ar h1 { letter-spacing: 0; max-width: 28ch; }
+    .lead {
+      font-size: clamp(0.92rem, 1.3vw, 1.1rem); line-height: 1.45;
+      color: var(--muted-foreground); max-width: 52rem;
+    }
+    .lead strong { color: var(--foreground); font-weight: 600; }
+    .foot {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border);
+      flex-shrink: 0; font-size: 0.72rem; color: var(--muted-foreground);
+    }
+    .dots { display: flex; gap: 0.45rem; align-items: center; }
+    .dot {
+      width: 0.55rem; height: 0.55rem; border-radius: 999px;
+      background: var(--border); border: 0; padding: 0; cursor: pointer;
+    }
+    .dot.on { background: var(--primary); }
+    .dot:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+    .hint { font-variant-numeric: tabular-nums; }
+
+    .nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      z-index: 20; width: var(--nav-btn); height: var(--nav-btn);
+      border-radius: 999px; border: 1px solid var(--border);
+      background: color-mix(in oklch, var(--background) 88%, transparent);
+      backdrop-filter: blur(6px); color: var(--foreground);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.2s ease, background 0.15s ease;
+      box-shadow: 0 1px 3px color-mix(in oklch, var(--foreground) 8%, transparent);
+    }
+    .deck:hover .nav-btn:not(:disabled),
+    .deck:focus-within .nav-btn:not(:disabled) { opacity: 1; }
+    .nav-btn:disabled { opacity: 0 !important; cursor: default; pointer-events: none; }
+    .nav-btn.prev { inset-inline-start: 0.65rem; }
+    .nav-btn.next { inset-inline-end: 0.65rem; }
+    .nav-btn svg { width: 1.15rem; height: 1.15rem; }
+    .nav-btn:hover:not(:disabled) { background: var(--card); }
+    .nav-btn:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; opacity: 1; }
+
+    .split {
+      display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: clamp(1.25rem, 3vw, 2.5rem); align-items: center;
+    }
+    .pipeline {
+      display: flex; flex-direction: column; border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; background: var(--card);
+    }
+    .node {
+      display: grid; grid-template-columns: 3.25rem 1fr; align-items: center;
+      gap: 0.85rem; padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--border);
+    }
+    .node:last-child { border-bottom: none; }
+    .node .sym {
+      font-weight: 600; font-size: 0.85rem; font-variant-numeric: tabular-nums;
+      letter-spacing: 0.04em; color: var(--muted-foreground);
+    }
+    .node .lbl { font-size: 0.88rem; font-weight: 500; }
+    .node .sub { font-size: 0.72rem; color: var(--muted-foreground); margin-top: 0.1rem; }
+    .node.p-node {
+      background: color-mix(in oklch, var(--danger) 8%, white);
+      border-block: 1px solid color-mix(in oklch, var(--danger) 35%, var(--border));
+    }
+    .node.p-node .sym { color: var(--danger-strong); font-weight: 700; }
+    .node.p-node .lbl { font-weight: 700; }
+    .valve-closed {
+      display: inline-flex; margin-inline-start: 0.5rem; font-size: 0.68rem;
+      font-weight: 600; color: var(--danger-strong); letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    body.lang-ar .valve-closed { letter-spacing: 0; text-transform: none; }
+    .aside-note {
+      margin-top: 0.85rem; padding: 0.75rem 0.9rem;
+      border-inline-start: 3px solid var(--primary); background: var(--muted);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 0.85rem; line-height: 1.4;
+    }
+    body.lang-ar .aside-note { border-radius: var(--radius) 0 0 var(--radius); }
+    .aside-note code {
+      font-family: inherit; font-weight: 600; font-variant-numeric: tabular-nums;
+    }
+
+    .two-col {
+      display: grid; grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(1rem, 2.5vw, 2rem); align-items: stretch; min-height: 0;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: clamp(0.72rem, 1.05vw, 0.88rem); }
+    th, td {
+      text-align: start; padding: 0.55rem 0.65rem;
+      border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.35;
+    }
+    th {
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted-foreground);
+    }
+    body.lang-ar th { letter-spacing: 0; text-transform: none; }
+    td.mono, .mono { font-variant-numeric: tabular-nums; font-weight: 500; }
+    .panel {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; display: flex; flex-direction: column; background: var(--card);
+    }
+    .panel-h {
+      padding: 0.55rem 0.85rem; background: var(--muted);
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--muted-foreground);
+      border-bottom: 1px solid var(--border);
+    }
+    body.lang-ar .panel-h { letter-spacing: 0; text-transform: none; }
+    .dim-list { list-style: none; }
+    .dim-list li { padding: 0.7rem 0.85rem; border-bottom: 1px solid var(--border); }
+    .dim-list li:last-child { border-bottom: none; }
+    .dim-list .id {
+      font-size: 0.7rem; font-weight: 600; font-variant-numeric: tabular-nums;
+      color: var(--primary-strong); letter-spacing: 0.04em;
+    }
+    .dim-list .name { font-weight: 600; font-size: 0.92rem; margin-top: 0.15rem; }
+    .dim-list .ev { font-size: 0.78rem; color: var(--muted-foreground); margin-top: 0.25rem; line-height: 1.35; }
+    .claim { margin-top: 0.65rem; font-size: 0.78rem; color: var(--muted-foreground); }
+
+    .steps {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+    .step {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 0.85rem 0.9rem; background: var(--card);
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .step .n {
+      width: 1.6rem; height: 1.6rem; border-radius: 999px;
+      background: var(--primary); color: var(--primary-foreground);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; font-variant-numeric: tabular-nums;
+    }
+    .step h2 { font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+    .step p { font-size: 0.78rem; color: var(--muted-foreground); line-height: 1.4; }
+    .outcomes {
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.65rem; margin-top: 0.25rem;
+    }
+    .out {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 0.7rem 0.8rem; background: var(--muted); font-size: 0.78rem; line-height: 1.35;
+    }
+    .out strong { display: block; font-size: 0.72rem; margin-bottom: 0.25rem; letter-spacing: 0.04em; }
+    .out .mono { color: var(--foreground); }
+
+    .gaps { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+    .gap {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1rem 1.1rem; background: var(--card);
+    }
+    .gap .gid {
+      font-size: 0.7rem; font-weight: 600; font-variant-numeric: tabular-nums;
+      color: var(--muted-foreground); letter-spacing: 0.06em;
+    }
+    .gap h2 { font-size: clamp(0.95rem, 1.35vw, 1.1rem); font-weight: 700; margin: 0.4rem 0 0.55rem; line-height: 1.3; }
+    .gap p { font-size: 0.82rem; color: var(--muted-foreground); line-height: 1.4; }
+    .gap .rec {
+      margin-top: 0.7rem; padding-top: 0.65rem; border-top: 1px dashed var(--border);
+      font-size: 0.8rem; font-weight: 600; line-height: 1.4; color: var(--foreground);
+    }
+    .innovation {
+      margin-top: 0.35rem; padding: 0.85rem 1rem;
+      border: 1px solid color-mix(in oklch, var(--primary) 35%, var(--border));
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--primary) 5%, white);
+      font-size: 0.88rem; line-height: 1.45;
+    }
+    .innovation > span {
+      display: block; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--primary-strong); margin-bottom: 0.35rem;
+    }
+    body.lang-ar .innovation > span { letter-spacing: 0; text-transform: none; }
+
+    #qa-view { display: none; max-width: 52rem; margin: 0 auto; padding: 1.25rem clamp(1rem, 4vw, 2rem) 2rem; }
+    body.mode-qa #qa-view { display: block; }
+    .qa-intro { margin-bottom: 1.25rem; }
+    .qa-intro h1 { max-width: none; font-size: clamp(1.25rem, 2.5vw, 1.75rem); margin: 0.35rem 0 0.5rem; }
+    .qa-intro p { font-size: 0.88rem; color: var(--muted-foreground); line-height: 1.45; }
+    .qa-card {
+      border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1rem 1.1rem; margin-bottom: 1rem; background: var(--card);
+    }
+    .qa-card .qnum {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+      color: var(--primary-strong); font-variant-numeric: tabular-nums;
+    }
+    body.lang-ar .qa-card .qnum { letter-spacing: 0; }
+    .qa-card h3 { font-size: 1.05rem; font-weight: 700; margin: 0.35rem 0 0.85rem; line-height: 1.35; }
+    .qa-card h4 {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--muted-foreground); margin: 0.75rem 0 0.35rem;
+    }
+    body.lang-ar .qa-card h4 { letter-spacing: 0; text-transform: none; }
+    .qa-card .why { font-size: 0.88rem; color: var(--muted-foreground); line-height: 1.4; }
+    .qa-card .say {
+      font-size: 0.92rem; line-height: 1.45;
+      border-inline-start: 3px solid var(--primary);
+      padding: 0.55rem 0.75rem; background: var(--muted);
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+    body.lang-ar .qa-card .say {
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+    .qa-card ol {
+      margin-inline-start: 1.15rem; font-size: 0.88rem; line-height: 1.45;
+    }
+    .qa-card ol li { margin-bottom: 0.25rem; }
+    .demo-line {
+      margin-top: 0.85rem; padding: 0.75rem 0.9rem;
+      background: color-mix(in oklch, var(--primary) 5%, white);
+      border: 1px solid var(--border); border-radius: var(--radius);
+      font-size: 0.88rem; font-weight: 600; line-height: 1.4;
+    }
+    .quick-table {
+      width: 100%; font-size: 0.82rem; margin-top: 0.75rem;
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .quick-table th { background: var(--muted); }
+
+    .qa-jump {
+      position: fixed; inset-inline: 0; bottom: 0; z-index: 45;
+      display: none; align-items: center; justify-content: center;
+      gap: 0.35rem; flex-wrap: wrap;
+      padding: 0.55rem 0.75rem calc(0.55rem + env(safe-area-inset-bottom));
+      background: color-mix(in oklch, var(--background) 94%, transparent);
+      backdrop-filter: blur(10px); border-top: 1px solid var(--border);
+    }
+    body.mode-qa .qa-jump { display: flex; }
+    .qa-jump .lab {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em;
+      color: var(--muted-foreground); margin-inline-end: 0.25rem;
+    }
+    .qa-jump a {
+      width: 2rem; height: 2rem; display: inline-flex; align-items: center;
+      justify-content: center; border-radius: 999px; text-decoration: none;
+      font-size: 0.8rem; font-weight: 600; color: var(--muted-foreground);
+      border: 1px solid var(--border); background: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .qa-jump a:hover, .qa-jump a:focus-visible {
+      background: var(--background); color: var(--foreground);
+      box-shadow: 0 0 0 1px var(--border); outline: none;
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .nav-btn:not(:disabled) { opacity: 0.92; }
+    }
+
+    @media (max-width: 900px) {
+      body.mode-slides { overflow: auto; }
+      .deck { height: auto; min-height: calc(100% - var(--chrome-h)); }
+      .slide {
+        position: relative; inset: auto; display: none;
+        min-height: calc(100dvh - var(--chrome-h));
+        padding: 1rem 1rem 1.25rem;
+      }
+      .slide.active { display: flex; }
+      .split, .two-col, .steps, .outcomes, .gaps { grid-template-columns: 1fr; }
+      h1 { max-width: none; }
+      .notice .full { display: none; }
+      .notice .short { display: inline; }
+      .notice { max-width: 9rem; text-align: center; }
+      .chrome-end { gap: 0.4rem; }
+      .mode-switch button, .lang-switch button { padding: 0.3rem 0.65rem; font-size: 0.72rem; }
+      .nav-btn { width: 2.4rem; height: 2.4rem; }
+      .foot { flex-wrap: wrap; gap: 0.5rem; }
+      .hint { display: none; }
+    }
+
+    @media print {
+      body { overflow: visible; }
+      .top-chrome, .qa-jump, .mode-switch, .lang-switch, .nav-btn { display: none !important; }
+      body.mode-slides .slide {
+        display: flex !important; position: relative;
+        page-break-after: always; height: 100vh;
+      }
+      body.mode-qa #qa-view { display: block !important; }
+    }
+  </style>
+</head>
+<body class="mode-slides lang-en">
+  <header class="top-chrome">
+    <a class="brand" href="#slides/1" id="brand-home">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 3v6m0 6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="2"/>
+          <path d="M5 12h3.6m6.8 0H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="brand-text">
+        <span class="ar-name" lang="ar">صِمَام</span>
+        <span class="en-name">SAMAAM</span>
+      </span>
+    </a>
+    <div class="chrome-end">
+      <div class="mode-switch" role="group" aria-label="View mode">
+        <button type="button" id="btn-slides" aria-pressed="true"><span class="t en">Slides</span><span class="t ar">الشرائح</span></button>
+        <button type="button" id="btn-qa" aria-pressed="false"><span class="t en">Q&amp;A</span><span class="t ar">أسئلة</span></button>
+      </div>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" id="btn-en" aria-pressed="true">EN</button>
+        <button type="button" id="btn-ar" aria-pressed="false">عربي</button>
+      </div>
+      <p class="notice">
+        <span class="full"><strong lang="ar">بيانات محاكاة لأغراض الهاكاثون فقط</strong><br/><span class="t en">Synthetic data, hackathon use only</span><span class="t ar">Synthetic data, hackathon use only</span></span>
+        <span class="short"><strong lang="ar">بيانات محاكاة</strong></span>
+      </p>
+    </div>
+  </header>
+
+  <div class="deck" id="deck" aria-live="polite">
+    <button type="button" class="nav-btn prev" id="nav-prev" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button type="button" class="nav-btn next" id="nav-next" aria-label="Next slide">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+
+    <!-- SLIDE 1 -->
+    <section class="slide active" data-slide="1" aria-label="Slide 1">
+      <div class="body">
+        <div class="split">
+          <div>
+            <p class="eyebrow"><span class="t en">Use case · Health / Radiology</span><span class="t ar">حالة الاستخدام · الصحة / الأشعة</span></p>
+            <h1>
+              <span class="t en">A policy gate between the screen and the CT scanner.</span>
+              <span class="t ar">بوابة سياسات بين الشاشة وجهاز الأشعة المقطعية.</span>
+            </h1>
+            <p class="lead">
+              <span class="t en">A tired CT worker enters a normal adult dose for a patient with weak kidneys. Nothing between the keyboard and the scanner checks kidney health or Saudi rules. <strong>Samaam checks both — before the scan — with fixed code rules.</strong></span>
+              <span class="t ar">فنّي متعب يدخل جرعة بالغ عادية لمريض كليته ضعيفة. لا شيء بين لوحة المفاتيح والجهاز يفحص الكلى أو القواعد السعودية. <strong>صِمَام يفحص الاثنين — قبل التصوير — بقواعد كود ثابتة.</strong></span>
+            </p>
+            <div class="aside-note">
+              <span class="t en">The AI model writes the text explanation <em>after</em> the decision. Only node <code>P</code> can stop the scan. Remove the model; the stop still works.</span>
+              <span class="t ar">نموذج الذكاء الاصطناعي يكتب الشرح النصي <em>بعد</em> القرار. عقدة <code>P</code> وحدها توقف التصوير. احذف النموذج؛ التوقيف يبقى.</span>
+            </div>
+          </div>
+          <div>
+            <div class="pipeline" aria-label="ITU-T Y.3172 pipeline">
+              <div class="node"><span class="sym">SRC</span><div><div class="lbl"><span class="t en">Source</span><span class="t ar">المصدر</span></div><div class="sub"><span class="t en">Saudi rules · fake patient data · scanner settings</span><span class="t ar">قواعد سعودية · بيانات مريض محاكاة · إعدادات الجهاز</span></div></div></div>
+              <div class="node"><span class="sym">C</span><div><div class="lbl"><span class="t en">Collector</span><span class="t ar">المجمّع</span></div><div class="sub"><span class="t en">HL7 FHIR R4 (read only) · DICOM work list</span><span class="t ar">HL7 FHIR R4 (قراءة فقط) · قائمة عمل DICOM</span></div></div></div>
+              <div class="node"><span class="sym">PP</span><div><div class="lbl"><span class="t en">Preprocessor</span><span class="t ar">المعالج الأولي</span></div><div class="sub"><span class="t en">PDPL Art. 23: drop name/ID · compute eGFR · local search</span><span class="t ar">PDPL م 23: حذف الاسم/الهوية · حساب eGFR · بحث محلي</span></div></div></div>
+              <div class="node"><span class="sym">M</span><div><div class="lbl"><span class="t en">Model</span><span class="t ar">النموذج</span></div><div class="sub"><span class="t en">Search + optional text — never decides the stop</span><span class="t ar">بحث + نص اختياري — لا يقرّر التوقيف</span></div></div></div>
+              <div class="node p-node"><span class="sym">P</span><div><div class="lbl"><span class="t en">Policy node</span><span class="t ar">عقدة السياسات</span> <span class="valve-closed"><span class="t en">valve shut</span><span class="t ar">الصمام مغلق</span></span></div><div class="sub"><span class="t en">Fixed rules · six results · cites by record id</span><span class="t ar">قواعد ثابتة · ست نتائج · استشهاد بالمعرّف</span></div></div></div>
+              <div class="node"><span class="sym">D</span><div><div class="lbl"><span class="t en">Distributor</span><span class="t ar">الموزّع</span></div><div class="sub"><span class="t en">Who said it · section · direct URL · audit log</span><span class="t ar">الجهة · القسم · رابط مباشر · سجل التدقيق</span></div></div></div>
+              <div class="node"><span class="sym">SINK</span><div><div class="lbl"><span class="t en">Sink</span><span class="t ar">المصارف</span></div><div class="sub"><span class="t en">Operator screen · fake device API — 200 or 403</span><span class="t ar">شاشة المشغّل · واجهة جهاز وهمية — 200 أو 403</span></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="foot">
+        <span>ITU-T Y.3172 · ITU AI Readiness Hackathon — KSA</span>
+        <span class="dots" data-dots aria-hidden="true"></span>
+        <span class="hint">1 / 4</span>
+      </footer>
+    </section>
+
+    <!-- SLIDE 2 -->
+    <section class="slide" data-slide="2" aria-label="Slide 2">
+      <div class="body">
+        <div>
+          <p class="eyebrow"><span class="t en">Knowledge base · ITU AI Readiness 2.0</span><span class="t ar">قاعدة المعرفة · جاهزية الذكاء الاصطناعي 2.0</span></p>
+          <h1 style="max-width:28ch">
+            <span class="t en">Checked Saudi sources. Three ITU dimensions we can prove.</span>
+            <span class="t ar">مصادر سعودية متحقَّقة. ثلاثة أبعاد للاتحاد نقدر نثبتها.</span>
+          </h1>
+        </div>
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-h"><span class="t en">Main sources — cited by record id</span><span class="t ar">المصادر الرئيسية — استشهاد بالمعرّف</span></div>
+            <table>
+              <thead><tr>
+                <th><span class="t en">Authority</span><span class="t ar">الجهة</span></th>
+                <th><span class="t en">Document</span><span class="t ar">الوثيقة</span></th>
+                <th><span class="t en">Role in P</span><span class="t ar">دورها في P</span></th>
+              </tr></thead>
+              <tbody>
+                <tr><td>SFDA</td><td>MDS-G008 NDRL · Royal Decree 60057 / SHC 3/88</td><td class="mono"><span class="t en">STATUTORY max dose (from the law)</span><span class="t ar">STATUTORY حد الجرعة (من النظام)</span></td></tr>
+                <tr><td>MoH</td><td>Contrast Media Protocol 2021 · §5.2 / §5.3</td><td class="mono"><span class="t en">NATIONAL_PROTOCOL kidney rules</span><span class="t ar">NATIONAL_PROTOCOL قواعد الكلى</span></td></tr>
+                <tr><td>SDAIA</td><td>PDPL Arts. 1(11), 23, 29</td><td class="mono"><span class="t en">Hard privacy stop</span><span class="t ar">إيقاف خصوصية صارم</span></td></tr>
+                <tr><td>ITU-T</td><td>Y.3172 AI pipeline</td><td class="mono"><span class="t en">How we build the system</span><span class="t ar">كيف نبني النظام</span></td></tr>
+                <tr><td>WHO</td><td>Ethics &amp; governance of AI for health</td><td class="mono"><span class="t en">World health AI guidance</span><span class="t ar">إرشاد عالمي لصحة الذكاء الاصطناعي</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel">
+            <div class="panel-h"><span class="t en">Dimensions we claim (3 of 13)</span><span class="t ar">الأبعاد التي ندّعيها (3 من 13)</span></div>
+            <ul class="dim-list">
+              <li><div class="id">D10</div><div class="name">AI &amp; Policies</div><div class="ev"><span class="t en">Policy sandbox: six results, four fixed rules, gap list.</span><span class="t ar">صندوق سياسات: ست نتائج، أربع قواعد ثابتة، قائمة ثغرات.</span></div></li>
+              <li><div class="id">D11</div><div class="name">AI for Inclusion</div><div class="ev"><span class="t en">Arabic + English UI · local Arabic search · local language access.</span><span class="t ar">واجهة عربية وإنجليزية · بحث عربي محلي · وصول باللغة المحلية.</span></div></li>
+              <li><div class="id">D13</div><div class="name">Digital Infrastructure</div><div class="ev"><span class="t en">Seven Y.3172 nodes as the AI pipeline (metric d13_m01).</span><span class="t ar">سبع عقد Y.3172 كخط أنابيب الذكاء الاصطناعي (مقياس d13_m01).</span></div></li>
+            </ul>
+          </div>
+        </div>
+        <p class="claim">
+          <span class="t en">Names from the organisers’ <span class="mono">dimensions.json</span>. We claim three of thirteen — only where the live system shows proof.</span>
+          <span class="t ar">الأسماء من <span class="mono">dimensions.json</span> للمنظّمين. ندّعي ثلاثة من ثلاثة عشر — فقط حيث النظام الحي يُظهر دليلاً.</span>
+        </p>
+      </div>
+      <footer class="foot">
+        <span><span class="t en">Sources: checked records · direct document links · local ChromaDB search</span><span class="t ar">المصادر: سجلات متحقَّقة · روابط وثائق مباشرة · بحث ChromaDB محلي</span></span>
+        <span class="dots" data-dots aria-hidden="true"></span>
+        <span class="hint">2 / 4</span>
+      </footer>
+    </section>
+
+    <!-- SLIDE 3 — STEPS -->
+    <section class="slide" data-slide="3" aria-label="Slide 3">
+      <div class="body">
+        <div>
+          <p class="eyebrow"><span class="t en">Evaluation scenarios · stepwise</span><span class="t ar">سيناريوهات التقييم · خطوة بخطوة</span></p>
+          <h1 style="max-width:26ch">
+            <span class="t en">Four steps. One clear stop.</span>
+            <span class="t ar">أربع خطوات. توقيف واحد واضح.</span>
+          </h1>
+        </div>
+        <div class="steps">
+          <article class="step">
+            <span class="n">1</span>
+            <h2><span class="t en">Enter settings</span><span class="t ar">إدخال الإعدادات</span></h2>
+            <p><span class="t en">CT worker loads patient data and dose settings on the console.</span><span class="t ar">الفنّي يحمّل بيانات المريض وإعدادات الجرعة في وحدة التحكم.</span></p>
+          </article>
+          <article class="step">
+            <span class="n">2</span>
+            <h2><span class="t en">Compute kidney health</span><span class="t ar">حساب صحة الكلى</span></h2>
+            <p><span class="t en">System computes eGFR from creatinine (CKD-EPI, MoH protocol).</span><span class="t ar">النظام يحسب eGFR من الكرياتينين (CKD-EPI حسب بروتوكول الوزارة).</span></p>
+          </article>
+          <article class="step">
+            <span class="n">3</span>
+            <h2><span class="t en">Compare to Saudi rules</span><span class="t ar">المقارنة بالقواعد السعودية</span></h2>
+            <p><span class="t en">Dose vs SFDA limits. Kidney steps vs MoH protocol. Privacy vs PDPL.</span><span class="t ar">الجرعة مقابل حدود هيئة الغذاء والدواء. خطوات الكلى مقابل الوزارة. الخصوصية مقابل PDPL.</span></p>
+          </article>
+          <article class="step">
+            <span class="n">4</span>
+            <h2><span class="t en">Decision + code</span><span class="t ar">القرار والرمز</span></h2>
+            <p><span class="t en">Allow (200) or stop (403). Cite the record. Log the audit trail.</span><span class="t ar">سماح (200) أو توقيف (403). استشهد بالسجل. اكتب في سجل التدقيق.</span></p>
+          </article>
+        </div>
+        <div class="outcomes">
+          <div class="out">
+            <strong>SC-01</strong>
+            <span class="t en">Safe kidneys · dose OK → <span class="mono">200 COMPLIANT</span></span>
+            <span class="t ar">كلى سليمة · جرعة نظامية → <span class="mono">200 COMPLIANT</span></span>
+          </div>
+          <div class="out">
+            <strong>SC-02</strong>
+            <span class="t en">eGFR <span class="mono">19.1</span> · dose <span class="mono">18 &gt; 14</span> → <span class="mono">403</span> · doctor may override</span>
+            <span class="t ar">eGFR <span class="mono">19.1</span> · جرعة <span class="mono">18 &gt; 14</span> → <span class="mono">403</span> · طبيب قد يتجاوز</span>
+          </div>
+          <div class="out">
+            <strong>SC-03</strong>
+            <span class="t en">Export abroad for marketing → <span class="mono">403 PROHIBITED</span> · no override</span>
+            <span class="t ar">تصدير للخارج للتسويق → <span class="mono">403 PROHIBITED</span> · بلا تجاوز</span>
+          </div>
+        </div>
+      </div>
+      <footer class="foot">
+        <span><span class="t en">Live via console · <span class="mono">POST /device/execute</span> · <span class="mono">POST /data/request</span></span><span class="t ar">حياً من وحدة التحكم · <span class="mono">POST /device/execute</span> · <span class="mono">POST /data/request</span></span></span>
+        <span class="dots" data-dots aria-hidden="true"></span>
+        <span class="hint">3 / 4</span>
+      </footer>
+    </section>
+
+    <!-- SLIDE 4 -->
+    <section class="slide" data-slide="4" aria-label="Slide 4">
+      <div class="body">
+        <div>
+          <p class="eyebrow"><span class="t en">Policy gaps · advice for the regulator</span><span class="t ar">ثغرات السياسات · نصيحة للمنظّم</span></p>
+          <h1 style="max-width:26ch">
+            <span class="t en">Rules we looked for — and did not find.</span>
+            <span class="t ar">قواعد بحثنا عنها — ولم نجدها.</span>
+          </h1>
+        </div>
+        <div class="gaps">
+          <article class="gap">
+            <div class="gid">GAP-02</div>
+            <h2><span class="t en">Who is responsible if a tired CT worker follows an AI alert?</span><span class="t ar">من المسؤول إذا تبع فنّي متعب تنبيه ذكاء اصطناعي؟</span></h2>
+            <p><span class="t en">SFDA asks for human checks (MDS-G010 / MDS-G027). No rule says who pays if harm comes after someone accepts an alert.</span><span class="t ar">هيئة الغذاء والدواء تطلب فحوصاً بشرية (MDS-G010 / MDS-G027). لا قاعدة تقول من يدفع إذا حصل ضرر بعد قبول تنبيه.</span></p>
+            <div class="rec"><span class="t en">Share duty across maker, hospital, CT worker, and doctor; require a signed override with a real name.</span><span class="t ar">وزّع المسؤولية على الصانع والمستشفى والفنّي والطبيب؛ واطلب تجاوزاً موقّعاً باسم حقيقي.</span></div>
+          </article>
+          <article class="gap">
+            <div class="gid">GAP-03</div>
+            <h2><span class="t en">National dose limits are law — but checks still happen after the scan</span><span class="t ar">حدود الجرعة الوطنية نظام — لكن الفحص ما زال بعد التصوير</span></h2>
+            <p><span class="t en">Royal Decree 60057 binds hospitals to NDRLs. MDS-G008 asks for dose reports emailed to SFDA later. The problem is found after the scan.</span><span class="t ar">المرسوم الملكي 60057 يُلزم المستشفيات بالمستويات المرجعية. MDS-G008 يطلب تقارير جرعة تُرسل لاحقاً. المشكلة تُكتشف بعد التصوير.</span></p>
+            <div class="rec"><span class="t en">Require the dose check before the scan starts — this is what the gateway does.</span><span class="t ar">اطلب فحص الجرعة قبل بدء التصوير — وهذا ما تفعله البوابة.</span></div>
+          </article>
+        </div>
+        <div class="innovation">
+          <span><span class="t en">What Samaam adds</span><span class="t ar">ماذا يضيف صِمَام</span></span>
+          <span class="t en">The check runs before the scan. If clinical risk remains, a named doctor puts their name on the decision. If PDPL forbids the act, no name is enough.</span>
+          <span class="t ar">الفحص يعمل قبل التصوير. إن بقي خطر إكلينيكي، طبيب باسمه يضع اسمه على القرار. إن منع نظام حماية البيانات الفعل، لا يكفي أي اسم.</span>
+        </div>
+      </div>
+      <footer class="foot">
+        <span><span class="t en">Gaps from knowledge base · six written · two shown</span><span class="t ar">الثغرات من قاعدة المعرفة · ست مكتوبة · اثنتان معروضتان</span></span>
+        <span class="dots" data-dots aria-hidden="true"></span>
+        <span class="hint">4 / 4</span>
+      </footer>
+    </section>
+  </div>
+
+  <nav class="qa-jump" aria-label="Jump to question">
+    <span class="lab"><span class="t en">Q</span><span class="t ar">س</span></span>
+    <a href="#qa/1">1</a><a href="#qa/2">2</a><a href="#qa/3">3</a><a href="#qa/4">4</a><a href="#qa/5">5</a><a href="#qa/6">6</a><a href="#qa/7">7</a>
+  </nav>
+
+  <main id="qa-view" aria-label="Judge Q&amp;A">
+    <div class="qa-intro">
+      <p class="eyebrow"><span class="t en">Judge Q&amp;A · table card</span><span class="t ar">أسئلة الحكام · بطاقة الطاولة</span></p>
+      <h1>
+        <span class="t en">Seven questions. Short answers you can defend.</span>
+        <span class="t ar">سبعة أسئلة. إجابات قصيرة تقدر تدافع عنها.</span>
+      </h1>
+      <p>
+        <span class="t en">Why they ask · what you say · what you click. Keys: <span class="mono">S</span> slides · <span class="mono">Q</span> this view · <span class="mono">1–7</span> jump.</span>
+        <span class="t ar">ليش يسألون · وش تقول · وش تضغط. المفاتيح: <span class="mono">S</span> الشرائح · <span class="mono">Q</span> هذه الصفحة · <span class="mono">1–7</span> قفز.</span>
+      </p>
+    </div>
+
+    <article class="qa-card" id="qa-1">
+      <div class="qnum"><span class="t en">Q1</span><span class="t ar">س1</span></div>
+      <h3>
+        <span class="t en">Show the core workflow actually running right now — not the slides or the video</span>
+        <span class="t ar">أظهر مسار العمل الأساسي وهو يعمل الآن — لا الشرائح ولا الفيديو</span>
+      </h3>
+      <h4><span class="t en">Why they ask</span><span class="t ar">ليش يسأل</span></h4>
+      <p class="why"><span class="t en">They want a live system — not a pitch deck.</span><span class="t ar">يبون نظاماً حياً — مو عرضاً.</span></p>
+      <h4><span class="t en">Say</span><span class="t ar">قل</span></h4>
+      <p class="say">
+        <span class="t en">“I will run scenario 2 now. Cancer patient. eGFR is 19.1. Dose is too high for Saudi rules. Node P stops the scan. Device returns 403 and LOCKED. The text explanation comes later. The stop is fixed code — not the AI model.”</span>
+        <span class="t ar">«أشغّل السيناريو الثاني حياً. مريضة أورام، eGFR‏ 19.1، الجرعة أعلى من الحد الوطني. عقدة P توقف الجهاز → 403 وLOCKED. الشرح النصي لاحقاً. التوقيف من كود ثابت مو من النموذج.»</span>
+      </p>
+      <h4><span class="t en">Click</span><span class="t ar">اضغط</span></h4>
+      <ol>
+        <li><span class="t en">Console → load SC-02 → send to device.</span><span class="t ar">وحدة التحكم → حمّل SC-02 → أرسل إلى الجهاز.</span></li>
+        <li><span class="t en">Show 403 and LOCKED.</span><span class="t ar">أظهر 403 و LOCKED.</span></li>
+      </ol>
+    </article>
+
+    <article class="qa-card" id="qa-2">
+      <div class="qnum"><span class="t en">Q2</span><span class="t ar">س2</span></div>
+      <h3>
+        <span class="t en">Is any of this on real Saudi data, or is it all synthetic?</span>
+        <span class="t ar">هل أي من هذا على بيانات سعودية حقيقية، أم كله محاكاة؟</span>
+      </h3>
+      <h4><span class="t en">Why they ask</span><span class="t ar">ليش يسأل</span></h4>
+      <p class="why"><span class="t en">They want fake patients, and real Saudi law texts.</span><span class="t ar">يبون مرضى محاكاة، ونصوص لوائح سعودية حقيقية.</span></p>
+      <h4><span class="t en">Say</span><span class="t ar">قل</span></h4>
+      <p class="say">
+        <span class="t en">“Patient records are 100% fake for the hackathon — every screen shows the notice. The FHIR link is a public test server. The Saudi law texts are real: checked records from MoH, SFDA, and SDAIA. Each cite opens the real document.”</span>
+        <span class="t ar">«بيانات المرضى محاكاة 100٪ والتنبيه على كل شاشة. FHIR = خادم اختبار. نصوص اللوائح حقيقية من الوزارة وهيئة الغذاء والدواء وسدايا، والرابط يفتح الوثيقة نفسها.»</span>
+      </p>
+      <h4><span class="t en">Click</span><span class="t ar">اضغط</span></h4>
+      <ol>
+        <li><span class="t en">Point to the banner. Open Knowledge base → a VERIFIED record with its URL.</span><span class="t ar">أشر للتنبيه. افتح قاعدة المعرفة → سجل VERIFIED مع رابطه.</span></li>
+      </ol>
+    </article>
+
+    <article class="qa-card" id="qa-3">
+      <div class="qnum"><span class="t en">Q3</span><span class="t ar">س3</span></div>
+      <h3>
+        <span class="t en">Show how a human can override the AI?</span>
+        <span class="t ar">أظهر كيف يمكن لإنسان أن يتجاوز الذكاء الاصطناعي؟</span>
+      </h3>
+      <h4><span class="t en">Why they ask</span><span class="t ar">ليش يسأل</span></h4>
+      <p class="why"><span class="t en">They want humans above the machine — and when override is refused.</span><span class="t ar">يبون الإنسان فوق الآلة — ومتى يُرفض التجاوز.</span></p>
+      <h4><span class="t en">Say</span><span class="t ar">قل</span></h4>
+      <p class="say">
+        <span class="t en">“On a clinical stop, we do not ban forever. A named doctor can accept with their name. Sending patient data abroad for marketing has no override — same name is refused and saved in the log.”</span>
+        <span class="t ar">«في التوقيف الطبي نوقف حتى يعتمد طبيب باسمه. تصدير بيانات للتسويق خارج المملكة: لا تجاوز — يُرفض ويُسجَّل.»</span>
+      </p>
+      <h4><span class="t en">Click</span><span class="t ar">اضغط</span></h4>
+      <ol>
+        <li><span class="t en">After SC-02 / 403: Override → doctor name → confirm. Show audit event.</span><span class="t ar">بعد SC-02 / 403: تجاوز → اسم الطبيب → اعتماد. أظهر حدث السجل.</span></li>
+      </ol>
+    </article>
+
+    <article class="qa-card" id="qa-4">
+      <div class="qnum"><span class="t en">Q4</span><span class="t ar">س4</span></div>
+      <h3>
+        <span class="t en">Which specific Saudi policy — by name and clause — governs this decision?</span>
+        <span class="t ar">أي سياسة سعودية محددة — بالاسم والبند — تحكم هذا القرار؟</span>
+      </h3>
+      <h4><span class="t en">Why they ask</span><span class="t ar">ليش يسأل</span></h4>
+      <p class="why"><span class="t en">They want a real law name — not vague “compliance” talk.</span><span class="t ar">يبون اسم نظام حقيقي — مو كلام عام عن الامتثال.</span></p>
+      <h4><span class="t en">Say</span><span class="t ar">قل</span></h4>
+      <p class="say">
+        <span class="t en">“We cite by fixed record id. SC-02: Royal Decree 60057 makes national dose limits law. Numbers from SFDA MDS-G008. Kidney steps when eGFR under 30 from MoH Contrast Protocol 2021. Dose too high = from the law. Missing kidney steps = national protocol. SC-03: PDPL articles 23, 1(11), 29.”</span>
+        <span class="t ar">«الاستشهاد بمعرّف ثابت. SC-02: المرسوم 60057 للمستويات المرجعية، أرقام MDS-G008، الوقاية من بروتوكول الوزارة. تجاوز الجرعة من النظام؛ غياب الوقاية من البروتوكول. SC-03: مواد PDPL ‏23 و1(11) و29.»</span>
+      </p>
+      <h4><span class="t en">Click</span><span class="t ar">اضغط</span></h4>
+      <ol>
+        <li><span class="t en">After any decision: citation cards — authority · section · url.</span><span class="t ar">بعد أي قرار: بطاقات المراجع — الجهة · القسم · الرابط.</span></li>
+      </ol>
+    </article>
+
+    <article class="qa-card" id="qa-5">
+      <div class="qnum"><span class="t en">Q5</span><span class="t ar">س5</span></div>
+      <h3>
+        <span class="t en">How does it perform in Arabic, on a paraphrased question?</span>
+        <span class="t ar">كيف يؤدي بالعربية على سؤال معاد صياغته؟</span>
+      </h3>
+      <h4><span class="t en">Why they ask</span><span class="t ar">ليش يسأل</span></h4>
+      <p class="why"><span class="t en">They want Arabic support — not English-only.</span><span class="t ar">يبون دعم العربية — مو إنجليزي فقط.</span></p>
+      <h4><span class="t en">Say</span><span class="t ar">قل</span></h4>
+      <p class="say">
+        <span class="t en">“Honest answer: the stop node does not read free chat. It reads a clear request. Arabic works on knowledge-base search by meaning. The stop still cites a fixed record id, so the law basis stays the same if you change the words.”</span>
+        <span class="t ar">«بصراحة: عقدة التوقيف ما تقرأ دردشة حرة — تقرأ طلباً واضحاً. العربية على البحث في قاعدة المعرفة. الحجب يستشهد بنفس المعرّف حتى لو تغيّرت الصياغة.»</span>
+      </p>
+      <h4><span class="t en">Click</span><span class="t ar">اضغط</span></h4>
+      <ol>
+        <li><span class="t en">Knowledge base → ready Arabic suggestion → show the found record.</span><span class="t ar">قاعدة المعرفة → اقتراح عربي جاهز → أظهر السجل المسترجع.</span></li>
+      </ol>
+    </article>
+
+    <article class="qa-card" id="qa-6">
+      <div class="qnum"><span class="t en">Q6</span><span class="t ar">س6</span></div>
+      <h3>
+        <span class="t en">Can we reproduce the results from your repo?</span>
+        <span class="t ar">هل يمكن إعادة إنتاج النتائج من المستودع؟</span>
+      </h3>
+      <h4><span class="t en">Why they ask</span><span class="t ar">ليش يسأل</span></h4>
+      <p class="why"><span class="t en">They want a public runnable project — not a locked demo.</span><span class="t ar">يبون مشروعاً عاماً قابلاً للتشغيل — مو ديمو مقفول.</span></p>
+      <h4><span class="t en">Say</span><span class="t ar">قل</span></h4>
+      <p class="say">
+        <span class="t en">“Public repo. MIT license. No API keys in the code. README has the steps. The model key is optional — without it, search and every stop still work. Only the text explanation is missing.”</span>
+        <span class="t ar">«المستودع عام MIT بلا مفاتيح. الأوامر في README. مفتاح النموذج اختياري — بدونه البحث والتوقيف يشتغلان؛ يختفي الشرح النصي فقط.»</span>
+      </p>
+      <h4><span class="t en">Click</span><span class="t ar">اضغط</span></h4>
+      <ol>
+        <li><span class="t en">Point at README Run section or open GitHub.</span><span class="t ar">أشر لقسم Run في README أو افتح GitHub.</span></li>
+      </ol>
+    </article>
+
+    <article class="qa-card" id="qa-7">
+      <div class="qnum"><span class="t en">Q7</span><span class="t ar">س7</span></div>
+      <h3>
+        <span class="t en">How is consent and data protection handled?</span>
+        <span class="t ar">كيف تُعالَج الموافقة وحماية البيانات؟</span>
+      </h3>
+      <h4><span class="t en">Why they ask</span><span class="t ar">ليش يسأل</span></h4>
+      <p class="why"><span class="t en">They want to know you do not ship patient data without a legal reason.</span><span class="t ar">يبون يتأكدون إنكم ما تنقلون بيانات مرضى بلا سبب قانوني.</span></p>
+      <h4><span class="t en">Say</span><span class="t ar">قل</span></h4>
+      <p class="say">
+        <span class="t en">“The decision does not need to know who the patient is — it needs kidney numbers and dose. So we remove name and ID before the decision. A marketing export of patient records abroad is refused with 403. No doctor override. PDPL article 23.”</span>
+        <span class="t ar">«القرار ما يحتاج يعرف مين المريض — يحتاج أرقام الكلى والجرعة. فنحذف الاسم والهوية قبل القرار. تصدير تسويقي للخارج → 403 بلا تجاوز. المادة 23 من نظام حماية البيانات.»</span>
+      </p>
+      <h4><span class="t en">Click</span><span class="t ar">اضغط</span></h4>
+      <ol>
+        <li><span class="t en">After a device run: removed identifiers. Data request → SC-03 → 403.</span><span class="t ar">بعد تشغيل جهاز: المعرّفات المحذوفة. طلب بيانات → SC-03 → 403.</span></li>
+      </ol>
+    </article>
+
+    <div class="demo-line">
+      <span class="t en">Demo opener: “Now I will show the live policy stop. Fixed rules. The AI model is not in the stop path.”</span>
+      <span class="t ar">افتتاح الديمو: «الآن أعرض إيقاف السياسة حياً. قواعد ثابتة. النموذج مو في مسار التوقيف.»</span>
+    </div>
+    <table class="quick-table"><thead><tr>
+      <th><span class="t en">Scenario</span><span class="t ar">السيناريو</span></th>
+      <th><span class="t en">Verdict</span><span class="t ar">الحكم</span></th>
+      <th><span class="t en">Device</span><span class="t ar">الجهاز</span></th>
+      <th><span class="t en">Override</span><span class="t ar">التجاوز</span></th>
+    </tr></thead><tbody>
+      <tr><td>SC-01</td><td class="mono">COMPLIANT</td><td>200</td><td><span class="t en">n/a</span><span class="t ar">لا يحتاج</span></td></tr>
+      <tr><td>SC-02</td><td class="mono">VIOLATION</td><td>403 · LOCKED</td><td><span class="t en">Yes — named doctor</span><span class="t ar">نعم — باسم طبيب</span></td></tr>
+      <tr><td>SC-03</td><td class="mono">VIOLATION</td><td>403 · session end</td><td><span class="t en">No — PROHIBITED</span><span class="t ar">لا — ممنوع</span></td></tr>
+    </tbody></table>
+  </main>
+
+  <script>
+    (function () {
+      var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+      var btnSlides = document.getElementById("btn-slides");
+      var btnQa = document.getElementById("btn-qa");
+      var btnEn = document.getElementById("btn-en");
+      var btnAr = document.getElementById("btn-ar");
+      var navPrev = document.getElementById("nav-prev");
+      var navNext = document.getElementById("nav-next");
+      var deck = document.getElementById("deck");
+      var mode = "slides";
+      var lang = "en";
+      var slideIndex = 0;
+      var touchX = null;
+
+      function clamp(n) {
+        if (n < 0) return 0;
+        if (n > slides.length - 1) return slides.length - 1;
+        return n;
+      }
+
+      function applyLang(next, opts) {
+        opts = opts || {};
+        lang = next === "ar" ? "ar" : "en";
+        document.body.classList.toggle("lang-en", lang === "en");
+        document.body.classList.toggle("lang-ar", lang === "ar");
+        document.documentElement.lang = lang;
+        document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+        btnEn.setAttribute("aria-pressed", lang === "en" ? "true" : "false");
+        btnAr.setAttribute("aria-pressed", lang === "ar" ? "true" : "false");
+        if (!opts.silent) syncHash();
+      }
+
+      function setMode(next, opts) {
+        opts = opts || {};
+        mode = next === "qa" ? "qa" : "slides";
+        document.body.classList.toggle("mode-slides", mode === "slides");
+        document.body.classList.toggle("mode-qa", mode === "qa");
+        btnSlides.setAttribute("aria-pressed", mode === "slides" ? "true" : "false");
+        btnQa.setAttribute("aria-pressed", mode === "qa" ? "true" : "false");
+        if (opts.scrollTo) {
+          var el = document.getElementById(opts.scrollTo);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        if (!opts.silent) syncHash();
+      }
+
+      function renderDots() {
+        document.querySelectorAll("[data-dots]").forEach(function (box) {
+          box.innerHTML = "";
+          slides.forEach(function (_, idx) {
+            var b = document.createElement("button");
+            b.type = "button";
+            b.className = "dot" + (idx === slideIndex ? " on" : "");
+            b.setAttribute("aria-label", "Slide " + (idx + 1));
+            b.addEventListener("click", function () { showSlide(idx); });
+            box.appendChild(b);
+          });
+        });
+        document.querySelectorAll(".hint").forEach(function (h, i) {
+          if (slides[i]) h.textContent = (slideIndex + 1) + " / " + slides.length;
+        });
+        navPrev.disabled = slideIndex <= 0;
+        navNext.disabled = slideIndex >= slides.length - 1;
+      }
+
+      function showSlide(n, opts) {
+        opts = opts || {};
+        slideIndex = clamp(n);
+        slides.forEach(function (el, idx) {
+          el.classList.toggle("active", idx === slideIndex);
+        });
+        renderDots();
+        if (!opts.silent) {
+          setMode("slides", { silent: true });
+          syncHash();
+        }
+      }
+
+      function syncHash() {
+        if (mode === "slides") {
+          history.replaceState(null, "", "#slides/" + (slideIndex + 1) + "/" + lang);
+        } else {
+          history.replaceState(null, "", "#qa/" + lang);
+        }
+      }
+
+      function jumpQa(n) {
+        setMode("qa", { scrollTo: "qa-" + n, silent: true });
+        history.replaceState(null, "", "#qa/" + lang + "/" + n);
+      }
+
+      function fromHash() {
+        var h = (location.hash || "").replace(/^#/, "");
+        var m;
+        if ((m = /^slides\/([1-4])(?:\/(en|ar))?$/.exec(h)) || (m = /^([1-4])$/.exec(h))) {
+          if (m[2]) applyLang(m[2], { silent: true });
+          showSlide(parseInt(m[1], 10) - 1, { silent: true });
+          setMode("slides", { silent: true });
+          return;
+        }
+        if ((m = /^qa\/(en|ar)\/([1-7])$/.exec(h))) {
+          applyLang(m[1], { silent: true });
+          jumpQa(parseInt(m[2], 10));
+          return;
+        }
+        if ((m = /^qa\/(en|ar)$/.exec(h)) || h === "qa") {
+          if (m) applyLang(m[1], { silent: true });
+          setMode("qa", { silent: true, scrollTo: "qa-1" });
+          return;
+        }
+        showSlide(0, { silent: true });
+        setMode("slides", { silent: true });
+      }
+
+      function fromQuery() {
+        var q = new URLSearchParams(location.search).get("lang");
+        if (q === "ar" || q === "en") applyLang(q, { silent: true });
+      }
+
+      btnSlides.addEventListener("click", function () {
+        setMode("slides");
+        showSlide(slideIndex);
+      });
+      btnQa.addEventListener("click", function () {
+        setMode("qa", { scrollTo: "qa-1" });
+      });
+      btnEn.addEventListener("click", function () { applyLang("en"); });
+      btnAr.addEventListener("click", function () { applyLang("ar"); });
+      navPrev.addEventListener("click", function () { showSlide(slideIndex - 1); });
+      navNext.addEventListener("click", function () { showSlide(slideIndex + 1); });
+
+      document.querySelectorAll(".qa-jump a").forEach(function (a) {
+        a.addEventListener("click", function (e) {
+          var href = a.getAttribute("href") || "";
+          var m = /^#qa\/([1-7])$/.exec(href);
+          if (!m) return;
+          e.preventDefault();
+          jumpQa(parseInt(m[1], 10));
+        });
+      });
+
+      document.getElementById("brand-home").addEventListener("click", function (e) {
+        e.preventDefault();
+        showSlide(0);
+        setMode("slides");
+      });
+
+      deck.addEventListener("touchstart", function (e) {
+        if (!e.changedTouches || !e.changedTouches[0]) return;
+        touchX = e.changedTouches[0].clientX;
+      }, { passive: true });
+      deck.addEventListener("touchend", function (e) {
+        if (touchX == null || !e.changedTouches || !e.changedTouches[0]) return;
+        var dx = e.changedTouches[0].clientX - touchX;
+        touchX = null;
+        if (Math.abs(dx) < 50) return;
+        var rtl = lang === "ar";
+        if (dx < 0) showSlide(slideIndex + (rtl ? -1 : 1));
+        else showSlide(slideIndex + (rtl ? 1 : -1));
+      }, { passive: true });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.target && /INPUT|TEXTAREA|SELECT/.test(e.target.tagName)) return;
+        if (e.key === "s" || e.key === "S") {
+          e.preventDefault(); setMode("slides"); showSlide(slideIndex); return;
+        }
+        if (e.key === "q" || e.key === "Q") {
+          e.preventDefault(); setMode("qa", { scrollTo: "qa-1" }); return;
+        }
+        if (e.key === "f" || e.key === "F") {
+          e.preventDefault();
+          if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(function () {});
+          else document.exitFullscreen().catch(function () {});
+          return;
+        }
+        if (mode === "slides") {
+          if (e.key === "ArrowRight" || e.key === " " || e.key === "PageDown") {
+            e.preventDefault(); showSlide(slideIndex + 1);
+          } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+            e.preventDefault(); showSlide(slideIndex - 1);
+          } else if (e.key === "Home") { showSlide(0); }
+          else if (e.key === "End") { showSlide(slides.length - 1); }
+          else if (e.key >= "1" && e.key <= "4") { showSlide(parseInt(e.key, 10) - 1); }
+        } else if (mode === "qa" && e.key >= "1" && e.key <= "7") {
+          e.preventDefault(); jumpQa(parseInt(e.key, 10));
+        }
+      });
+
+      window.addEventListener("message", function (ev) {
+        var data = ev.data || {};
+        if (data && data.type === "samaam-lang" && (data.lang === "ar" || data.lang === "en")) {
+          applyLang(data.lang);
+        }
+      });
+
+      window.addEventListener("hashchange", fromHash);
+      fromQuery();
+      fromHash();
+      renderDots();
+    })();
+  </script>
+</body>
+</html>
