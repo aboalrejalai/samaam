@@ -6,7 +6,7 @@ chromadb==1.5.9
 sentence-transformers==6.0.0
 
 # قراءة الوثائق الأصلية (SRC)
-pypdf==6.16.2
+pypdf==6.19.0
 
 # الموصّلات (C) — نظام المستشفى بـ FHIR، وخادم قائمة العمل بـ DICOM
 httpx==0.28.1
