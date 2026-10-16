@@ -23,8 +23,8 @@ const STATUS_ICON: Record<CheckStatus, LucideIcon> = {
 
 const STATUS_COLOUR: Record<CheckStatus, string> = {
   PASS: 'text-success-strong',
-  FAIL: 'text-danger-strong',
-  WARN: 'text-warn-strong',
+  FAIL: 'text-destructive-strong',
+  WARN: 'text-warning-strong',
   NO_EVIDENCE: 'text-foreground/80',
   NOT_APPLICABLE: 'text-muted-foreground',
 }

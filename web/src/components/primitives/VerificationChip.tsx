@@ -10,7 +10,7 @@ import type { Verification } from '@/types/api'
  */
 const VERIFICATION_CLASS: Record<Verification, string> = {
   VERIFIED: 'border-success-strong text-success-strong',
-  PENDING: 'border-warn-strong text-warn-strong',
+  PENDING: 'border-warning-strong text-warning-strong',
   UNVERIFIED: 'border-border text-muted-foreground',
 }
 

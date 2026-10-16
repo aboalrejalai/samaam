@@ -73,7 +73,7 @@ export default function AuditPage() {
                   return (
                     <TableRow
                       key={`${entry.at}-${index}`}
-                      className={cn(EMPHASISED.has(entry.event) && 'bg-warn/5')}
+                      className={cn(EMPHASISED.has(entry.event) && 'bg-warning/5')}
                     >
                       <TableCell dir="ltr" className="font-mono text-xs tabular-nums whitespace-nowrap">
                         {entry.at.slice(0, 19).replace('T', ' ')}
@@ -82,7 +82,7 @@ export default function AuditPage() {
                         <span
                           className={cn(
                             'text-sm',
-                            EMPHASISED.has(entry.event) && 'font-semibold text-warn-strong',
+                            EMPHASISED.has(entry.event) && 'font-semibold text-warning-strong',
                           )}
                         >
                           {label}

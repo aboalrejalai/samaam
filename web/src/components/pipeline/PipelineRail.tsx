@@ -31,9 +31,9 @@ function offsetFor(index: number): string {
 
 const NODE_CLASS: Record<NodeState, string> = {
   idle: 'border-border bg-card',
-  active: 'border-primary-strong bg-primary/15 animate-pulse',
-  passed: 'border-primary-strong bg-primary',
-  sealed: 'border-danger-strong bg-card ring-4 ring-danger/25',
+  active: 'border-primary bg-primary/15 animate-pulse',
+  passed: 'border-primary bg-primary',
+  sealed: 'border-destructive-strong bg-card ring-4 ring-destructive/25',
   unreached: 'border-dashed border-border bg-transparent opacity-45',
 }
 
@@ -116,7 +116,7 @@ export function PipelineRail({
                   NODE_CLASS[state],
                   // The scar. An override reopens the valve but never erases
                   // that it was shut — FRONTEND-PLAN 2.6.
-                  isGate && scarred && !sealed && 'border-dashed border-danger-strong',
+                  isGate && scarred && !sealed && 'border-dashed border-destructive-strong',
                 )}
                 style={{ transitionDuration: `${reducedMotion ? 0 : NODE_TRANSIT_MS}ms` }}
               />
@@ -143,14 +143,14 @@ export function PipelineRail({
             transitionDuration: `${reducedMotion ? 0 : sealed ? SEAL_MS : NODE_TRANSIT_MS}ms`,
           }}
           className={cn(
-            'absolute z-20 block size-2.5 rounded-[2px] transition-all',
+            'absolute z-20 block size-2.5 rounded-sm transition-all',
             horizontal
               ? 'top-[0.9rem] -translate-x-1/2 -translate-y-1/2 rtl:translate-x-1/2'
               : 'start-[0.9rem] -translate-x-1/2 -translate-y-1/2 rtl:translate-x-1/2',
             sealed
               ? // The seal: sharp, immediate, no give. A hard edge under the
                 // token marks exactly where it was stopped.
-                'bg-danger-strong shadow-[0_2px_0_0_var(--danger)] ease-[cubic-bezier(0.2,0,0,1)]'
+                'bg-destructive-strong shadow-[0_2px_0_0_var(--destructive)] ease-[cubic-bezier(0.2,0,0,1)]'
               : 'bg-primary ease-out',
           )}
         />

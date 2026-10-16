@@ -25,7 +25,7 @@ export default function GapsPage() {
       <p className="mb-4 text-sm text-muted-foreground">{t('gaps.lead')}</p>
 
       {isLoading && (
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           <Skeleton className="h-40 w-full" />
           <Skeleton className="h-40 w-full" />
         </div>
@@ -38,7 +38,7 @@ export default function GapsPage() {
               <span dir="ltr" className="font-mono text-xs text-muted-foreground">{gap.id}</span>
               <CardTitle className="text-base leading-tight">{gap.title}</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-3 text-sm">
+            <CardContent className="flex flex-col gap-3 text-sm">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">{t('gaps.finding')}</p>
                 <p className="pt-0.5 text-foreground/80">{gap.finding}</p>
@@ -47,7 +47,7 @@ export default function GapsPage() {
                 <p className="text-xs font-medium text-muted-foreground">{t('gaps.implication')}</p>
                 <p className="pt-0.5 text-foreground/80">{gap.implication}</p>
               </div>
-              <div className="rounded-md border-s-2 border-primary-strong bg-accent px-3 py-2">
+              <div className="rounded-md border-s-2 border-primary bg-primary/5 px-3 py-2">
                 <p className="text-xs font-medium text-muted-foreground">
                   {t('gaps.recommendation')}
                 </p>

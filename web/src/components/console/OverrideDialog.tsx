@@ -32,7 +32,7 @@ export function OverrideDialog({ reason, pending, onConfirm }: OverrideDialogPro
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" className="w-full border-warn-strong text-warn-strong">
+        <Button variant="outline" className="w-full border-warning-strong text-warning-strong">
           {t('console.overrideOpen')}
         </Button>
       </AlertDialogTrigger>
@@ -41,7 +41,7 @@ export function OverrideDialog({ reason, pending, onConfirm }: OverrideDialogPro
           <AlertDialogTitle>{t('console.overrideTitle')}</AlertDialogTitle>
           <AlertDialogDescription className="text-start">{reason}</AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="override-name">{t('console.overrideName')}</Label>
           <Input
             id="override-name"

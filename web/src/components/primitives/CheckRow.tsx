@@ -8,8 +8,8 @@ import type { PolicyCheck } from '@/types/api'
 
 const STATUS_EDGE: Record<PolicyCheck['status'], string> = {
   PASS: 'border-s-success',
-  FAIL: 'border-s-danger',
-  WARN: 'border-s-warn',
+  FAIL: 'border-s-destructive',
+  WARN: 'border-s-warning',
   NO_EVIDENCE: 'border-s-foreground/80',
   NOT_APPLICABLE: 'border-s-border',
 }

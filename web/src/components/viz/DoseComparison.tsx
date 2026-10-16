@@ -34,13 +34,13 @@ export function DoseComparison({
   if (plottable.length === 0) return null
 
   return (
-    <div data-slot="dose-comparison" className={cn('space-y-5', className)} {...props}>
+    <div data-slot="dose-comparison" className={cn('flex flex-col gap-5', className)} {...props}>
       {plottable.map((r) => {
         const at = scale(r)
         const over = r.limit !== null && r.measured > r.limit
         const excess = r.limit ? Math.round(((r.measured - r.limit) / r.limit) * 100) : 0
         return (
-          <div key={r.name} className="space-y-1.5">
+          <div key={r.name} className="flex flex-col gap-1.5">
             <div className="flex items-baseline justify-between gap-2">
               <span dir="ltr" className="font-mono text-xs font-semibold uppercase">
                 {r.name}
@@ -88,7 +88,7 @@ export function DoseComparison({
 }
 
 const TONE = {
-  over: 'bg-danger-strong',
+  over: 'bg-destructive-strong',
   ok: 'bg-success-strong',
   alt: 'bg-muted-foreground/45',
 } as const
@@ -105,15 +105,15 @@ function Bar({
   return (
     <div className="flex items-center gap-2">
       <span className="w-20 shrink-0 text-[11px] text-muted-foreground">{label}</span>
-      <div className="relative h-2.5 flex-1 rounded-pill bg-muted">
+      <div className="relative h-2.5 flex-1 rounded-full bg-muted">
         <div
           style={{ width }}
-          className={cn('h-full rounded-pill transition-[width] duration-300', TONE[tone])}
+          className={cn('h-full rounded-full transition-[width] duration-300', TONE[tone])}
         />
       </div>
       <span dir="ltr" className="w-24 shrink-0 text-end font-mono text-xs tabular-nums">
         {value}
-        {suffix && <span className="ms-1 font-semibold text-danger-strong">{suffix}</span>}
+        {suffix && <span className="ms-1 font-semibold text-destructive-strong">{suffix}</span>}
       </span>
     </div>
   )

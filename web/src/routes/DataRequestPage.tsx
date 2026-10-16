@@ -90,23 +90,23 @@ export default function DataRequestPage() {
           <CardHeader className="pb-3">
             <CardTitle className="text-base">{t('data.request')}</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="space-y-1.5">
+          <CardContent className="flex flex-col gap-3">
+            <div className="flex flex-col gap-1.5">
               <Label className="text-xs text-muted-foreground">{t('data.actor')}</Label>
               <Input value={body.actor} disabled={locked}
                 onChange={(e) => patch({ actor: e.target.value })} />
             </div>
-            <div className="space-y-1.5">
+            <div className="flex flex-col gap-1.5">
               <Label className="text-xs text-muted-foreground">{t('data.action')}</Label>
               <Input value={body.action} disabled={locked}
                 onChange={(e) => patch({ action: e.target.value })} />
             </div>
-            <div className="space-y-1.5">
+            <div className="flex flex-col gap-1.5">
               <Label className="text-xs text-muted-foreground">{t('data.purpose')}</Label>
               <Input value={body.stated_purpose} disabled={locked}
                 onChange={(e) => patch({ stated_purpose: e.target.value })} />
             </div>
-            <div className="space-y-1.5">
+            <div className="flex flex-col gap-1.5">
               <Label className="text-xs text-muted-foreground">{t('data.recordCount')}</Label>
               <Input type="number" value={body.record_count ?? 0} disabled={locked}
                 onChange={(e) => patch({ record_count: Number(e.target.value) })} />
@@ -121,7 +121,7 @@ export default function DataRequestPage() {
               <Switch checked={body.care_purpose ?? false} disabled={locked}
                 onCheckedChange={(v) => patch({ care_purpose: v })} />
             </div>
-            <div className="rounded-md border border-warn-strong/40 bg-warn/5 p-3">
+            <div className="rounded-md border border-warning-strong/40 bg-warning/5 p-3">
               <div className="flex items-center justify-between">
                 <Label className="text-sm">{t('data.attemptOverride')}</Label>
                 <Switch checked={attemptOverride} disabled={locked}
@@ -138,10 +138,10 @@ export default function DataRequestPage() {
           </CardContent>
         </Card>
 
-        <div className="min-w-0 space-y-4">
+        <div className="min-w-0 flex flex-col gap-4">
           {offline && (
-            <Card className="border-danger-strong">
-              <CardContent className="py-4 text-sm text-danger-strong">
+            <Card className="border-destructive-strong">
+              <CardContent className="py-4 text-sm text-destructive-strong">
                 {t('console.deviceOffline')}
               </CardContent>
             </Card>
@@ -168,8 +168,8 @@ export default function DataRequestPage() {
                 )}
               </VerdictBanner>
               {result.policy.blocked && !result.policy.overridable && (
-                <div className="rounded-md border-2 border-danger-strong bg-danger/5 p-4">
-                  <p className="font-semibold text-danger-strong">{t('data.noOverride')}</p>
+                <div className="rounded-md border-2 border-destructive-strong bg-destructive/5 p-4">
+                  <p className="font-semibold text-destructive-strong">{t('data.noOverride')}</p>
                   <p className="pt-1 text-sm text-foreground/80">{result.policy.override_reason}</p>
                 </div>
               )}
@@ -188,7 +188,7 @@ export default function DataRequestPage() {
               )}
               <Card>
                 <CardHeader><CardTitle className="text-base">{t('console.checks')}</CardTitle></CardHeader>
-                <CardContent className="space-y-2">
+                <CardContent className="flex flex-col gap-2">
                   {result.policy.checks.map((check) => (
                     <CheckRow key={check.rule} check={check} />
                   ))}
@@ -203,7 +203,7 @@ export default function DataRequestPage() {
                     </span>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="flex flex-col gap-3">
                   {result.policy.citations.map((citation) => (
                     <CitationCard key={citation.record_id} citation={citation} />
                   ))}

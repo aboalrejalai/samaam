@@ -23,9 +23,9 @@ const VERDICT_TONE: Record<Verdict, Tone> = {
 
 const TONE_CLASS: Record<Tone, string> = {
   released: 'border-s-success bg-success/8 text-success-strong',
-  withheld: 'border-s-danger bg-danger/8 text-danger-strong',
-  unsettled: 'border-s-warn bg-warn/8 text-warn-strong',
-  abstained: 'border-s-muted-foreground bg-accent text-foreground',
+  withheld: 'border-s-destructive bg-destructive/8 text-destructive-strong',
+  unsettled: 'border-s-warning bg-warning/8 text-warning-strong',
+  abstained: 'border-s-muted-foreground bg-muted text-foreground',
 }
 
 export interface VerdictBannerProps extends React.ComponentProps<typeof Card> {
@@ -71,7 +71,7 @@ export function VerdictBanner({
         {/* The verdict name is a contract value and is never translated. */}
         <span
           dir="ltr"
-          className="font-display text-xl font-bold tracking-[0.04em] uppercase"
+          className=" text-xl font-bold tracking-[0.04em] uppercase"
         >
           {verdict}
         </span>

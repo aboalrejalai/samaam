@@ -28,19 +28,19 @@ export function CitationCard({ citation, className, ...props }: CitationCardProp
         size="sm"
         data-slot="citation-card"
         data-error
-        className={cn('gap-2 rounded-md border-s-2 border-s-warn ring-0 shadow-ring', className)}
+        className={cn('gap-2 rounded-md border-s-2 border-s-warning ring-0 shadow-ring', className)}
         {...props}
       >
         <CardHeader className="px-3">
           <CardTitle className="flex items-center gap-2 text-sm">
-            <FileWarning aria-hidden className="size-4 shrink-0 text-warn-strong" />
+            <FileWarning aria-hidden className="size-4 shrink-0 text-warning-strong" />
             <code dir="ltr" className="font-mono">
               {citation.record_id}
             </code>
           </CardTitle>
         </CardHeader>
         <CardContent className="px-3">
-          <p className="text-xs text-warn-strong">{citation.error}</p>
+          <p className="text-xs text-warning-strong">{citation.error}</p>
         </CardContent>
       </Card>
     )
@@ -54,7 +54,7 @@ export function CitationCard({ citation, className, ...props }: CitationCardProp
       {...props}
     >
       <CardHeader className="gap-1 px-3">
-        <p className="text-xs font-medium text-primary-strong">{citation.authority}</p>
+        <p className="text-xs font-medium text-primary">{citation.authority}</p>
         <CardTitle className="text-sm">{citation.title}</CardTitle>
         <p className="text-xs text-muted-foreground">{citation.section}</p>
       </CardHeader>
@@ -77,7 +77,7 @@ export function CitationCard({ citation, className, ...props }: CitationCardProp
             href={citation.url}
             target="_blank"
             rel="noreferrer noopener"
-            className="inline-flex items-center gap-1.5 rounded-sm text-xs font-medium text-primary-strong underline underline-offset-4 hover:text-primary-strong"
+            className="inline-flex items-center gap-1.5 rounded-sm text-xs font-medium text-primary underline underline-offset-4 hover:text-primary"
           >
             <ExternalLink aria-hidden className="size-3.5" />
             {t('citation.open')}

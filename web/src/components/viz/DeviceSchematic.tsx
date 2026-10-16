@@ -35,9 +35,9 @@ function unitTone(unit: Unit, state: DeviceState | null) {
 
 const TONE: Record<string, string> = {
   idle: 'border-border text-muted-foreground',
-  armed: 'border-primary-strong text-primary-strong',
+  armed: 'border-primary text-primary',
   live: 'border-success-strong text-success-strong',
-  held: 'border-danger-strong text-danger-strong ring-4 ring-danger/20',
+  held: 'border-destructive-strong text-destructive-strong ring-4 ring-destructive/20',
   unreached: 'border-dashed border-border text-muted-foreground/50',
 }
 
@@ -83,12 +83,12 @@ export function DeviceSchematic({ state, className, ...props }: DeviceSchematicP
                 <span
                   className={cn(
                     'h-px w-full',
-                    linkBroken ? 'bg-danger-strong' : 'bg-border',
+                    linkBroken ? 'bg-destructive-strong' : 'bg-border',
                     tone === 'unreached' && 'bg-border/40',
                   )}
                 />
                 {linkBroken && (
-                  <span className="absolute text-xs font-bold text-danger-strong">✕</span>
+                  <span className="absolute text-xs font-bold text-destructive-strong">✕</span>
                 )}
               </span>
             )}

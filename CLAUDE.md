@@ -2,93 +2,98 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## What this repository is
+## What this is
 
-**صِمَام (Samaam)** — a hackathon submission for the **ITU AI Readiness Hackathon — Kingdom of Saudi Arabia**, Health/Radiology track.
+**صِمَام (Samaam)** — a policy gateway that sits between a radiology technologist's console and a CT scanner / contrast injector, and returns `403 Forbidden — Policy Violation` when requested settings breach Saudi regulation. Built for the ITU AI Readiness Hackathon (KSA, Health/Radiology track), where it won 3rd Prize. Live deployment: see `DEPLOY.md` (single Docker container, host port 3172).
 
-As of now the repo contains **specification documents only — no code, no commits**. The first implementation work in this repo is greenfield.
+`docs/Hackathon-Guide.md` was the spec of record. `README.md` is the public-facing summary and stays in sync with the code (API table, record counts, latency figures).
 
-```
-docs/            Samaam.md (concept) · Hackathon-Guide.md (the contract) · Knowledge-Base.md (RAG corpus)
-kb/sources/      Primary source PDFs — Y.3172 standard, WHO health-AI ethics, NSDAI, ITU AI4G KSA
-kb/framework/    dimensions.json — official ITU 13 dimensions / 6 factors / 111 metrics
-reference/organizers/   Organizers' reference code (read-only, do not import)
-app/             Samaam implementation
-scenarios/       The three mandatory demo scenarios
-```
+## Commands
 
-`docs/Hackathon-Guide.md` is the spec of record. Where it and any other file disagree, the guide wins.
+```bash
+# one-time setup (from repo root)
+python -m venv .venv && .venv/bin/pip install -r requirements.txt
+cp .env.example .env                       # SAMAAM_LLM_API_KEY is optional
+.venv/bin/python -m app.ingest --reset     # build kb/chroma (gitignored)
 
-## Hard constraints (non-negotiable — these are graded)
+# backend — boots in ~15 s because it loads the local embedding model
+.venv/bin/uvicorn app.main:app --reload --port 8000
 
-- **Deadline: 31 August 2026, 23:59 Riyadh.** Judging day 14 Sept 2026, Riyadh.
-- Technical report **≤ 5 pages** PDF. Demo video **≤ 7 minutes**, with subtitles. Exceeding either loses points.
-- GitHub repo must be **public, MIT/Apache-2.0, and contain zero API keys**. All secrets via env vars only.
-- **100% synthetic data.** Never commit or generate real/realistic patient records. Every UI screen and the report must carry the notice: *"بيانات محاكاة لأغراض الهاكاثون فقط"*.
-- **Zero hallucination rule.** The Policy Node must never invent a law name, article number, or URL. If the retrieved context does not support a claim, it must return `INSUFFICIENT_EVIDENCE`.
-- Knowledge Base must hold **15–40 sources with direct, working links to the actual documents** — never ministry homepages.
-- The MVP must be **functionally operational** (live RAG retrieval + real policy enforcement), not a static UI mockup.
+# the three scenarios end-to-end in the terminal; prints "N/3 matched expected"
+.venv/bin/python run_demo.py
+.venv/bin/python run_demo.py 2                                  # one scenario
+.venv/bin/python run_demo.py 2 --override "Dr. X, Consultant"   # override path
 
-## Architecture: ITU-T Y.3172 seven-node pipeline
+# frontend (web/) — dev server on :5173 (landing on /, system on /app), talks to :8000
+npm install && npm run dev
+npm run typecheck
+npm run build                              # tsc -b && vite build → web/dist
 
-Every module must map to a named node, and code/docs should use these symbols verbatim (`SRC`, `C`, `PP`, `M`, `P`, `D`, `SINK`) — the mapping itself is a judging criterion.
-
-```
-SRC → C → PP → M → P → D → SINK
-                    ↑
-              Knowledge Base (pgvector)
+# full image: frontend build + KB index baked in, one port
+docker compose up -d --build
 ```
 
-- **SRC** — Saudi regulation texts, synthetic patient record, technician-entered scanner settings.
-- **C** — API ingest; simulates HL7 FHIR (patient data) and DICOM Modality Worklist (device commands).
-- **PP** — PDPL anonymization, chunking, embedding generation.
-- **M** — LLM + RAG retrieval; drafts the clinical/regulatory reasoning.
-- **P** — **Policy Node. The heart of the project.** Deterministic guardrail that inspects M's output against retrieved policy chunks and either approves, warns, or blocks.
-- **D** — attaches citations (authority, document title, section, direct URL) and writes the audit log.
-- **SINK** — operator UI, and the mock device API that receives (or is denied) the execute command.
+There is no test suite and no linter config. Verification is `run_demo.py` (every scenario must match its `expected_verdict`; it does **not** exit non-zero on a mismatch — read the last line), `npm run typecheck`, and hitting the API (`POST /device/execute` with SC-02 must return 403).
 
-### The Policy Node's six verdicts
+Re-run `app.ingest --reset` after any change to `kb/records/health-regulatory.json` or `kb/sources/`. The Docker image indexes at build time, so a KB change also needs a rebuild — never mount a volume over `kb/chroma`.
 
-`P` must classify every scenario into exactly one of: `COMPLIANT`, `VIOLATION`, `AMBIGUITY`, `CONFLICT`, `POTENTIAL_GAP`, `INSUFFICIENT_EVIDENCE`.
+## Architecture
 
-`VIOLATION` → block execution and name the violated article + issuing authority. `POTENTIAL_GAP` and `INSUFFICIENT_EVIDENCE` → mandatory human-in-the-loop; never auto-approve.
+The pipeline follows ITU-T Y.3172 node for node: `SRC → C → PP → M → P → D → SINK`. Code and docs use these symbols verbatim, and the mapping is part of the pitch, so every new module should state which node it belongs to.
 
-**`P` must be deterministic code, not a second LLM call.** An LLM may draft the reasoning inside `M`, but the block/allow decision has to be enforceable, reproducible rule logic — otherwise the safety claim collapses under judging, and the whole pitch is that the AI is *constrained* by policy rather than trusted.
+| Node | Where |
+| :--- | :--- |
+| C | `app/connectors/fhir.py` (read-only HL7 FHIR R4 client, defaults to public HAPI) · `app/connectors/mwl.py` (DICOM Modality Worklist C-FIND **server** on :11112, started in FastAPI's lifespan) |
+| PP | `Samaam.preprocess` in `app/pipeline.py` (drops direct identifiers, computes eGFR) · `app/ingest.py` (chunking/embedding) |
+| M | `app/llm.py` + `EXPLAIN_SYSTEM` in `app/pipeline.py`, used only to write the explanation |
+| P | `app/policy_node.py`, the core of the system |
+| D | `PolicyNode._resolve` (citations) · `MockCTScanner._log` (audit) |
+| SINK | `app/device_api.py` (`MockCTScanner`) · the React UI |
 
-### The domain mechanic
+### P is deterministic and contains no model
 
-The mock device API (representing the CT scanner and the Bayer-Medrad-style contrast injector) must return **`403 Forbidden — Policy Violation`** when `P` rejects the settings. That HTTP rejection *is* the demo's money shot: an unsafe contrast dose for a low-GFR oncology patient never reaches the hardware.
+`policy_node.py` must never import `app.llm`. The block/allow decision is plain rule logic. If the model is deleted, every block must still happen. The LLM only writes prose about a decision that has already been made, and the frontend fetches that prose separately from `POST /explain` after the verdict has arrived. That is why the UI calls `/evaluate` and `/device/execute` with `explain: false`. With no API key or an unreachable provider, `/explain` returns `source: "unavailable"` and nothing else degrades.
 
-## The three mandatory demo scenarios
+Key concepts that span several files:
 
-The video and the report must both walk through all three, in this order:
+- **Verdict vs Action are orthogonal.** `Verdict` is the regulatory classification, one of the six required verdicts: `COMPLIANT` · `VIOLATION` · `AMBIGUITY` · `CONFLICT` · `POTENTIAL_GAP` · `INSUFFICIENT_EVIDENCE`. `Action` is operational: `PROCEED` · `CONFIRM` · `AUTHORISE` · `PROHIBITED`. A decision's action is the most severe action among its checks, and `blocked` means `action != PROCEED`. This split came out of a consultant radiologist's review: a clinical block is a *hold for a named authoriser*, not a prohibition. No eGFR value forbids contrast outright.
+- **`Basis` must never be blurred.** `STATUTORY` means binding by Royal Decree (SFDA DRLs, PDPL). `NATIONAL_PROTOCOL` means an MoH clinical protocol, not penal law. The explanation prompt and the UI both preserve this distinction. Never describe a protocol breach as a legal one.
+- **Checks cite KB records by explicit ID, not by semantic search,** so the legal basis can't drift with query wording. `_resolve` fetches each ID via `kb.get` and refuses to cite anything not marked `VERIFIED`. When adding a rule: add or verify the record in `kb/records/health-regulatory.json` (direct document URL, never a ministry homepage), re-ingest, then reference its ID in `Check.cites`. Thresholds live as constants at the top of `policy_node.py`, each with a comment citing its source page.
+- **`INSUFFICIENT_EVIDENCE` wins over everything.** Any check returning `NO_EVIDENCE` sets the verdict to `INSUFFICIENT_EVIDENCE`, even when other checks fail.
+- **Two evaluation paths.** `evaluate` covers the device path (scenarios 1–2): DRL, renal prophylaxis, metformin, nephrotoxic meds. A named `override_by` can release it. `evaluate_data_request` covers the privacy path (scenario 3): PDPL minimisation, lawful basis, cross-border. It is `overridable=False` on purpose, because no clinician can authorise what the PDPL forbids.
+- **`Check.readings` and `band` are display-only.** They carry the measured numbers to the UI, and no condition reads them. Don't make logic depend on them, and don't make the frontend parse numbers out of `detail` text.
+- **State is in-memory and process-global.** One `Samaam` instance in `app/main.py` holds the `MockCTScanner` state (IDLE/EXECUTED/LOCKED) and the audit trail. Both reset on restart. The MWL server evaluates every scenario on each C-FIND and *withholds* blocked entries from the worklist, logging `MWL_WITHHELD` / `MWL_SERVED`.
 
-1. **Baseline / compliant** — normal patient, settings pass, answer is approved *with visible citations*.
-2. **Operational drift** — low `GFR` + high iodinated contrast request → `P` issues a conditional block, cites the protocol, and proposes a safe alternative (low-dose CT / adjusted contrast).
-3. **Controversial breach** — attempt to export or commercially exploit patient data → hard security override citing PDPL + SDAIA ethics, session halted, incident written to the audit trail.
+### Knowledge base
 
-## Stack
+ChromaDB with **local** embeddings (`intfloat/multilingual-e5-small`; no key, works offline, and the multilingual model is required because queries are Arabic). It has three collections: `policies` (structured records), `sources` (PDF chunks from `kb/sources/`), and `gaps` (Samaam's own gap analysis, kept separate so it never competes with regulation in retrieval). e5 needs its `query: ` / `passage: ` prefixes; `kb.py` adds them.
 
-LLM inference goes through any OpenAI-compatible provider (GLM/Z.ai by default, OpenRouter or Alibaba DashScope by swapping two env vars) via `app/llm.py`. Embeddings are computed locally by ChromaDB — no key, no network — so retrieval keeps working if the venue's wifi dies during the demo.
+### Serving
 
-The guide's Gemini + Supabase code in §9 is illustrative only; do not wire it up.
+In production FastAPI serves `web/dist` from the same origin, so there is no CORS and no `VITE_API_BASE_URL`. The SPA catch-all must stay registered last in `main.py`. The system's screens live under `/app/*`, so they no longer share paths with API endpoints; the old top-level paths (`/audit`, `/connectors`, …) still work because the Accept-header middleware in `main.py` hands browser navigations to the SPA, which redirects them.
 
-## Reference implementation in `Hackathon-Guide.md`
+### Frontend (`web/`)
 
-Section 9 contains ready-to-use `pgvector` schema (`policies_kb`, `match_policies` RPC, HNSW index) and a Supabase Edge Function (`supabase/functions/policy-guardian/index.ts`). Use it as the starting point rather than designing from scratch.
+React 19 · Vite · Tailwind v4 · shadcn/ui · TanStack Query · react-router v7 · i18next (ar/en) · `motion` (landing page only). `/` is a landing page (`routes/HomePage.tsx` + `components/home/`, lazy-loaded); the system is under `/app` (`APP_BASE` in `lib/routes.ts`). Read `web/README.md` before editing. The rules that matter most:
 
-Read it for the Policy Node system prompt and the six-verdict contract, not for the stack. The dimension mismatch it contains (768 vs. the KB's 1536) is moot now that ChromaDB owns the embedding.
+- **Saudi Soft identity** (skill in `.claude/skills/saudi-soft/`). `src/index.css` holds Soft's `theme-bridge.css` verbatim between its markers; the only edit is the `--sa-50…900` ladder, which carries the medical blue. Retint by editing those values only. Soft fixes the rest: IBM Plex Sans Arabic 400–700, radii 8/10/12/16, sidebar 280px, top bar 64px, lucide-react only, `gap` not `space-*`, light/dark only. In Soft, `accent`/`secondary` are saturated brand colours, so subtle panels use `bg-muted` or `bg-primary/5`. Status text uses the `*-strong` extension (outside the Soft markers) for contrast.
+- **The frontend computes nothing.** Thresholds, verdicts, and citations come from the service; the UI renders them. The landing page's facts all live in `components/home/home-data.ts`, each with a `source:` comment — no invented feature or number.
+- **A 403 is a result, not an error.** `lib/api.ts` resolves 403s with the decision from FastAPI's `detail` envelope. Transport failure raises `SamaamOfflineError` so that "server down" and "request refused" never look alike.
+- `src/types/api.ts` mirrors `app/main.py` and `policy_node.py` by hand, so update it when the wire shape changes.
+- Use logical CSS properties only (`ps-`, `me-`, `text-start`), because the Arabic toggle flips the whole document. Put `dir="ltr"` on inline spans around ids and values, not on blocks. `components/ui/` is generated shadcn code: regenerate it, don't hand-edit it.
+- Never translate record IDs, verdict/basis names, statutory quotations, or measured values/units. `en.json` and `ar.json` must keep identical key sets.
 
-## Knowledge Base gaps to close before submission
+## Rules that still bind
 
-`Knowledge-Base.md` is built for the **Education** track, not Health. It has full SDAIA AI Ethics and PDPL coverage (including minors/student data, which this project does not use), and **no health-sector regulation at all**. Missing and required:
+- **100% synthetic data.** Every UI screen and document carries `بيانات محاكاة لأغراض الهاكاثون فقط` (`SyntheticNotice` component; `SYNTHETIC_NOTICE` in `main.py`). Never add realistic patient records. Hospital site profiles in `main.py` deliberately have empty endpoints; don't invent hospital network addresses.
+- **Zero hallucination.** Never invent a law name, article number, threshold, or URL, whether in code, prompts, KB records, or docs. If the evidence isn't there, the answer is `INSUFFICIENT_EVIDENCE`.
+- The repository is public (MIT). Secrets come only from `.env` via `SAMAAM_*` env vars (`app/config.py`, pydantic-settings).
+- `submission/TECHNICAL-REPORT.md` must stay within 5 pages as a PDF.
 
-- SFDA medical-device and Software-as-a-Medical-Device (SaMD) regulations.
-- MoH clinical practice guidelines: radiology protocols, contrast administration limits, GFR thresholds.
-- PDPL provisions specific to health data and automated diagnostic liability.
-- ~~WHO / ITU guidance on ethics and governance of AI in health~~ — covered by `kb/sources/WHO_Ethics_Governance_AI_Health.pdf`.
+## Conventions
 
-The education/minors section (student data, Noor/MADARES, parental consent) has been removed — Samaam has no minor or student subjects, and leaving it in signalled a corpus copied from another project.
-
-Still to fix: several citations are law-firm and vendor commentary (`iclg.com`, `cookiebot.com`, `scribd.com`, consultancy blogs) rather than primary government documents. Judging rewards official primary sources — replace them as verified sources arrive.
-
+- Backend comments and docstrings are written in **Arabic**, frontend comments in English. Match the file you're in. Comments explain *why* a decision was made, often citing a document page, and are kept dense.
+- `changelog/CHANGELOG.md` (Arabic, `MAJOR.MINOR.PATCH`) records each completed phase, including what was verified and how.
+- `submission/slides.html` and `web/public/deck/index.html` are the same deck; the second is what `/slides` embeds. Keep them identical.
+- `reference/organizers/` is the organizers' reference code: read-only, never import from it.
+- `map/` is an Obsidian vault of per-node notes. `.obsidian/` and `Samaam/` are untracked vault artifacts.

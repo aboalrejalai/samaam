@@ -20,14 +20,14 @@ import type { Basis } from '@/types/api'
  * holds whether the check passed or failed; only the fill and the wording move.
  */
 const SHAPE: Record<Basis, string> = {
-  STATUTORY: 'rounded-[4px]',
-  NATIONAL_PROTOCOL: 'rounded-pill',
+  STATUTORY: 'rounded-sm',
+  NATIONAL_PROTOCOL: 'rounded-full',
   CLINICAL_GUIDANCE: 'rounded-none px-0',
 }
 
 const BREACHED: Record<Basis, string> = {
-  STATUTORY: 'border-transparent bg-danger-strong text-card font-semibold',
-  NATIONAL_PROTOCOL: 'border border-warn-strong bg-transparent text-warn-strong',
+  STATUTORY: 'border-transparent bg-destructive-strong text-card font-semibold',
+  NATIONAL_PROTOCOL: 'border border-warning-strong bg-transparent text-warning-strong',
   CLINICAL_GUIDANCE: 'border-transparent bg-transparent text-muted-foreground',
 }
 

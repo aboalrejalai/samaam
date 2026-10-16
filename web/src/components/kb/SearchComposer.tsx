@@ -68,7 +68,7 @@ export function SearchComposer({
     <div
       data-slot="search-composer"
       className={cn(
-        'rounded-3xl border border-border bg-card p-2 transition-colors',
+        'rounded-2xl border border-border bg-card p-2 transition-colors',
         'focus-within:border-ring',
         className,
       )}

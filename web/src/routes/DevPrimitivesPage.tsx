@@ -130,7 +130,7 @@ function Section({ title, note, children }: { title: string; note?: string; chil
   return (
     <section className="flex flex-col gap-3">
       <div className="flex flex-col gap-0.5">
-        <h2 className="font-display text-lg font-semibold text-foreground">{title}</h2>
+        <h2 className=" text-lg font-semibold text-foreground">{title}</h2>
         {note !== undefined && <p className="max-w-prose text-xs text-muted-foreground">{note}</p>}
       </div>
       <Separator />
@@ -292,7 +292,7 @@ export default function DevPrimitivesPage() {
         </Section>
       </div>
 
-      <section className="space-y-4">
+      <section className="flex flex-col gap-4">
         <h2 className="text-lg font-semibold">Visualisations</h2>
         <p className="text-sm text-muted-foreground">
           Each renders a number the policy node cited. Print this in greyscale:
@@ -344,9 +344,9 @@ export default function DevPrimitivesPage() {
           </CardContent>
         </Card>
 
-        <div className="space-y-3">
+        <div className="flex flex-col gap-3">
           {(['LOCKED', 'EXECUTED', 'ARMED', null] as const).map((s) => (
-            <div key={String(s)} className="space-y-1">
+            <div key={String(s)} className="flex flex-col gap-1">
               <p className="font-mono text-xs text-muted-foreground">
                 DeviceSchematic — {s ?? 'no request yet'}
               </p>

@@ -27,7 +27,7 @@ export interface RequestFormProps {
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
-    <div className="space-y-1.5">
+    <div className="flex flex-col gap-1.5">
       <Label className="text-xs text-muted-foreground">{label}</Label>
       {children}
     </div>
@@ -41,12 +41,12 @@ export function RequestForm({
   const num = (value: string) => (value === '' ? null : Number(value))
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       <Card>
         <CardHeader className="pb-3">
           <CardTitle className="text-base">{t('console.patient')}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="flex flex-col gap-3">
           <div className="grid grid-cols-3 gap-2">
             <Field label={t('console.age')}>
               <Input type="number" value={patient.age} disabled={disabled}
@@ -68,7 +68,7 @@ export function RequestForm({
             <div className="flex flex-wrap gap-1.5">
               {patient.medications.map((drug) => (
                 <span key={drug}
-                  className="rounded-pill border border-border bg-accent px-2 py-0.5 text-xs text-foreground/80">
+                  className="rounded-full border border-border bg-muted px-2 py-0.5 text-xs text-foreground/80">
                   {drug}
                 </span>
               ))}
@@ -81,12 +81,12 @@ export function RequestForm({
         <CardHeader className="pb-3">
           <CardTitle className="text-base">{t('console.renal')}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="flex flex-col gap-3">
           <Field label={`${t('console.creatinine')} (µmol/L)`}>
             <Input type="number" value={patient.serum_creatinine_umol_l ?? ''} disabled={disabled}
               onChange={(e) => onPatientChange({ serum_creatinine_umol_l: num(e.target.value) })} />
           </Field>
-          <div className="rounded-md border border-border bg-accent px-3 py-3">
+          <div className="rounded-md border border-border bg-muted px-3 py-3">
             <RiskScale
               value={patient.egfr ?? null}
               band={riskBand ?? null}
@@ -130,7 +130,7 @@ export function RequestForm({
         <CardHeader className="pb-3">
           <CardTitle className="text-base">{t('console.contrast')}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="flex flex-col gap-3">
           <div className="grid grid-cols-2 gap-2">
             <Field label={t('console.agent')}>
               <Input value={requested.contrast_agent ?? ''} disabled={disabled}

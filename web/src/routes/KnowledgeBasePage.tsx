@@ -68,7 +68,7 @@ export default function KnowledgeBasePage() {
       />
       <p className="-mt-4 px-2 text-xs text-muted-foreground">{t('kb.hint')}</p>
 
-      <div className="space-y-3">
+      <div className="flex flex-col gap-3">
         {term.length <= 1 && (
           <Card>
             <CardContent className="py-10 text-center text-sm text-muted-foreground">
@@ -79,8 +79,8 @@ export default function KnowledgeBasePage() {
 
         {/* A dead server and an empty corpus must never look the same. */}
         {isError && (
-          <Card className="border-danger-strong">
-            <CardContent className="py-4 text-sm text-danger-strong">
+          <Card className="border-destructive-strong">
+            <CardContent className="py-4 text-sm text-destructive-strong">
               {t(error instanceof SamaamOfflineError ? 'kb.errorOffline' : 'kb.errorService')}
             </CardContent>
           </Card>
@@ -109,7 +109,7 @@ export default function KnowledgeBasePage() {
 
         {data?.results.map((hit) => (
           <Card key={`${hit.record_id}-${hit.section}`}>
-            <CardContent className="space-y-2 py-4">
+            <CardContent className="flex flex-col gap-2 py-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <span dir="ltr" className="font-mono text-xs font-semibold text-foreground">
                   {hit.record_id}
@@ -137,7 +137,7 @@ export default function KnowledgeBasePage() {
                   target="_blank"
                   rel="noreferrer"
                   dir="ltr"
-                  className="inline-block break-all font-mono text-xs text-primary-strong underline underline-offset-2"
+                  className="inline-block break-all font-mono text-xs text-primary underline underline-offset-2"
                 >
                   {hit.url}
                 </a>

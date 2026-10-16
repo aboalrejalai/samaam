@@ -1,0 +1,97 @@
+{
+  "skill_name": "saudi-soft",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Scaffold a Vite React app with Saudi Soft: shadcn init, lucide, Soft theme bridge, RTL Arabic, dark mode toggle. Then build a settings form with full name, email, and notification toggles with validation.",
+      "expected_output": "Soft theme applied, lucide icons, FieldGroup/Field forms, semantic Soft tokens, gap-* spacing. No sidebar required for settings-only.",
+      "files": [],
+      "expectations": [
+        "Uses lucide-react only (iconLibrary lucide)",
+        "Applies Soft theme bridge markers or saudi-soft apply-theme",
+        "Uses FieldGroup and Field instead of raw div space-y",
+        "Uses data-invalid / aria-invalid for validation",
+        "Uses gap-* not space-y-*; semantic colors not bg-green-600",
+        "No manual dark: brand color overrides",
+        "Does not force app shell / sidebar for a settings form alone"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Create a dialog for editing a user profile with avatar, name, bio, Save/Cancel with icons — Saudi Soft / lucide.",
+      "expected_output": "DialogTitle, Avatar+AvatarFallback, data-icon, lucide imports, Soft semantic tokens.",
+      "files": [],
+      "expectations": [
+        "Includes DialogTitle",
+        "Avatar includes AvatarFallback",
+        "Icons use data-icon; no size-4 on icons inside Button",
+        "Imports from lucide-react only",
+        "Uses asChild or render per project base"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Dashboard with 3 Soft-styled stat cards (primary/chart tokens), Badge deltas, Skeleton loading — Saudi Soft.",
+      "expected_output": "KPI Soft recipe: from-primary/10 gradient, bold value without CardTitle, muted labels, Badge deltas, Skeleton, gap-*.",
+      "files": [],
+      "expectations": [
+        "KPI cards use from-primary/10 (or Soft tint) gradient surface — not plain default CardTitle blocks",
+        "Stat value is text-2xl or text-3xl font-bold without CardTitle",
+        "Label uses text-sm text-muted-foreground",
+        "Badge for deltas; semantic Soft tokens not raw emerald/red",
+        "Skeleton instead of custom animate-pulse",
+        "gap-* and size-* conventions"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Chat conversation with MessageScroller, Message, Bubble, Attachment, Marker — Saudi Soft lucide.",
+      "expected_output": "Registry chat primitives, Soft tokens, lucide.",
+      "files": [],
+      "expectations": [
+        "Uses MessageScroller family for scroll",
+        "Uses Message + Bubble for rows",
+        "Uses Attachment and Marker appropriately",
+        "Semantic Soft colors; lucide icons"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Build an Arabic RTL Soft dashboard app shell: sidebar 280px with active pill, 64px topbar with theme capsule (sun/moon ring-primary), page header with 48px icon tile, three gradient KPI cards, and two hub quick-action cards.",
+      "expected_output": "App shell + page header + KPI + hub recipes from Soft references; Soft tokens; lucide; RTL logical spacing.",
+      "files": [],
+      "expectations": [
+        "Sidebar uses Soft width tokens (~280px expanded)",
+        "Active nav has start pill / primary-subtle treatment",
+        "Topbar height ~64px with theme capsule ring-2 ring-primary on active",
+        "Page header includes rounded-xl bg-primary/10 icon tile",
+        "Three KPI cards with Soft gradient tint and bold values without CardTitle",
+        "Hub cards with icon tile and hover border-primary/40 or bg-primary/5",
+        "RTL dir and logical ms/me/ps/pe spacing; lucide only"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "The client rejected Soft green. Explicitly rebrand to a red brand ladder (primary around #B42318). Soft theme is already applied; dashboards use bg-primary and from-primary/10.",
+      "expected_output": "Edit only the Soft theme SA ladder (light + dark) in the theme block / theme-bridge; do not rewrite page components; gradients stay on var(--sa-*).",
+      "files": [],
+      "expectations": [
+        "Changes limited to Soft theme markers or theme-bridge SA ladder values",
+        "Does not rewrite dashboard/page TSX just to change hue",
+        "Gradients remain derived from var(--sa-*) after ladder update",
+        "Follows rebrand.md / explicit-request policy"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Existing large React app with shadcn, hundreds of screens, many bg-emerald-* classes, no Soft theme yet. User asks to adopt Saudi Soft.",
+      "expected_output": "Agent asks theme-only vs Soft-native for new UI vs full migration before bulk changes; does not rewrite all pages by default.",
+      "files": [],
+      "expectations": [
+        "Asks user to choose theme-only / Soft-native new work / full migration",
+        "Does not default to rewriting the entire legacy UI",
+        "Theme-only path uses apply-theme without mass page rewrites"
+      ]
+    }
+  ]
+}

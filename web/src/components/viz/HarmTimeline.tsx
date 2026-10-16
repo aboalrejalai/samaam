@@ -25,14 +25,14 @@ export function HarmTimeline({ citeId = 'CLINICAL-AKI-ONSET', className, ...prop
   const { t } = useTranslation()
 
   return (
-    <div data-slot="harm-timeline" className={cn('space-y-3', className)} {...props}>
+    <div data-slot="harm-timeline" className={cn('flex flex-col gap-3', className)} {...props}>
       <p className="text-xs text-muted-foreground">{t('viz.timeline.lead')}</p>
 
       <ol className="relative flex justify-between">
         <span aria-hidden className="absolute inset-x-2 top-1.5 h-px bg-border" />
         <span
           aria-hidden
-          className="absolute start-2 top-1.5 h-px w-[calc(100%-1rem)] bg-gradient-to-r from-transparent via-warn to-danger-strong rtl:bg-gradient-to-l"
+          className="absolute start-2 top-1.5 h-px w-[calc(100%-1rem)] bg-gradient-to-r from-transparent via-warning to-destructive-strong rtl:bg-gradient-to-l"
         />
         {STOPS.map((stop, i) => (
           <li key={stop} className="relative z-10 flex w-1/3 flex-col items-center gap-1.5 text-center">
@@ -40,8 +40,8 @@ export function HarmTimeline({ citeId = 'CLINICAL-AKI-ONSET', className, ...prop
               className={cn(
                 'size-3 rounded-full border-2 bg-card',
                 i === 0 && 'border-muted-foreground',
-                i === 1 && 'border-warn-strong',
-                i === 2 && 'border-danger-strong',
+                i === 1 && 'border-warning-strong',
+                i === 2 && 'border-destructive-strong',
               )}
             />
             <span dir="ltr" className="font-mono text-[10px] tabular-nums text-muted-foreground">
@@ -50,7 +50,7 @@ export function HarmTimeline({ citeId = 'CLINICAL-AKI-ONSET', className, ...prop
             <span
               className={cn(
                 'text-[11px] leading-tight',
-                i === 2 ? 'font-semibold text-danger-strong' : 'text-foreground/80',
+                i === 2 ? 'font-semibold text-destructive-strong' : 'text-foreground/80',
               )}
             >
               {t(`viz.timeline.${stop}.what`)}

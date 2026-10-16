@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
+import { APP_BASE } from '@/lib/routes'
 import { cn } from '@/lib/utils'
 import { useConnectorTest, useConnectors, useFhirPull } from '@/lib/queries'
 import type { ConnectorCard, ConnectorTestResult } from '@/types/api'
@@ -33,8 +34,8 @@ const STATE_TONE: Record<ConnectorCard['state'], string> = {
   discovered: 'text-success-strong',
   local: 'text-muted-foreground',
   awaiting: 'text-muted-foreground',
-  stopped: 'text-warn-strong',
-  error: 'text-danger-strong',
+  stopped: 'text-warning-strong',
+  error: 'text-destructive-strong',
 }
 
 function StateIcon({ state }: { state: ConnectorCard['state'] }) {
@@ -53,10 +54,10 @@ function TestOutcome({ result }: { result: ConnectorTestResult }) {
     <div
       className={cn(
         'rounded-md border-s-2 px-3 py-2 text-xs',
-        result.ok ? 'border-success-strong bg-accent' : 'border-danger-strong bg-accent',
+        result.ok ? 'border-success-strong bg-muted' : 'border-destructive-strong bg-muted',
       )}
     >
-      <p className={cn('font-medium', result.ok ? 'text-success-strong' : 'text-danger-strong')}>
+      <p className={cn('font-medium', result.ok ? 'text-success-strong' : 'text-destructive-strong')}>
         {result.ok ? t('connectors.reachable') : t('connectors.unreachable')}
         {result.latency_ms != null && (
           <span dir="ltr" className="ms-2 font-mono tabular-nums text-muted-foreground">
@@ -101,7 +102,7 @@ export default function ConnectorsPage() {
       />
 
       {/* The claim a judge will test first, stated before the cards. */}
-      <Card className="mb-6 border-s-2 border-primary-strong">
+      <Card className="mb-6 border-s-2 border-primary">
         <CardContent className="py-4 text-sm text-foreground/80">
           {t('connectors.premise')}
         </CardContent>
@@ -109,8 +110,8 @@ export default function ConnectorsPage() {
 
       {isLoading && <Skeleton className="h-64 w-full" />}
       {isError && (
-        <Card className="border-danger-strong">
-          <CardContent className="py-4 text-sm text-danger-strong">
+        <Card className="border-destructive-strong">
+          <CardContent className="py-4 text-sm text-destructive-strong">
             {t('connectors.offline')}
           </CardContent>
         </Card>
@@ -131,7 +132,7 @@ export default function ConnectorsPage() {
                 {connector.standard}
               </p>
             </CardHeader>
-            <CardContent className="space-y-3 text-sm">
+            <CardContent className="flex flex-col gap-3 text-sm">
               <div>
                 <p className="text-xs font-medium text-muted-foreground">
                   {t('connectors.endpoint')}
@@ -166,12 +167,12 @@ export default function ConnectorsPage() {
       <Card className="mt-6">
         <CardHeader className="pb-3">
           <CardTitle className="flex items-center gap-2 text-base">
-            <Cable className="size-4 text-primary-strong" aria-hidden />
+            <Cable className="size-4 text-primary" aria-hidden />
             {t('connectors.pull.title')}
           </CardTitle>
           <p className="pt-1 text-xs text-muted-foreground">{t('connectors.pull.lead')}</p>
         </CardHeader>
-        <CardContent className="space-y-4 text-sm">
+        <CardContent className="flex flex-col gap-4 text-sm">
           <div className="flex flex-wrap items-end gap-2">
             <div className="min-w-0 flex-1">
               <label htmlFor="fhir-id" className="text-xs text-muted-foreground">
@@ -194,11 +195,11 @@ export default function ConnectorsPage() {
           </div>
 
           {pull.isError && (
-            <p className="text-sm text-danger-strong">{t('connectors.pull.failed')}</p>
+            <p className="text-sm text-destructive-strong">{t('connectors.pull.failed')}</p>
           )}
 
           {pull.data && (
-            <div className="space-y-3">
+            <div className="flex flex-col gap-3">
               {/* Raw beside derived, never derived alone: a computed number
                   with no visible origin is a number nobody can check. */}
               <div className="grid gap-3 sm:grid-cols-2">
@@ -240,7 +241,7 @@ export default function ConnectorsPage() {
               </p>
 
               {pull.data.identifiers_withheld.length > 0 && (
-                <p className="rounded-md border-s-2 border-primary-strong bg-accent px-3 py-2 text-xs text-foreground/80">
+                <p className="rounded-md border-s-2 border-primary bg-primary/5 px-3 py-2 text-xs text-foreground/80">
                   {t('connectors.pull.withheld', {
                     fields: pull.data.identifiers_withheld.join(', '),
                   })}
@@ -248,7 +249,7 @@ export default function ConnectorsPage() {
               )}
 
               {pull.data.warnings.map((warning) => (
-                <p key={warning} dir="ltr" className="text-xs text-warn-strong">
+                <p key={warning} dir="ltr" className="text-xs text-warning-strong">
                   {warning}
                 </p>
               ))}
@@ -256,7 +257,7 @@ export default function ConnectorsPage() {
               <Button
                 size="sm"
                 onClick={() =>
-                  navigate('/', { state: { pulledPatient: pull.data.patient } })
+                  navigate(APP_BASE, { state: { pulledPatient: pull.data.patient } })
                 }
               >
                 {t('connectors.pull.openInConsole')}

@@ -18,7 +18,7 @@ export function SyntheticNotice({ className, ...props }: React.ComponentProps<'d
       className={cn('flex min-w-0 items-center gap-2 text-xs text-foreground/80', className)}
       {...props}
     >
-      <FlaskConical aria-hidden className="size-3.5 shrink-0 text-warn-strong" />
+      <FlaskConical aria-hidden className="size-3.5 shrink-0 text-warning-strong" />
       <span dir="rtl" lang="ar" className="truncate font-medium">
         {SYNTHETIC_NOTICE_AR}
       </span>

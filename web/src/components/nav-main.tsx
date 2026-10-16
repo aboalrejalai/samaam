@@ -7,10 +7,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-import type { RouteEntry } from '@/lib/routes'
+import { APP_BASE, type RouteEntry } from '@/lib/routes'
 
 function isCurrent(pathname: string, path: string) {
-  return path === '/' ? pathname === '/' : pathname.startsWith(path)
+  return path === APP_BASE ? pathname === APP_BASE || pathname === `${APP_BASE}/` : pathname.startsWith(path)
 }
 
 /**

@@ -23,13 +23,13 @@ const BANDS = [
 ] as const
 
 const FILL: Record<(typeof BANDS)[number]['tone'], string> = {
-  danger: 'bg-danger/25',
-  warn: 'bg-warn/20',
+  danger: 'bg-destructive/25',
+  warn: 'bg-warning/20',
   success: 'bg-success/20',
 }
 const INK: Record<(typeof BANDS)[number]['tone'], string> = {
-  danger: 'text-danger-strong',
-  warn: 'text-warn-strong',
+  danger: 'text-destructive-strong',
+  warn: 'text-warning-strong',
   success: 'text-success-strong',
 }
 
@@ -57,7 +57,7 @@ export function RiskScale({
   const pct = value === null ? 0 : Math.min(Math.max(value, 0), MAX) / MAX
 
   return (
-    <div data-slot="risk-scale" className={cn('space-y-2', className)} {...props}>
+    <div data-slot="risk-scale" className={cn('flex flex-col gap-2', className)} {...props}>
       <div className="flex items-baseline justify-between gap-2">
         <span className="text-xs text-muted-foreground">{t('viz.risk.label')}</span>
         {active && (

@@ -53,11 +53,11 @@ export function DecisionPanel({ result, explanation, explaining }: DecisionPanel
   }
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       <p
         className={
           policy.blocked && !device.overridden_by
-            ? 'rounded-md border border-danger-strong/40 bg-danger/10 px-3 py-2 text-sm font-semibold text-danger-strong'
+            ? 'rounded-md border border-destructive-strong/40 bg-destructive/10 px-3 py-2 text-sm font-semibold text-destructive-strong'
             : 'rounded-md border border-border bg-muted px-3 py-2 text-sm font-semibold text-foreground'
         }
       >
@@ -76,7 +76,7 @@ export function DecisionPanel({ result, explanation, explaining }: DecisionPanel
       </VerdictBanner>
 
       {device.overridden_by && (
-        <p className="rounded-md border border-warn-strong bg-warn/10 px-3 py-2 text-sm text-warn-strong">
+        <p className="rounded-md border border-warning-strong bg-warning/10 px-3 py-2 text-sm text-warning-strong">
           {t('console.overrideRecorded', { name: device.overridden_by })}
         </p>
       )}
@@ -107,7 +107,7 @@ export function DecisionPanel({ result, explanation, explaining }: DecisionPanel
         <CardHeader>
           <CardTitle className="text-base">{t('console.checks')}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-2">
+        <CardContent className="flex flex-col gap-2">
           {policy.checks.map((check) => (
             <CheckRow key={check.rule} check={check} />
           ))}
@@ -121,7 +121,7 @@ export function DecisionPanel({ result, explanation, explaining }: DecisionPanel
           </CardHeader>
           <CardContent>
             {explaining && !explanation ? (
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-11/12" />
                 <Skeleton className="h-4 w-4/5" />
@@ -144,7 +144,7 @@ export function DecisionPanel({ result, explanation, explaining }: DecisionPanel
             </span>
           </CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="flex flex-col gap-3">
           {policy.citations.map((citation) => (
             <CitationCard key={citation.record_id} citation={citation} />
           ))}

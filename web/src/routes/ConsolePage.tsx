@@ -167,7 +167,7 @@ export default function ConsolePage() {
       />
 
       <div className="grid gap-6 xl:grid-cols-[minmax(340px,380px)_120px_minmax(0,1fr)]">
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           <RequestForm
             patient={patient}
             requested={requested}
@@ -201,8 +201,8 @@ export default function ConsolePage() {
 
         <div className="min-w-0">
           {offline && (
-            <Card className="border-danger-strong">
-              <CardContent className="py-4 text-sm text-danger-strong">
+            <Card className="border-destructive-strong">
+              <CardContent className="py-4 text-sm text-destructive-strong">
                 {t('console.deviceOffline')}
               </CardContent>
             </Card>

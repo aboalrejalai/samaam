@@ -1,181 +1,70 @@
 /* ═══════════════════════════════════════════════════════════════════════
    Samaam — theme
 
-   Colour comes wholly from the shadcn `radix-maia` preset. The project
-   keeps no private colour vocabulary: a translation layer between our
-   names and shadcn's is what made the last palette drift, and it would
-   drift again on the next preset.
-
-   Four tokens are added, because shadcn has no vocabulary for them:
-   success, warn and danger, plus a stronger variant of each for text.
-   They are not borrowed from elsewhere — each is built in OKLCH at the
-   preset's own destructive lightness, so the three read as siblings.
+   Saudi Soft identity, applied from .claude/skills/saudi-soft/references/
+   theme-bridge.css verbatim. The one edit is the brand ladder, per the
+   skill's rebrand.md: --sa-50…900 (light and .dark) carry Samaam's medical
+   blue instead of SA green. --sa-600 is the blue the interface already used
+   for --primary (oklch 0.488 0.243 264.4 = #1d4ed8); the rest of the ladder
+   is built around it, and the .dark ladder is lifted for contrast the same
+   way Soft lifts its greens. Everything else — neutrals, radii, status,
+   shadows, gradients — is Soft as shipped.
    ═══════════════════════════════════════════════════════════════════════ */
 
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* One family, seven weights, Latin and Arabic. Bundled rather than fetched:
-   the venue's network is not a dependency of the interface. */
-@import "@fontsource/ibm-plex-sans-arabic/100.css";
-@import "@fontsource/ibm-plex-sans-arabic/200.css";
-@import "@fontsource/ibm-plex-sans-arabic/300.css";
+/* IBM Plex Sans Arabic 400–700, Latin and Arabic. Bundled rather than
+   fetched: the venue's network is not a dependency of the interface. */
 @import "@fontsource/ibm-plex-sans-arabic/400.css";
 @import "@fontsource/ibm-plex-sans-arabic/500.css";
 @import "@fontsource/ibm-plex-sans-arabic/600.css";
 @import "@fontsource/ibm-plex-sans-arabic/700.css";
-@import "@fontsource/ibm-plex-sans-arabic/arabic-100.css";
-@import "@fontsource/ibm-plex-sans-arabic/arabic-200.css";
-@import "@fontsource/ibm-plex-sans-arabic/arabic-300.css";
 @import "@fontsource/ibm-plex-sans-arabic/arabic-400.css";
 @import "@fontsource/ibm-plex-sans-arabic/arabic-500.css";
 @import "@fontsource/ibm-plex-sans-arabic/arabic-600.css";
 @import "@fontsource/ibm-plex-sans-arabic/arabic-700.css";
 
+/* # saudi-soft-theme:start */
+
 @custom-variant dark (&:is(.dark *));
 
-/* ── The preset's palette, untouched ──────────────────────────────── */
-
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.488 0.243 264.376);
-  --primary-foreground: oklch(0.97 0.014 254.604);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.546 0.245 262.881);
-  --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-
-  /* ── Ours. Three states shadcn does not name. ──────────────────────
-
-     Built at the preset's own destructive lightness (L 0.577) with only
-     the hue changed, so red, amber and green look like one family rather
-     than three borrowed colours. Chroma is the most each hue can hold
-     in sRGB at that lightness.
-
-     The plain token fills and outlines. The -strong variant carries text
-     and 1px edges: at L 0.577 green measures 4.04:1 on white and amber
-     4.43:1, both short of the 4.5 minimum, so text uses a darker sibling
-     measured to 5:1. Every value here was computed, not chosen by eye. */
-  --success: oklch(0.577 0.159 150);
-  --warn: oklch(0.577 0.121 75);
-  --danger: oklch(0.577 0.235 27.325);
-  --success-strong: oklch(0.527 0.146 150);
-  --warn-strong: oklch(0.547 0.116 75);
-  --danger-strong: oklch(0.571 0.232 27.325);
-
-  /* The preset's --primary is a button fill meant to sit under
-     --primary-foreground. As text it measures 6.83:1 on white here but only
-     2.03:1 on the dark card, so links and inline emphasis use this instead.
-     Same hue, lightness raised only as far as 5:1 requires. */
-  --primary-strong: var(--primary);
-
-  /* The preset's radius scale is multiplicative and has no pill stop. */
-  --radius-pill: 9999px;
-}
-
-.dark {
-  color-scheme: dark;
-
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.424 0.199 265.638);
-  --primary-foreground: oklch(0.97 0.014 254.604);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.623 0.214 259.815);
-  --sidebar-primary-foreground: oklch(0.97 0.014 254.604);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-
-  /* Lightened, not darkened. A darker sibling vanishes on a dark ground —
-     measured to 5:1 against the card, which is where these mostly sit. */
-  --success-strong: oklch(0.606 0.166 150);
-  --warn-strong: oklch(0.63 0.132 75);
-  --danger-strong: oklch(0.652 0.234 27.325);
-  --primary-strong: oklch(0.633 0.196 265.638);
-}
-
-/* ── Tailwind bindings ────────────────────────────────────────────── */
-
 @theme inline {
-  /* One family for everything: display, body, and the class still called
-     font-mono. Nothing else may render. */
-  --font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
-  --font-heading: var(--font-sans);
-  --font-display: var(--font-sans);
-  --font-body: var(--font-sans);
-  --font-mono: var(--font-sans);
-
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
+
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
+
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -186,41 +75,328 @@
   --color-sidebar-ring: var(--sidebar-ring);
 
   --color-success: var(--success);
-  --color-warn: var(--warn);
-  --color-danger: var(--danger);
-  --color-success-strong: var(--success-strong);
-  --color-warn-strong: var(--warn-strong);
-  --color-danger-strong: var(--danger-strong);
-  --color-primary-strong: var(--primary-strong);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-status-success: var(--status-success);
+  --color-status-warning: var(--status-warning);
+  --color-status-info: var(--status-info);
+  --color-label: var(--label);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-subtle: var(--primary-subtle);
 
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-  --radius-pill: var(--radius-pill);
+  /* Ladder: sm 8 · md 10 · lg 12 */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+
+  --font-sans: var(--font-sans-soft);
+
+  /* Map Soft elevation → Tailwind shadow-e* utilities */
+  --shadow-e1: var(--soft-shadow-e1);
+  --shadow-e2: var(--soft-shadow-e2);
+  --shadow-e3: var(--soft-shadow-e3);
+  --shadow-e4: var(--soft-shadow-e4);
+  --shadow-e5: var(--soft-shadow-e5);
+  --shadow-e6: var(--soft-shadow-e6);
+}
+
+:root {
+  /* Layout metrics (app shell) */
+  --sidebar-width: 280px;
+  --sidebar-collapsed-width: 72px;
+  --topbar-height: 64px;
+
+  /* SA scale (active steps) */
+  --sa-50: #eff6ff;
+  --sa-100: #dbeafe;
+  --sa-200: #bfdbfe;
+  --sa-300: #93c5fd;
+  --sa-400: #60a5fa;
+  --sa-500: #2563eb;
+  --sa-600: #1d4ed8;
+  --sa-700: #1e40af;
+  --sa-800: #1e3a8a;
+  --sa-900: #172554;
+
+  /* Neutrals */
+  --gray-0: #ffffff;
+  --gray-25: #fcfcfd;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d2d6db;
+  --gray-400: #9da4ae;
+  --gray-600: #4d5761;
+  --gray-700: #384250;
+  --gray-900: #111927;
+  --gray-950: #0d121c;
+
+  /* shadcn semantic → Soft identity */
+  --background: var(--gray-25);
+  --foreground: var(--gray-950);
+
+  --card: var(--gray-0);
+  --card-foreground: var(--gray-950);
+
+  --popover: var(--gray-0);
+  --popover-foreground: var(--gray-950);
+
+  --primary: var(--sa-600);
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--sa-700);
+  --secondary-foreground: #ffffff;
+
+  --muted: var(--gray-100);
+  --muted-foreground: var(--gray-600);
+
+  --accent: var(--sa-500);
+  --accent-foreground: #ffffff;
+
+  --destructive: #d92d20;
+  --destructive-foreground: #ffffff;
+
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+  --ring: var(--sa-600);
+
+  /* Base radius = lg (12px); md/sm derived via @theme */
+  --radius: 0.75rem;
+
+  --sidebar: var(--gray-0);
+  --sidebar-foreground: var(--gray-900);
+  --sidebar-primary: var(--sa-600);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--sa-50);
+  --sidebar-accent-foreground: var(--sa-700);
+  --sidebar-border: var(--gray-200);
+  --sidebar-ring: var(--sa-600);
+
+  --chart-1: var(--sa-600);
+  --chart-2: var(--sa-400);
+  --chart-3: var(--sa-800);
+  --chart-4: var(--sa-300);
+  --chart-5: var(--sa-500);
+
+  --success: #079455;
+  --warning: #dc6803;
+  --info: #1570ef;
+  --status-success: var(--success);
+  --status-warning: var(--warning);
+  --status-info: var(--info);
+
+  --status-success-bg: #ecfdf3;
+  --status-success-border: #abefc6;
+  --status-warning-bg: #fffaeb;
+  --status-warning-border: #fedf89;
+  --status-error-bg: #fef3f2;
+  --status-error-border: #fecdca;
+  --status-info-bg: #eff8ff;
+  --status-info-border: #b2ddff;
+
+  --primary-hover: var(--sa-700);
+  --primary-active: var(--sa-800);
+  --primary-subtle: var(--sa-50);
+  --label: var(--gray-700);
+
+  --font-sans-soft: "IBM Plex Sans Arabic", "Work Sans", ui-sans-serif, system-ui,
+    sans-serif;
+  --font-mono-soft: "Inconsolata", ui-monospace, SFMono-Regular, monospace;
+
+  --overlay: rgb(13 18 28 / 0.4);
+  --blur-md: 16px;
+
+  --soft-shadow-e1: 0 1px 2px 0 rgb(16 24 40 / 0.05);
+  --soft-shadow-e2: 0 1px 3px 0 rgb(16 24 40 / 0.1), 0 1px 2px 0 rgb(16 24 40 / 0.06);
+  --soft-shadow-e3: 0 4px 8px -2px rgb(16 24 40 / 0.1), 0 2px 4px -2px rgb(16 24 40 / 0.06);
+  --soft-shadow-e4: 0 12px 16px -4px rgb(16 24 40 / 0.08), 0 4px 6px -2px rgb(16 24 40 / 0.03);
+  --soft-shadow-e5: 0 20px 24px -4px rgb(16 24 40 / 0.08), 0 8px 8px -4px rgb(16 24 40 / 0.03);
+  --soft-shadow-e6: 0 24px 48px -12px rgb(16 24 40 / 0.18);
+
+  /* Derived from SA ladder — rebrand by replacing --sa-* only */
+  --gradient-1: linear-gradient(90deg, var(--sa-600) 0%, var(--sa-500) 100%);
+  --gradient-2: linear-gradient(45deg, var(--sa-700) 0%, var(--sa-600) 100%);
+  --gradient-primary: var(--gradient-2);
+  --gradient-mesh:
+    radial-gradient(at 40% 20%, color-mix(in srgb, var(--sa-600) 12%, transparent) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, color-mix(in srgb, var(--sa-400) 10%, transparent) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, color-mix(in srgb, var(--sa-800) 8%, transparent) 0px, transparent 50%);
+}
+
+.dark {
+  /* SA lift for contrast on dark surfaces */
+  --sa-50: #0b1630;
+  --sa-100: #0f1e42;
+  --sa-200: #1e3a8a;
+  --sa-300: #1d4ed8;
+  --sa-400: #2563eb;
+  --sa-500: #60a5fa;
+  --sa-600: #3b82f6;
+  --sa-700: #2563eb;
+  --sa-800: #1e40af;
+  --sa-900: #93c5fd;
+
+  /* Gray invert */
+  --gray-0: #0b1220;
+  --gray-25: #0f1724;
+  --gray-50: #141c2b;
+  --gray-100: #1c2536;
+  --gray-200: #2a3447;
+  --gray-300: #3d4a5c;
+  --gray-400: #6b7789;
+  --gray-600: #b0b8c4;
+  --gray-700: #d0d5dd;
+  --gray-900: #f0f2f5;
+  --gray-950: #ffffff;
+
+  --background: var(--gray-25);
+  --foreground: var(--gray-950);
+
+  --card: var(--gray-0);
+  --card-foreground: var(--gray-950);
+
+  --popover: var(--gray-0);
+  --popover-foreground: var(--gray-950);
+
+  --primary: var(--sa-600);
+  --primary-foreground: #0b1220;
+
+  --secondary: var(--sa-700);
+  --secondary-foreground: #ffffff;
+
+  --muted: var(--gray-100);
+  --muted-foreground: var(--gray-600);
+
+  --accent: var(--sa-500);
+  --accent-foreground: #0b1220;
+
+  --destructive: #f04438;
+  --destructive-foreground: #ffffff;
+
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+  --ring: var(--sa-600);
+
+  --sidebar: var(--gray-0);
+  --sidebar-foreground: var(--gray-900);
+  --sidebar-primary: var(--sa-600);
+  --sidebar-primary-foreground: #0b1220;
+  --sidebar-accent: var(--sa-50);
+  --sidebar-accent-foreground: var(--sa-900);
+  --sidebar-border: var(--gray-200);
+  --sidebar-ring: var(--sa-600);
+
+  --chart-1: var(--sa-600);
+  --chart-2: var(--sa-400);
+  --chart-3: var(--sa-300);
+  --chart-4: var(--sa-500);
+  --chart-5: var(--sa-700);
+
+  --success: #47cd89;
+  --warning: #fdb022;
+  --info: #53b0fd;
+  --status-success: var(--success);
+  --status-warning: var(--warning);
+  --status-info: var(--info);
+
+  --primary-hover: var(--sa-500);
+  --primary-active: var(--sa-700);
+  --primary-subtle: var(--sa-50);
+  --label: var(--gray-700);
+
+  --status-success-bg: rgb(7 148 85 / 0.15);
+  --status-success-border: rgb(71 205 137 / 0.4);
+  --status-warning-bg: rgb(220 104 3 / 0.15);
+  --status-warning-border: rgb(253 176 34 / 0.4);
+  --status-error-bg: rgb(240 68 56 / 0.15);
+  --status-error-border: rgb(240 68 56 / 0.4);
+  --status-info-bg: rgb(21 112 239 / 0.15);
+  --status-info-border: rgb(83 176 253 / 0.4);
+
+  --overlay: rgb(0 0 0 / 0.55);
+  --soft-shadow-e1: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --soft-shadow-e2: 0 2px 4px -1px rgb(0 0 0 / 0.35);
+  --soft-shadow-e3: 0 4px 8px -2px rgb(0 0 0 / 0.4);
+  --soft-shadow-e4: 0 8px 16px -4px rgb(0 0 0 / 0.45);
+  --soft-shadow-e5: 0 16px 32px -8px rgb(0 0 0 / 0.5);
+  --soft-shadow-e6: 0 24px 48px -12px rgb(0 0 0 / 0.55);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
 
+@layer utilities {
+  .bg-gradient-1 {
+    background: var(--gradient-1);
+  }
+  .bg-gradient-2 {
+    background: var(--gradient-2);
+  }
+  .bg-gradient-brand {
+    background: var(--gradient-primary);
+  }
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+  .bg-mesh {
+    background: var(--gradient-mesh);
+  }
+}
+
+/* # saudi-soft-theme:end */
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Samaam extensions — outside the Soft markers on purpose, per the skill's
+   customization.md ("Adding Custom Colors"). Re-applying the bridge never
+   touches them.
+
+   -strong: Soft's status hues are fills. As small text on white, success
+   (#079455) measures 3.9:1 and warning (#dc6803) 3.5:1 — short of 4.5. Text
+   and 1px edges use the -700 step of the same families instead. On the dark
+   ground the lifted Soft hues already clear 4.5:1, so they stand as-is.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --success-strong: #067647;
+  --warning-strong: #b54708;
+  --destructive-strong: #b42318;
+}
+
+.dark {
+  color-scheme: dark;
+  --success-strong: var(--success);
+  --warning-strong: var(--warning);
+  --destructive-strong: var(--destructive);
+}
+
+@theme inline {
+  --color-success-strong: var(--success-strong);
+  --color-warning-strong: var(--warning-strong);
+  --color-destructive-strong: var(--destructive-strong);
+
+  /* One family. `font-mono` stays as a marker for measured values and
+     identifiers — tabular digits, so 18.0 above 14.0 compares by eye. */
+  --font-mono: var(--font-sans-soft);
+}
+
+@layer base {
   html {
     @apply font-sans;
   }
 
-  body {
-    @apply bg-background text-foreground;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* The class is kept as a marker for measured values and identifiers,
-     not as a claim about the family — there is only one family now. What
-     it still carries is the part that mattered: digits of equal width, so
-     18.0 above 14.0 is compared by eye rather than by arithmetic. */
   .font-mono {
     font-variant-numeric: tabular-nums;
     font-weight: 500;

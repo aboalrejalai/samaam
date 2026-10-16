@@ -27,7 +27,9 @@
     "primitives": "Primitives",
     "primitivesDescription": "Component gallery",
     "connectors": "Connectors",
-    "connectorsDescription": "Standards integration"
+    "connectorsDescription": "Standards integration",
+    "about": "Team & award",
+    "aboutDescription": "3rd Prize · ITU"
   },
   "shell": {
     "toggleSidebar": "Toggle sidebar",
@@ -35,8 +37,11 @@
     "switchToArabic": "Switch to Arabic",
     "switchToEnglish": "Switch to English",
     "theme": "Theme",
-    "themeLight": "Switch to dark theme",
-    "themeDark": "Switch to light theme"
+    "themeLight": "Light theme",
+    "themeDark": "Dark theme",
+    "awardChip": "3rd Prize · ITU",
+    "awardTitle": "3rd Prize · ITU AI Readiness Hackathon",
+    "awardLink": "About the team and the award"
   },
   "connection": {
     "connected": "Connected",
@@ -51,6 +56,10 @@
     "modelUnreachable": "Explanation model unreachable — the policy node does not need it"
   },
   "pages": {
+    "about": {
+      "title": "Team & award",
+      "lead": "Team Samaam built this gateway for the ITU AI Readiness Hackathon, where it won 3rd Prize."
+    },
     "console": {
       "title": "Technologist console",
       "lead": "Enter acquisition parameters and hand the worklist to the scanner."
@@ -402,6 +411,292 @@
       "title": "Deployment profiles",
       "note": "Real institutions, listed as deployment targets only. Endpoints and AE titles live on hospital networks and are not public, so they are filled in on installation. No affiliation or integration is claimed.",
       "pending": "Endpoint configured on site"
+    }
+  },
+  "home": {
+    "skip": "Skip to content",
+    "nav": {
+      "story": "How it works",
+      "pipeline": "Architecture",
+      "scenarios": "Scenarios",
+      "sources": "Sources",
+      "dashboard": "Dashboard",
+      "home": "Samaam home",
+      "menu": "Sections",
+      "award": "Award",
+      "team": "Team"
+    },
+    "hero": {
+      "award": "3rd Prize · ITU AI Readiness Hackathon, Kingdom of Saudi Arabia",
+      "title": "A gateway between the console and the CT scanner",
+      "titleAccent": "that refuses what Saudi regulation forbids.",
+      "lead": "Samaam reads the patient's renal function, checks the scan settings against Saudi regulation, and answers 403 with the article and the issuing authority. The decision is deterministic code, not a language model.",
+      "secondary": "See how it works",
+      "teamCta": "Meet the team",
+      "chipDeterministic": "No language model in the decision",
+      "awardCta": "View the award"
+    },
+    "preview": {
+      "title": "Gateway preview",
+      "request": "Request",
+      "checks": "Policy node",
+      "online": "Knowledge base online",
+      "offline": "Service offline. The preview shows scenario values.",
+      "counts": "records · gaps · passages",
+      "caption": "SC-01 and SC-02, as the pipeline returns them",
+      "forbidden": "Forbidden — Policy Violation",
+      "ok": "OK — Acquisition parameters accepted"
+    },
+    "outcome": {
+      "EXECUTED": "Executed",
+      "LOCKED": "Locked",
+      "SESSION_TERMINATED": "Session terminated"
+    },
+    "story": {
+      "eyebrow": "How it works",
+      "title": "From one keypress to a documented refusal",
+      "lead": "Scenario SC-02, followed node by node: an oncology patient with failing kidneys and a standard adult dose.",
+      "steps": {
+        "arrive": {
+          "title": "The request arrives",
+          "body": "The technologist enters the protocol. The record carries serum creatinine of 229.8 µmol/L; the console asks for CTDIvol 18.0 mGy and DLP 900 mGy·cm."
+        },
+        "prepare": {
+          "title": "Preprocessing strips and computes",
+          "body": "Direct identifiers are dropped under PDPL Article 23, and eGFR is computed with CKD-EPI exactly as the Ministry of Health protocol prints it: 19.1."
+        },
+        "check": {
+          "title": "The policy node checks",
+          "body": "Four deterministic rules run, each citing its knowledge-base record by explicit ID: national reference levels, renal prophylaxis, metformin, nephrotoxic medication."
+        },
+        "refuse": {
+          "title": "The device refuses",
+          "body": "403 Forbidden, and the scanner is locked. It is a hold, not a prohibition: a named radiologist can authorise the scan, and that name goes into the audit trail."
+        }
+      },
+      "identifiers": "Identifiers dropped",
+      "egfr": "eGFR (CKD-EPI)",
+      "threshold": "Protocol threshold",
+      "band": "Contrast-associated AKI risk",
+      "alternative": "Proposed lower-dose alternative",
+      "override": "Override path",
+      "overrideBody": "A named consultant may release it. The release is recorded as EXECUTED_UNDER_OVERRIDE.",
+      "timing": "In the recorded demo the refusal landed in {{block}} ms. The written explanation followed about {{explain}} s later, from a separate endpoint."
+    },
+    "pipeline": {
+      "eyebrow": "ITU-T Y.3172",
+      "title": "Seven nodes, each one a file you can open",
+      "lead": "The architecture follows the ITU-T Y.3172 standard node for node. The language model in M only drafts the explanation. The decision to block lives in P alone.",
+      "kb": "Knowledge base · ChromaDB with local embeddings, no key and no network",
+      "cannotBlock": "Cannot block",
+      "core": "Deterministic core",
+      "onlyBlocker": "The only node that blocks",
+      "nodes": {
+        "SRC": "Saudi regulation texts, the synthetic patient record, and the technologist's settings",
+        "C": "A read-only HL7 FHIR R4 client, and a DICOM Modality Worklist server on port 11112",
+        "PP": "Drops direct identifiers and computes eGFR",
+        "M": "Retrieves policy text and drafts the explanation, nothing more",
+        "P": "Deterministic decision: proceed, hold, or prohibit",
+        "D": "Attaches citations and writes the audit trail",
+        "SINK": "The operator interface, and a simulated scanner that answers 403"
+      }
+    },
+    "bento": {
+      "eyebrow": "Design",
+      "title": "The AI is not trusted. It is constrained.",
+      "lead": "The reasoning and the decision are separate jobs, done by separate parts of the system.",
+      "deterministic": {
+        "title": "The decision is deterministic code",
+        "body": "Delete the language model entirely and Samaam still blocks correctly, every time. policy_node.py imports no model."
+      },
+      "verdicts": {
+        "title": "A six-verdict contract",
+        "body": "Every case is classified into exactly one verdict. Missing evidence outranks everything: nothing is ruled on that was not verified.",
+        "emitted": "Raised by the current rules"
+      },
+      "actions": {
+        "title": "A verdict is not an action",
+        "body": "After a consultant radiologist's review, the regulatory classification was separated from the operational decision. A clinical block is a hold for review, not a ban."
+      },
+      "citations": {
+        "title": "Cited by ID, not by search",
+        "body": "Each rule cites its record by explicit identifier, so the legal basis cannot drift with the wording of a question. Unverified records are never cited in a block."
+      },
+      "privacy": {
+        "title": "Privacy has no override",
+        "body": "A request to export records for marketing is prohibited and the session ends. No clinician holds authority to approve what the PDPL forbids."
+      },
+      "audit": {
+        "title": "Every decision has a name on it",
+        "body": "What turns an override from an anonymous act into a named decision."
+      }
+    },
+    "stats": {
+      "eyebrow": "By the numbers",
+      "title": "Counted from the repository",
+      "items": {
+        "records": {
+          "label": "regulatory records in the knowledge base",
+          "note": "{{verified}} verified; the rest are never cited"
+        },
+        "chunks": {
+          "label": "passages from {{files}} primary documents",
+          "note": "Indexed locally, retrievable offline"
+        },
+        "rules": {
+          "label": "deterministic rules",
+          "note": "4 on the device path, 3 on the privacy path"
+        },
+        "gaps": {
+          "label": "regulatory gaps",
+          "note": "Each found by a documented absence of text"
+        }
+      }
+    },
+    "scenarios": {
+      "eyebrow": "The three scenarios",
+      "title": "Three cases, three outcomes",
+      "lead": "The mandatory scenarios, as the system runs them. Every value below comes from an actual run of the pipeline.",
+      "verdict": "Verdict",
+      "action": "Action",
+      "outcome": "Outcome",
+      "overridable": "Override",
+      "overrideYes": "By a named authoriser",
+      "overrideNo": "None",
+      "checks": "Checks",
+      "measured": "measured",
+      "limit": "limit",
+      "open": "Run it in the dashboard",
+      "items": {
+        "sc01": {
+          "name": "Healthy kidneys, dose within limits",
+          "summary": "eGFR 81.4 and CTDIvol 9.5 mGy, under the national reference level for the chest. The request is released to the device, with its citations."
+        },
+        "sc02": {
+          "name": "Weak kidneys, dose above the reference level",
+          "summary": "eGFR 19.1 with no prophylaxis ordered, and CTDIvol 18.0 above 14. Samaam holds the scan and proposes a lower-dose alternative: CTDIvol 13.0, DLP 660."
+        },
+        "sc03": {
+          "name": "Exporting records abroad for marketing",
+          "summary": "A service account asks to export {{records}} oncology records to an external endpoint for a marketing campaign. Three statutory failures, a prohibition with no override, and the session ends."
+        }
+      },
+      "http": "HTTP response"
+    },
+    "sources": {
+      "eyebrow": "Knowledge base",
+      "title": "The source is the document itself",
+      "lead": "The core instruments the policy node cites. Each card opens the original document, not a ministry homepage.",
+      "open": "Open the document",
+      "count": "primary documents, each linked to the original"
+    },
+    "cta": {
+      "title": "The gateway is running",
+      "body": "Open the dashboard, load SC-02, and send it to the device. You will get a 403 with the article and the authority.",
+      "repo": "Code on GitHub",
+      "award": "3rd Prize · an international award from ITU",
+      "seeAward": "See the award",
+      "meetTeam": "Meet the team"
+    },
+    "footer": {
+      "award": "3rd Prize, ITU AI Readiness Hackathon, 15 September 2026",
+      "team": "Team Samaam",
+      "license": "Open source under the MIT license",
+      "disclaimer": "A hackathon prototype. It is not a medical device, and nothing here is cleared for clinical use.",
+      "awardHeading": "Award",
+      "viewCertificate": "View certificate",
+      "preferences": "Preferences"
+    },
+    "announce": {
+      "cta": "View the award",
+      "label": "Award announcement"
+    },
+    "award": {
+      "eyebrow": "Recognition",
+      "medalLabel": "3rd Prize medal",
+      "hostLabel": "Host",
+      "programmeLabel": "Programme",
+      "trackLabel": "Track",
+      "dateLabel": "Date",
+      "partnersLabel": "Partners",
+      "citationLabel": "Certificate citation",
+      "awardedTo": "Awarded to",
+      "viewFull": "View full size",
+      "openOriginal": "Open the original image"
+    },
+    "team": {
+      "eyebrow": "The people behind it",
+      "lead": "Radiological sciences, people operations and AI systems at one table: the clinical scenarios came from radiology, the regulatory lens from human resources, and the build from the team leader.",
+      "members": "Members",
+      "focus": "Contribution",
+      "asOnCertificate": "Name as spelled on the certificate"
+    }
+  },
+  "about": {
+    "eyebrow": "Winning team",
+    "awardedTo": "Awarded to Team Samaam",
+    "facts": {
+      "host": "Host",
+      "programme": "Programme",
+      "track": "Track",
+      "date": "Date",
+      "partners": "Partners"
+    },
+    "certificateHint": "Select the certificate to view it full size.",
+    "viewCertificate": "View full size",
+    "citationLabel": "Citation",
+    "teamTitle": "The team",
+    "teamLead": "Four members who designed, researched and built Samaam.",
+    "focusLabel": "Focus",
+    "whatTitle": "What Samaam is",
+    "whatBody": "A policy gateway between the technologist's console and the CT scanner and contrast injector. When requested settings breach Saudi regulation, it returns 403 Forbidden — Policy Violation.",
+    "openConsole": "Open the console",
+    "openSlides": "View the slides"
+  },
+  "hackathon": {
+    "name": "ITU AI Readiness Hackathon",
+    "host": "Kingdom of Saudi Arabia",
+    "programme": "AI for Good · ITU AI/ML in 5G Challenge",
+    "track": "Health & Radiology track",
+    "prize": "3rd Prize",
+    "prizeLong": "3rd Prize — ITU AI Readiness Hackathon, Kingdom of Saudi Arabia",
+    "international": "An international award from the International Telecommunication Union (ITU)",
+    "date": "15 September 2026",
+    "partners": "ITU · SDAIA · UNESCO · ICAIRE",
+    "citation": "For the outstanding innovation “Samaam” and an excellent demonstration during the ITU AI Readiness Hackathon hosted by the Kingdom of Saudi Arabia.",
+    "certificate": "Winner certificate — 3rd Prize",
+    "certificateAlt": "ITU winner certificate, 3rd Prize, awarded to Team Samaam",
+    "signedBy": "Signed by Seizo Onoe, Director of the ITU Telecommunication Standardization Bureau"
+  },
+  "team": {
+    "name": "Team Samaam",
+    "leader": "Team Leader",
+    "ledBy": "Led by Mohammed Nadher Abo Alrejal",
+    "members": {
+      "mohammed": {
+        "name": "Mohammed Nadher Abo Alrejal",
+        "role": "AI systems & automation",
+        "study": "Independent",
+        "focus": "Architecture, policy node and the full build"
+      },
+      "badour": {
+        "name": "Badour Alsehli",
+        "role": "Human Resources, Year 4",
+        "study": "Majmaah University",
+        "focus": "Regulatory impact, data protection and the scanner-settings idea"
+      },
+      "haneen": {
+        "name": "Haneen Saleh Alharbi",
+        "role": "Radiological Sciences, Year 4",
+        "study": "King Saud University",
+        "focus": "Clinical scenario, eGFR and contrast safety"
+      },
+      "norah": {
+        "name": "Norah Abdullah Alsahli",
+        "role": "Radiological Sciences, Year 4",
+        "study": "King Saud University",
+        "focus": "Clinical scenario, radiation dose and contrast safety"
+      }
     }
   }
 }

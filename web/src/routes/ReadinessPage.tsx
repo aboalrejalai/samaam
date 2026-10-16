@@ -62,12 +62,12 @@ export default function ReadinessPage() {
             ))}
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             {data.dimensions.map((dimension) => {
               const ours = OURS.has(dimension.id)
               return (
                 <Collapsible key={dimension.id} asChild>
-                  <Card className={cn('py-0', ours && 'border-primary-strong')}>
+                  <Card className={cn('py-0', ours && 'border-primary')}>
                     <CollapsibleTrigger className="w-full text-start">
                       <CardHeader className="gap-1 py-4">
                         <div className="flex flex-wrap items-center gap-2">
@@ -76,7 +76,7 @@ export default function ReadinessPage() {
                           </span>
                           <CardTitle className="text-base">{dimension.name}</CardTitle>
                           {ours && (
-                            <Badge className="rounded-pill border-primary-strong bg-transparent text-primary-strong">
+                            <Badge className="rounded-full border-primary bg-transparent text-primary">
                               {t('readiness.ours')}
                             </Badge>
                           )}
@@ -91,7 +91,7 @@ export default function ReadinessPage() {
                     </CollapsibleTrigger>
                     <CollapsibleContent>
                       <CardContent className="border-t border-border/60 py-3">
-                        <ul className="space-y-1.5">
+                        <ul className="flex flex-col gap-1.5">
                           {dimension.metrics.map((metric) => (
                             <li key={metric.id} className="text-sm">
                               <span dir="ltr" className="font-mono text-xs text-muted-foreground">

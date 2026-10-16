@@ -50,9 +50,9 @@ export function ConnectionIndicator() {
             aria-hidden
             data-status={status}
             className={cn(
-              'size-2 shrink-0 rounded-pill',
+              'size-2 shrink-0 rounded-full',
               status === 'connected' && 'animate-pulse bg-success',
-              status === 'offline' && 'bg-danger',
+              status === 'offline' && 'bg-destructive',
               status === 'checking' && 'bg-muted-foreground',
             )}
           />
@@ -60,7 +60,7 @@ export function ConnectionIndicator() {
             <span
               className={cn(
                 'truncate text-xs font-medium',
-                status === 'offline' ? 'text-danger-strong' : 'text-foreground/80',
+                status === 'offline' ? 'text-destructive-strong' : 'text-foreground/80',
               )}
             >
               {label}
