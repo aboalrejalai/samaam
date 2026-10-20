@@ -351,8 +351,9 @@ export const SOURCES: readonly Source[] = [
 export const AWARD = {
   place: 3,
   date: '2026-09-15',
-  // copy of docs/awards/… served from web/public so the SPA can show it
-  certificate: '/awards/itu-ai-readiness-hackathon-3rd-prize-2026.jpg',
+  // copy of docs/awards/… served from web/public so the SPA can show it.
+  // `?v=` busts a Cloudflare edge entry cached before the file was deployed.
+  certificate: '/awards/itu-ai-readiness-hackathon-3rd-prize-2026.jpg?v=1',
   // source: certificate — signatory line
   signatory: 'Seizo Onoe',
 } as const
