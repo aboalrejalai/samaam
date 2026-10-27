@@ -1,0 +1,1 @@
+../../.cursor/plans/001-saudi-soft-landing.plan.md
