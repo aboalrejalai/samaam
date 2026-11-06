@@ -2,7 +2,7 @@
   "brand": {
     "name": "صِمَام",
     "latin": "SAMAAM",
-    "tagline": "AI–hardware policy gateway"
+    "tagline": "Policy gateway"
   },
   "notice": {
     "synthetic": "بيانات محاكاة لأغراض الهاكاثون فقط",
@@ -212,7 +212,6 @@
     "overrideRecorded": "Released under override by {{name}}",
     "deviceOffline": "Could not reach the Samaam service.",
     "heldForRadiologist": "Held for a named radiologist. Nothing reached the scanner.",
-    "heldForRadiologistDetail": "Dose above the national level, and eGFR {{egfr}} with no prophylaxis ordered.",
     "pathTitle": "Path to the device",
     "pathLocked": "Locked",
     "pathExecuted": "Executed",
@@ -507,221 +506,177 @@
   },
   "home": {
     "skip": "Skip to content",
+    "notice": {
+      "ar": "بيانات محاكاة لأغراض الهاكاثون فقط",
+      "en": "Synthetic data, hackathon use only"
+    },
     "nav": {
-      "story": "How it works",
-      "pipeline": "Architecture",
-      "scenarios": "Scenarios",
+      "how": "How it works",
+      "arch": "Architecture",
+      "paths": "Scenarios",
       "sources": "Sources",
-      "dashboard": "Dashboard",
-      "home": "Samaam home",
-      "menu": "Sections",
       "award": "Award",
-      "team": "Team"
+      "dashboard": "Open the dashboard",
+      "home": "Samaam home",
+      "menu": "Sections"
     },
     "hero": {
-      "award": "3rd Prize · ITU AI Readiness Hackathon, Kingdom of Saudi Arabia",
+      "awardChip": "3rd Prize · ITU",
       "title": "A gateway between the console and the CT scanner",
       "titleAccent": "that refuses what Saudi regulation forbids.",
       "lead": "Samaam reads the patient's renal function, checks the scan settings against Saudi regulation, and answers 403 with the article and the issuing authority. The decision is deterministic code, not a language model.",
-      "secondary": "See how it works",
-      "teamCta": "Meet the team",
-      "chipDeterministic": "No language model in the decision",
-      "awardCta": "View the award"
+      "openDashboard": "Open the dashboard",
+      "howItWorks": "See how it works",
+      "stageRequest": "The request",
+      "stageProtocol": "The usual protocol. It looks normal on the console.",
+      "stageHeld": "Held before the scan",
+      "egfrLabel": "eGFR, computed with CKD-EPI",
+      "egfrThreshold": "threshold 30",
+      "riskLabel": "Contrast-associated AKI risk in this band",
+      "demoLabel": "Refusal in the recorded demo",
+      "demoNote": "observed, not a guarantee"
     },
-    "preview": {
-      "title": "Gateway preview",
-      "request": "Request",
-      "checks": "Policy node",
-      "online": "Knowledge base online",
-      "offline": "Service offline. The preview shows scenario values.",
-      "counts": "records · gaps · passages",
-      "caption": "SC-01 and SC-02, as the pipeline returns them",
-      "forbidden": "Forbidden — Policy Violation",
-      "ok": "OK — Acquisition parameters accepted"
+    "award": {
+      "chip": "An international award from ITU",
+      "teamPageLink": "Team and award page",
+      "date": "Date",
+      "track": "Track",
+      "programme": "Programme",
+      "partners": "Partners"
     },
-    "outcome": {
-      "EXECUTED": "Executed",
-      "LOCKED": "Locked",
-      "SESSION_TERMINATED": "Session terminated"
-    },
-    "story": {
-      "eyebrow": "How it works",
+    "case": {
+      "chip": "Simulated case",
       "title": "From one keypress to a documented refusal",
-      "lead": "Scenario SC-02, followed node by node: an oncology patient with failing kidneys and a standard adult dose.",
+      "lead": "An oncology patient, 62, whose chemotherapy has weakened her kidneys. A night shift, a standard adult dose, and nothing between the console and the scanner that reads her file.",
       "steps": {
         "arrive": {
+          "code": "C",
           "title": "The request arrives",
-          "body": "The technologist enters the protocol. The record carries serum creatinine of 229.8 µmol/L; the console asks for CTDIvol 18.0 mGy and DLP 900 mGy·cm."
+          "body": "The record carries serum creatinine of 229.8 µmol/L. The console asks for CTDIvol 18.0 mGy and DLP 900 mGy·cm."
         },
         "prepare": {
+          "code": "PP",
           "title": "Preprocessing strips and computes",
-          "body": "Direct identifiers are dropped under PDPL Article 23, and eGFR is computed with CKD-EPI exactly as the Ministry of Health protocol prints it: 19.1."
+          "body": "Direct identifiers are dropped, and eGFR is computed with CKD-EPI as the Ministry of Health protocol prints it: 19.1."
         },
         "check": {
+          "code": "P",
           "title": "The policy node checks",
-          "body": "Four deterministic rules run, each citing its knowledge-base record by explicit ID: national reference levels, renal prophylaxis, metformin, nephrotoxic medication."
+          "body": "Four deterministic rules run, each citing its knowledge-base record by explicit ID."
         },
         "refuse": {
+          "code": "403",
           "title": "The device refuses",
-          "body": "403 Forbidden, and the scanner is locked. It is a hold, not a prohibition: a named radiologist can authorise the scan, and that name goes into the audit trail."
+          "body": "The scanner is locked. It is a hold, not a prohibition: a named radiologist can authorise the scan, and that name goes into the audit trail."
         }
       },
-      "identifiers": "Identifiers dropped",
-      "egfr": "eGFR (CKD-EPI)",
-      "threshold": "Protocol threshold",
-      "band": "Contrast-associated AKI risk",
-      "alternative": "Proposed lower-dose alternative",
-      "override": "Override path",
-      "overrideBody": "A named consultant may release it. The release is recorded as EXECUTED_UNDER_OVERRIDE.",
-      "timing": "In the recorded demo the refusal landed in {{block}} ms. The written explanation followed about {{explain}} s later, from a separate endpoint."
+      "hotspots": {
+        "egfr": {
+          "value": "19.1",
+          "label": "eGFR, both kidneys"
+        },
+        "region": {
+          "value": "Abdomen and pelvis",
+          "label": "Scan region requested"
+        }
+      }
     },
-    "pipeline": {
-      "eyebrow": "ITU-T Y.3172",
-      "title": "Seven nodes, each one a file you can open",
-      "lead": "The architecture follows the ITU-T Y.3172 standard node for node. The language model in M only drafts the explanation. The decision to block lives in P alone.",
-      "kb": "Knowledge base · ChromaDB with local embeddings, no key and no network",
-      "cannotBlock": "Cannot block",
-      "core": "Deterministic core",
-      "onlyBlocker": "The only node that blocks",
+    "lost": {
+      "title": "What gets lost in a busy shift",
+      "lead": "Four rules read what a tired eye misses. Each one states its basis, because a binding law and a clinical protocol are not the same thing.",
+      "rules": {
+        "drl": {
+          "title": "Dose above the national level",
+          "value": "18.0 mGy, level 14",
+          "basis": "STATUTORY"
+        },
+        "prophylaxis": {
+          "title": "Renal prophylaxis not ordered",
+          "value": "eGFR 19.1, threshold 30",
+          "basis": "NATIONAL_PROTOCOL"
+        },
+        "metformin": {
+          "title": "Metformin not held",
+          "value": "1000 mg BD, still active",
+          "basis": "NATIONAL_PROTOCOL"
+        },
+        "nephrotoxic": {
+          "title": "Nephrotoxic medication",
+          "value": "Oxaliplatin and ibuprofen PRN",
+          "basis": "NATIONAL_PROTOCOL"
+        }
+      }
+    },
+    "paths": {
+      "title": "A clinical block is a hold. A privacy breach is a refusal.",
+      "holdChip": "AUTHORISE",
+      "holdTitle": "Held for a named doctor",
+      "holdDesc": "Emergencies do not wait. A named consultant may release the scan, and the release is recorded as EXECUTED_UNDER_OVERRIDE.",
+      "refuseChip": "PROHIBITED",
+      "refuseTitle": "Refused without exception",
+      "refuseDesc": "No clinician can authorise what the PDPL forbids. An export of patient records abroad ends the session, and the incident goes into the audit trail."
+    },
+    "arch": {
+      "title": "If the model is deleted, every block still happens",
+      "lead": "The pipeline follows ITU-T Y.3172 node for node. The decision sits in P, plain rule logic. The model only writes the explanation, after the verdict has arrived.",
       "nodes": {
-        "SRC": "Saudi regulation texts, the synthetic patient record, and the technologist's settings",
-        "C": "A read-only HL7 FHIR R4 client, and a DICOM Modality Worklist server on port 11112",
-        "PP": "Drops direct identifiers and computes eGFR",
-        "M": "Retrieves policy text and drafts the explanation, nothing more",
-        "P": "Deterministic decision: proceed, hold, or prohibit",
-        "D": "Attaches citations and writes the audit trail",
-        "SINK": "The operator interface, and a simulated scanner that answers 403"
-      }
-    },
-    "bento": {
-      "eyebrow": "Design",
-      "title": "The AI is not trusted. It is constrained.",
-      "lead": "The reasoning and the decision are separate jobs, done by separate parts of the system.",
-      "deterministic": {
-        "title": "The decision is deterministic code",
-        "body": "Delete the language model entirely and Samaam still blocks correctly, every time. policy_node.py imports no model."
-      },
-      "verdicts": {
-        "title": "A six-verdict contract",
-        "body": "Every case is classified into exactly one verdict. Missing evidence outranks everything: nothing is ruled on that was not verified.",
-        "emitted": "Raised by the current rules"
-      },
-      "actions": {
-        "title": "A verdict is not an action",
-        "body": "After a consultant radiologist's review, the regulatory classification was separated from the operational decision. A clinical block is a hold for review, not a ban."
-      },
-      "citations": {
-        "title": "Cited by ID, not by search",
-        "body": "Each rule cites its record by explicit identifier, so the legal basis cannot drift with the wording of a question. Unverified records are never cited in a block."
-      },
-      "privacy": {
-        "title": "Privacy has no override",
-        "body": "A request to export records for marketing is prohibited and the session ends. No clinician holds authority to approve what the PDPL forbids."
-      },
-      "audit": {
-        "title": "Every decision has a name on it",
-        "body": "What turns an override from an anonymous act into a named decision."
-      }
-    },
-    "stats": {
-      "eyebrow": "By the numbers",
-      "title": "Counted from the repository",
-      "items": {
-        "records": {
-          "label": "regulatory records in the knowledge base",
-          "note": "{{verified}} verified; the rest are never cited"
+        "src": {
+          "sym": "SRC",
+          "what": "Regulation, record, settings"
         },
-        "chunks": {
-          "label": "passages from {{files}} primary documents",
-          "note": "Indexed locally, retrievable offline"
+        "c": {
+          "sym": "C",
+          "what": "DICOM MWL, HL7 FHIR"
         },
-        "rules": {
-          "label": "deterministic rules",
-          "note": "4 on the device path, 3 on the privacy path"
+        "pp": {
+          "sym": "PP",
+          "what": "Drops identifiers, computes eGFR"
         },
-        "gaps": {
-          "label": "regulatory gaps",
-          "note": "Each found by a documented absence of text"
+        "m": {
+          "sym": "M",
+          "what": "Explains only"
+        },
+        "p": {
+          "sym": "P",
+          "what": "The decision, no model"
+        },
+        "d": {
+          "sym": "D",
+          "what": "Citations, audit"
+        },
+        "sink": {
+          "sym": "SINK",
+          "what": "Device, interface"
         }
       }
-    },
-    "scenarios": {
-      "eyebrow": "The three scenarios",
-      "title": "Three cases, three outcomes",
-      "lead": "The mandatory scenarios, as the system runs them. Every value below comes from an actual run of the pipeline.",
-      "verdict": "Verdict",
-      "action": "Action",
-      "outcome": "Outcome",
-      "overridable": "Override",
-      "overrideYes": "By a named authoriser",
-      "overrideNo": "None",
-      "checks": "Checks",
-      "measured": "measured",
-      "limit": "limit",
-      "open": "Run it in the dashboard",
-      "items": {
-        "sc01": {
-          "name": "Healthy kidneys, dose within limits",
-          "summary": "eGFR 81.4 and CTDIvol 9.5 mGy, under the national reference level for the chest. The request is released to the device, with its citations."
-        },
-        "sc02": {
-          "name": "Weak kidneys, dose above the reference level",
-          "summary": "eGFR 19.1 with no prophylaxis ordered, and CTDIvol 18.0 above 14. Samaam holds the scan and proposes a lower-dose alternative: CTDIvol 13.0, DLP 660."
-        },
-        "sc03": {
-          "name": "Exporting records abroad for marketing",
-          "summary": "A service account asks to export {{records}} oncology records to an external endpoint for a marketing campaign. Three statutory failures, a prohibition with no override, and the session ends."
-        }
-      },
-      "http": "HTTP response"
     },
     "sources": {
-      "eyebrow": "Knowledge base",
-      "title": "The source is the document itself",
-      "lead": "The core instruments the policy node cites. Each card opens the original document, not a ministry homepage.",
-      "open": "Open the document",
-      "count": "primary documents, each linked to the original"
+      "title": "It speaks the language of the radiology department",
+      "lead": "The gateway answers a scanner's worklist query over DICOM and reads the hospital record over HL7 FHIR, read-only. Thresholds were reviewed by a consultant radiologist, which turned absolute blocks into holds for authorisation.",
+      "counts": {
+        "records": "regulatory records, 43 verified",
+        "passages": "source passages indexed",
+        "rules": "deterministic rules",
+        "gaps": "regulatory gaps documented"
+      }
     },
     "cta": {
       "title": "The gateway is running",
       "body": "Open the dashboard, load SC-02, and send it to the device. You will get a 403 with the article and the authority.",
-      "repo": "Code on GitHub",
-      "award": "3rd Prize · an international award from ITU",
-      "seeAward": "See the award",
-      "meetTeam": "Meet the team"
+      "dashboard": "Open the dashboard",
+      "repo": "Code on GitHub"
     },
     "footer": {
-      "award": "3rd Prize, ITU AI Readiness Hackathon, 15 September 2026",
-      "team": "Team Samaam",
+      "links": "Navigation",
+      "console": "Console",
+      "data": "Data request",
+      "about": "Team and award",
+      "slides": "Presentation slides",
       "license": "Public to read. All rights reserved",
       "disclaimer": "A hackathon prototype. It is not a medical device, and nothing here is cleared for clinical use.",
       "awardHeading": "Award",
       "viewCertificate": "View certificate",
       "preferences": "Preferences"
-    },
-    "announce": {
-      "cta": "View the award",
-      "label": "Award announcement"
-    },
-    "award": {
-      "eyebrow": "Recognition",
-      "medalLabel": "3rd Prize medal",
-      "hostLabel": "Host",
-      "programmeLabel": "Programme",
-      "trackLabel": "Track",
-      "dateLabel": "Date",
-      "partnersLabel": "Partners",
-      "citationLabel": "Certificate citation",
-      "awardedTo": "Awarded to",
-      "viewFull": "View full size",
-      "openOriginal": "Open the original image"
-    },
-    "team": {
-      "eyebrow": "The people behind it",
-      "lead": "Radiological sciences, people operations and AI systems at one table: the clinical scenarios came from radiology, the regulatory lens from human resources, and the build from the team leader.",
-      "members": "Members",
-      "focus": "Contribution",
-      "asOnCertificate": "Name as spelled on the certificate"
     }
   },
   "about": {
@@ -790,5 +745,21 @@
         "focus": "Clinical scenario, radiation dose and contrast safety"
       }
     }
+  },
+  "regions": {
+    "abdomen_pelvis": "Abdomen and pelvis",
+    "chest": "Chest",
+    "head": "Head"
+  },
+  "models": {
+    "torsoAlt": "A translucent human torso showing liver, kidneys and bladder.",
+    "recordsAlt": "A stack of glass slabs etched with CT slices, clamped shut by a titanium lock.",
+    "valveAlt": "A titanium valve closed on a glass tube, with amber contrast stopped on one side and the other side dry.",
+    "contrastVialAlt": "A pharmaceutical vial of iodinated contrast agent.",
+    "kidneyInjuredAlt": "A shrunken, pale human kidney injured by chemotherapy.",
+    "ctScannerAlt": "A CT scanner with an empty patient table.",
+    "kidneyAlt": "A human kidney.",
+    "kidneySectionAlt": "A coronal cut-away of a human kidney showing cortex, medullary pyramids, calyces and renal pelvis.",
+    "abdomenAlt": "A translucent torso showing the liver, both kidneys, ureters, bladder, aorta and vena cava."
   }
 }

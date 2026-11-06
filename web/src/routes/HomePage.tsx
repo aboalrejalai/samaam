@@ -1,23 +1,30 @@
 import { MotionConfig } from 'motion/react'
 import { useTranslation } from 'react-i18next'
-import { AwardSection } from '@/components/home/AwardSection'
-import { Bento } from '@/components/home/Bento'
+import { ArchitectureSection } from '@/components/home/ArchitectureSection'
+import { AwardAndTeam } from '@/components/home/AwardAndTeam'
+import { CaseSection } from '@/components/home/CaseSection'
 import { ClosingCta } from '@/components/home/ClosingCta'
 import { Hero } from '@/components/home/Hero'
+import { HoldVsRefuseSection } from '@/components/home/HoldVsRefuseSection'
 import { HomeFooter } from '@/components/home/HomeFooter'
 import { HomeHeader } from '@/components/home/HomeHeader'
-import { PipelineSection } from '@/components/home/PipelineSection'
-import { ScenarioTabs } from '@/components/home/ScenarioTabs'
-import { SourcesRail } from '@/components/home/SourcesRail'
-import { Stats } from '@/components/home/Stats'
-import { StoryScroll } from '@/components/home/StoryScroll'
-import { TeamSection } from '@/components/home/TeamSection'
+import { SourcesSection } from '@/components/home/SourcesSection'
+import { WhatGetsLostSection } from '@/components/home/WhatGetsLostSection'
 
 /**
- * The landing page on `/`. Everything it states comes from
- * `components/home/home-data.ts`; every word from `home.*` in the locales.
- * `reducedMotion="user"` strips transforms for readers who ask for less motion;
- * the pinned sections additionally fall back to plain layouts in CSS.
+ * Port of the approved landing page from `design/001-samaam-redesign/boards/Main.dc.html`.
+ * Section order:
+ *  1. notice bar (HomeHeader)
+ *  2. header (HomeHeader)
+ *  3. hero (Hero)
+ *  4. award and team (AwardAndTeam)
+ *  5. the SC-02 case (CaseSection)
+ *  6. what gets lost in a busy shift (WhatGetsLostSection)
+ *  7. hold versus refuse (HoldVsRefuseSection)
+ *  8. architecture (ArchitectureSection)
+ *  9. sources (SourcesSection)
+ * 10. closing call to action (ClosingCta)
+ * 11. footer (HomeFooter)
  */
 export default function HomePage() {
   const { t } = useTranslation()
@@ -34,14 +41,12 @@ export default function HomePage() {
         <HomeHeader />
         <main id="main">
           <Hero />
-          <AwardSection />
-          <StoryScroll />
-          <PipelineSection />
-          <Bento />
-          <Stats />
-          <ScenarioTabs />
-          <SourcesRail />
-          <TeamSection />
+          <AwardAndTeam />
+          <CaseSection />
+          <WhatGetsLostSection />
+          <HoldVsRefuseSection />
+          <ArchitectureSection />
+          <SourcesSection />
           <ClosingCta />
         </main>
         <HomeFooter />

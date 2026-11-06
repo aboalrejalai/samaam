@@ -40,7 +40,7 @@ page's gateway preview, should read `45 · 6 · 1338` — the knowledge-base cou
 `/` is the landing page (`routes/HomePage.tsx`, lazy-loaded so the system's screens never
 load `motion`). The system lives under `/app` (`APP_BASE` in `lib/routes.ts`): `/app` is the
 console, then `/app/data`, `/app/connectors`, `/app/kb`, `/app/gaps`, `/app/audit`,
-`/app/readiness`, `/app/slides`. The old top-level paths (`/kb`, `/audit`, …) redirect.
+`/app/readiness`, `/app/slides`, `/app/about`. The old top-level paths (`/kb`, `/audit`, …) redirect.
 
 ## Layout
 
@@ -51,7 +51,6 @@ src/
   lib/api.ts             Typed client. 403 is a result here, not an exception
   lib/queries.ts         TanStack Query hooks and query keys
   lib/i18n.ts            i18next; also owns <html lang> and <html dir>
-  lib/theme.tsx          The .dark class on <html>
   lib/routes.ts          APP_BASE, the page inventory, legacy redirects
   components/home/       The landing page. home-data.ts holds every fact it states,
                          each with a `source:` comment; copy lives under `home.*`
@@ -69,7 +68,7 @@ src/
 and `.dark`), which is Samaam's medical blue instead of SA green; to retint, change those ten
 values per `rebrand.md` and nothing else. Soft fixes the rest: IBM Plex Sans Arabic 400–700,
 radii 8/10/12/16 (`rounded-sm/md/lg|xl/2xl`), sidebar 280px (`--sidebar-width`), top bar 64px
-(`--topbar-height`), lucide-react icons only, `gap` rather than `space-*`, light and dark only.
+(`--topbar-height`), lucide-react icons only, `gap` rather than `space-*`, white mode only.
 
 Colour comes from tokens, never from literals. In Soft, `accent` and `secondary` are saturated
 brand blues with white text — not the light neutrals shadcn presets use — so subtle panels take

@@ -117,7 +117,7 @@ export default function ConnectorsPage() {
         </p>
         <img
           src="/models/ct-scanner.webp"
-          alt="A CT scanner with an empty table."
+          alt={t('models.ctScannerAlt')}
           className="w-full max-h-[190px] object-contain mx-auto"
           data-id="premise.scanner"
         />

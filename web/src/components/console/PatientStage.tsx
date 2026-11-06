@@ -29,22 +29,19 @@ export function PatientStage({
   const renalCheck = result?.policy.checks.find((c) => c.rule === 'renal_prophylaxis')
   const egfrReading = renalCheck?.readings.find((r) => r.name === 'egfr')
   const egfrVal = egfrReading?.measured ?? patient.egfr ?? null
-  const egfrLimit = egfrReading?.limit ?? 30
+  const egfrLimit = egfrReading?.limit != null ? String(egfrReading.limit) : '—'
 
   const hasResult = result !== null
-  const pin1Color =
-    hasResult && renalCheck
-      ? renalCheck.status === 'FAIL'
-        ? 'text-destructive-strong border-destructive-strong'
-        : renalCheck.status === 'WARN'
-          ? 'text-warning-strong border-warning-strong'
-          : 'text-success-strong border-success-strong'
-      : 'text-muted-foreground border-border'
+  const pin1Color = renalCheck?.status === 'FAIL'
+    ? 'var(--destructive-strong)'
+    : renalCheck?.status === 'WARN'
+      ? 'var(--warning-strong)'
+      : 'var(--success-strong)'
+  const pin2Color = 'var(--warning-strong)'
 
-  const pin2Color =
-    hasResult && renalCheck?.band
-      ? 'text-warning-strong border-warning-strong'
-      : 'text-muted-foreground border-border'
+  const regionDisplay = requested.body_region
+    ? t(`regions.${requested.body_region}`, { defaultValue: requested.body_region })
+    : '—'
 
   // Six pipeline nodes: C, PP, M, P, D, SINK
   const isSealed = transit.sealed || (hasResult && result.device_response.status !== 200)
@@ -92,78 +89,89 @@ export function PatientStage({
         <figure className="relative mx-auto mt-1.5 w-full max-w-[330px]">
           <img
             src="/models/abdomen.webp"
-            alt="A translucent torso with the liver, kidneys, ureters and bladder shown inside."
+            alt={t('models.torsoAlt')}
             className="block w-full h-auto"
             data-id="stage.torso"
           />
 
-          {/* Pin 1: Kidney eGFR */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                type="button"
-                style={{ top: '45%', left: '33%' }}
-                className={cn(
-                  'pin',
-                  pin1Color,
-                  !hasResult && 'opacity-30',
-                )}
-                aria-label={t('console.pinTooltipEgfr', {
-                  val: egfrVal ?? '—',
-                  threshold: egfrLimit,
-                })}
-                onClick={() => onPinClick?.('renal_prophylaxis')}
-              >
-                1
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="top">
-              <span>
-                {t('console.pinTooltipEgfr', {
-                  val: egfrVal ?? '—',
-                  threshold: egfrLimit,
-                })}
-              </span>
-            </TooltipContent>
-          </Tooltip>
+          {/* Pin 1: Kidney eGFR - visible on kidneys once result exists */}
+          {hasResult && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  style={{
+                    top: '45%',
+                    left: '33%',
+                    borderColor: pin1Color,
+                    color: pin1Color,
+                  }}
+                  className="pin"
+                  aria-label={t('console.pinTooltipEgfr', {
+                    val: egfrVal ?? '—',
+                    threshold: egfrLimit,
+                  })}
+                  onClick={() => onPinClick?.('renal_prophylaxis')}
+                >
+                  1
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <span>
+                  {t('console.pinTooltipEgfr', {
+                    val: egfrVal ?? '—',
+                    threshold: egfrLimit,
+                  })}
+                </span>
+              </TooltipContent>
+            </Tooltip>
+          )}
 
-          {/* Pin 2: AKI Risk */}
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button
-                type="button"
-                style={{ top: '45%', left: '62%' }}
-                className={cn(
-                  'pin',
-                  pin2Color,
-                  !hasResult && 'opacity-30',
-                )}
-                aria-label={t('console.pinTooltipAki', {
-                  val: renalCheck?.band ?? '—',
-                })}
-                onClick={() => onPinClick?.('renal_prophylaxis')}
-              >
-                2
-              </button>
-            </TooltipTrigger>
-            <TooltipContent side="top">
-              <span>
-                {t('console.pinTooltipAki', {
-                  val: renalCheck?.band ?? '—',
-                })}
-              </span>
-            </TooltipContent>
-          </Tooltip>
+          {/* Pin 2: AKI Risk - visible on kidneys once result exists */}
+          {hasResult && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  type="button"
+                  style={{
+                    top: '45%',
+                    left: '62%',
+                    borderColor: pin2Color,
+                    color: pin2Color,
+                  }}
+                  className="pin"
+                  aria-label={t('console.pinTooltipAki', {
+                    val: renalCheck?.band ?? '—',
+                  })}
+                  onClick={() => onPinClick?.('renal_prophylaxis')}
+                >
+                  2
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="top">
+                <span>
+                  {t('console.pinTooltipAki', {
+                    val: renalCheck?.band ?? '—',
+                  })}
+                </span>
+              </TooltipContent>
+            </Tooltip>
+          )}
 
           {/* Pin 3: Region */}
           <Tooltip>
             <TooltipTrigger asChild>
               <button
                 type="button"
-                style={{ top: '31%', left: '41%' }}
-                className="pin text-primary border-primary"
+                style={{
+                  top: '31%',
+                  left: '41%',
+                  borderColor: 'var(--primary)',
+                  color: 'var(--primary)',
+                }}
+                className="pin"
                 aria-label={t('console.pinTooltipRegion', {
-                  val: requested.body_region,
+                  val: regionDisplay,
                 })}
                 onClick={() => onPinClick?.('national_drl')}
               >
@@ -173,7 +181,7 @@ export function PatientStage({
             <TooltipContent side="top">
               <span>
                 {t('console.pinTooltipRegion', {
-                  val: requested.body_region,
+                  val: regionDisplay,
                 })}
               </span>
             </TooltipContent>
@@ -186,15 +194,22 @@ export function PatientStage({
           data-id="stage.legend"
         >
           <div>
-            <dt className="text-xs text-muted-foreground truncate">
-              <span className={cn('font-mono font-semibold me-1', pin1Color)}>1</span>
+            <dt className="text-xs text-muted-foreground leading-snug">
+              <span
+                className="font-mono font-semibold me-1"
+                style={{
+                  color: hasResult ? pin1Color : 'var(--muted-foreground)',
+                }}
+              >
+                1
+              </span>
               {t('console.legendEgfr', { threshold: egfrLimit })}
             </dt>
             <dd
-              className={cn(
-                'font-mono text-[22px] leading-7 font-semibold mt-0.5',
-                hasResult && egfrVal !== null ? pin1Color : 'text-muted-foreground',
-              )}
+              className="font-mono text-[22px] leading-7 font-semibold mt-0.5"
+              style={{
+                color: hasResult && egfrVal !== null ? pin1Color : 'var(--muted-foreground)',
+              }}
               dir="ltr"
             >
               {hasResult && egfrVal !== null ? egfrVal : '—'}
@@ -202,7 +217,7 @@ export function PatientStage({
           </div>
 
           <div>
-            <dt className="text-xs text-muted-foreground truncate">
+            <dt className="text-xs text-muted-foreground leading-snug">
               <span className="font-mono font-semibold text-warning-strong me-1">2</span>
               {t('console.legendAkiRisk')}
             </dt>
@@ -218,12 +233,12 @@ export function PatientStage({
           </div>
 
           <div>
-            <dt className="text-xs text-muted-foreground truncate">
+            <dt className="text-xs text-muted-foreground leading-snug">
               <span className="font-mono font-semibold text-primary me-1">3</span>
               {t('console.legendRegion')}
             </dt>
-            <dd className="text-sm font-semibold leading-7 truncate mt-0.5" title={requested.body_region}>
-              {requested.body_region || '—'}
+            <dd className="text-sm font-semibold leading-snug mt-0.5" title={regionDisplay}>
+              {regionDisplay}
             </dd>
           </div>
         </dl>

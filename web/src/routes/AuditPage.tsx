@@ -230,7 +230,7 @@ export default function AuditPage() {
               {isClinical && (
                 <img
                   src="/models/kidney-injured.webp"
-                  alt="The patient's injured kidney."
+                  alt={t('models.kidneyInjuredAlt')}
                   className="w-32 mx-auto my-1 object-contain"
                   data-id="detail.kidney"
                 />

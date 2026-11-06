@@ -35,7 +35,7 @@ const EMPTY_PATIENT: Patient = {
 }
 
 const EMPTY_REQUEST: Requested = {
-  body_region: 'Abdomen and pelvis',
+  body_region: 'abdomen_pelvis',
   kvp: 120,
   mas: 200,
   ctdivol_mgy: null,
@@ -162,6 +162,10 @@ export default function ConsolePage() {
   let verdictDetail = ''
   if (result) {
     const { policy, device_response: device } = result
+    const failedOrWarned = policy.checks
+      .filter((c) => c.status === 'FAIL' || c.status === 'WARN')
+      .map((c) => t(`rules.${c.rule}`, { defaultValue: c.rule }))
+
     if (device.overridden_by) {
       verdictTitle = t('console.resultOverride')
       verdictDetail = t('console.overrideRecorded', { name: device.overridden_by })
@@ -170,13 +174,14 @@ export default function ConsolePage() {
       verdictDetail = t('verdict.COMPLIANT')
     } else if (policy.action === 'AUTHORISE') {
       verdictTitle = t('console.heldForRadiologist')
-      const egfrVal = renalCheck?.readings.find((r) => r.name === 'egfr')?.measured ?? patient.egfr
-      verdictDetail = egfrVal != null
-        ? t('console.heldForRadiologistDetail', { egfr: egfrVal })
+      verdictDetail = failedOrWarned.length > 0
+        ? failedOrWarned.join(useEnglish ? ', ' : '، ')
         : t('verdict.VIOLATION')
     } else {
       verdictTitle = t('console.resultBlocked')
-      verdictDetail = t('verdict.VIOLATION')
+      verdictDetail = failedOrWarned.length > 0
+        ? failedOrWarned.join(useEnglish ? ', ' : '، ')
+        : t('verdict.VIOLATION')
     }
   }
 
@@ -199,20 +204,28 @@ export default function ConsolePage() {
         <div className="flex flex-wrap items-center gap-2" data-id="head.cases">
           <span className="text-xs text-muted-foreground">{t('console.scenarios')}:</span>
           {clinical.length === 0 && <Skeleton className="h-8 w-48" />}
-          {clinical.map((scenario) => (
-            <Button
-              key={scenario.id}
-              size="sm"
-              variant={loaded === scenario.id ? 'default' : 'outline'}
-              onClick={() => loadScenario(scenario)}
-              disabled={pending}
-            >
-              <span className="font-mono text-xs" dir="ltr">
-                {scenario.id}
-              </span>
-              <span className="ms-1.5">{useEnglish ? scenario.name_en : scenario.name}</span>
-            </Button>
-          ))}
+          {clinical.map((scenario) => {
+            const isSelected = loaded === scenario.id
+            return (
+              <Button
+                key={scenario.id}
+                size="sm"
+                variant={isSelected ? 'default' : 'outline'}
+                className={cn(
+                  isSelected
+                    ? 'bg-primary text-primary-foreground hover:bg-primary/90 border-transparent shadow-xs font-semibold'
+                    : 'bg-card text-foreground border-border hover:bg-muted font-normal',
+                )}
+                onClick={() => loadScenario(scenario)}
+                disabled={pending}
+              >
+                <span className="font-mono text-xs" dir="ltr">
+                  {scenario.id}
+                </span>
+                <span className="ms-1.5">{useEnglish ? scenario.name_en : scenario.name}</span>
+              </Button>
+            )
+          })}
         </div>
       </div>
 
@@ -271,7 +284,7 @@ export default function ConsolePage() {
 
       {/* Three columns grid: Form, Patient Stage, Decision */}
       <div
-        className="grid grid-cols-1 lg:grid-cols-[minmax(280px,300px)_minmax(0,1fr)_minmax(320px,370px)] gap-5 items-start"
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[minmax(280px,300px)_minmax(0,1fr)_minmax(320px,370px)] gap-5 items-start"
         data-id="grid"
       >
         {/* Column 1: Request form */}
@@ -305,7 +318,7 @@ export default function ConsolePage() {
         </div>
 
         {/* Column 3: Decision column */}
-        <div className="min-w-0">
+        <div className="min-w-0 md:col-span-2 xl:col-span-1">
           {offline && (
             <Card className="border-destructive-strong">
               <CardContent className="py-4 text-sm text-destructive-strong">

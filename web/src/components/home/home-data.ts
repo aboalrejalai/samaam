@@ -189,6 +189,8 @@ export const SCENARIOS: readonly Scenario[] = [
  * app/policy_node.py:193 (CKD-EPI, MoH protocol p.21) from creatinine 229.8
  */
 export const SC02 = {
+  agent: 'Iohexol',
+  volume: '150',
   creatinine: '229.8',
   egfr: '19.1',
   ctdivol: '18.0',
@@ -384,9 +386,9 @@ export const TEAM_MEMBERS = [
 export const TEAM = TEAM_MEMBERS.map((m) => m.name)
 export const TEAM_LEADER = TEAM_MEMBERS[0]
 
-// source: submission/TECHNICAL-REPORT.md:48-50; LICENSE
+// source: submission/TECHNICAL-REPORT.md:48-50; LICENSE; git remote origin
 export const LINKS = {
-  repo: 'https://github.com/aboalrejal-ai/samaam',
+  repo: 'https://github.com/aboalrejalai/samaam',
   license: 'All rights reserved',
 } as const
 

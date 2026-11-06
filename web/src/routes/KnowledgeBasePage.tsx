@@ -135,7 +135,7 @@ export default function KnowledgeBasePage() {
 
         <img
           src="/models/contrast-vial.webp"
-          alt="A vial of iodinated contrast medium."
+          alt={t('models.contrastVialAlt')}
           className="h-[180px] sm:h-[220px] w-auto mx-auto object-contain hidden md:block"
           data-id="search.vial"
         />

@@ -126,9 +126,7 @@ export function RequestForm({
             dir="ltr"
             className={cn(
               'font-mono font-semibold',
-              (breaches?.egfr || (patient.egfr != null && patient.egfr < 30))
-                ? 'text-destructive-strong'
-                : 'text-foreground',
+              breaches?.egfr ? 'text-destructive-strong' : 'text-foreground',
             )}
           >
             {patient.egfr != null ? patient.egfr : '—'}
@@ -138,7 +136,7 @@ export function RequestForm({
         <div className="flex items-center justify-between gap-3 min-h-8 text-sm">
           <span>{t('console.onMetformin')}</span>
           <Switch
-            checked={patient.on_metformin ?? false}
+            checked={!!patient.on_metformin}
             disabled={disabled}
             onCheckedChange={(v) => onPatientChange({ on_metformin: v })}
           />
@@ -153,7 +151,11 @@ export function RequestForm({
         <Field label={t('console.bodyRegion')}>
           <Input
             className="h-[38px] text-sm"
-            value={requested.body_region}
+            value={
+              requested.body_region
+                ? t(`regions.${requested.body_region}`, { defaultValue: requested.body_region })
+                : ''
+            }
             disabled={disabled}
             onChange={(e) => onRequestedChange({ body_region: e.target.value })}
           />
@@ -216,7 +218,7 @@ export function RequestForm({
         <div className="flex items-center justify-between gap-3 min-h-8 text-sm">
           <span>{t('console.prophylaxisOrdered')}</span>
           <Switch
-            checked={requested.prophylaxis_ordered ?? false}
+            checked={!!requested.prophylaxis_ordered}
             disabled={disabled}
             onCheckedChange={(v) => onRequestedChange({ prophylaxis_ordered: v })}
           />
@@ -224,7 +226,7 @@ export function RequestForm({
         <div className="flex items-center justify-between gap-3 min-h-8 text-sm">
           <span>{t('console.metforminHeld')}</span>
           <Switch
-            checked={requested.metformin_held ?? false}
+            checked={!!requested.metformin_held}
             disabled={disabled}
             onCheckedChange={(v) => onRequestedChange({ metformin_held: v })}
           />

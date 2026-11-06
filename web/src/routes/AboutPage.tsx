@@ -182,7 +182,7 @@ export default function AboutPage() {
       >
         <img
           src="/models/valve.webp"
-          alt="The Samaam valve."
+          alt={t('models.valveAlt')}
           className="max-w-[120px] md:max-w-[140px] w-auto h-auto mx-auto object-contain"
           data-id="what.valve"
         />

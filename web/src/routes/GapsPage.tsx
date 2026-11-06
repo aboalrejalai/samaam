@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useKbGaps } from '@/lib/queries'
@@ -33,7 +34,7 @@ export default function GapsPage() {
         </div>
         <img
           src="/models/kidney.webp"
-          alt="A healthy human kidney."
+          alt={t('models.kidneyAlt')}
           className="h-[120px] sm:h-[132px] w-auto mx-auto object-contain hidden md:block"
           data-id="head.kidney"
         />
@@ -66,8 +67,8 @@ export default function GapsPage() {
               const recommendation = t(`gaps.items.${gap.id}.recommendation`, { defaultValue: gap.recommendation })
 
               return (
-                <div key={gap.id} className="contents" data-id={`gap.${gap.id.toLowerCase().replace('-', '.')}`}>
-                  <div>
+                <Fragment key={gap.id}>
+                  <div data-id={`gap.${gap.id.toLowerCase().replace('-', '.')}`}>
                     <span dir="ltr" className="gap-id">
                       {gap.id}
                     </span>
@@ -76,7 +77,7 @@ export default function GapsPage() {
                   <div className="text-foreground/90">{finding}</div>
                   <div className="text-foreground/90">{implication}</div>
                   <div className="rec text-foreground">{recommendation}</div>
-                </div>
+                </Fragment>
               )
             })}
           </div>

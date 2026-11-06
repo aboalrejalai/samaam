@@ -174,7 +174,7 @@ export default function DataRequestPage() {
 
       {/* Three columns grid: Form, Center stage (Records + No override), Decision (Checks + Refs) */}
       <div
-        className="grid grid-cols-1 lg:grid-cols-[minmax(280px,320px)_minmax(0,1fr)_minmax(320px,370px)] gap-5 items-start"
+        className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-[minmax(280px,320px)_minmax(0,1fr)_minmax(320px,370px)] gap-5 items-start"
         data-id="grid"
       >
         {/* Column 1: Access request form */}
@@ -283,7 +283,7 @@ export default function DataRequestPage() {
           >
             <img
               src="/models/records.webp"
-              alt="A stack of glass slabs etched with CT slices, clamped shut by a titanium lock."
+              alt={t('models.recordsAlt')}
               className="w-full max-w-[330px] h-auto block"
               data-id="stage.model"
             />
@@ -337,7 +337,7 @@ export default function DataRequestPage() {
         </div>
 
         {/* Column 3: Checks and References */}
-        <div className="flex flex-col gap-5 min-w-0" data-id="decision">
+        <div className="flex flex-col gap-5 min-w-0 md:col-span-2 xl:col-span-1" data-id="decision">
           {offline && (
             <Card className="border-destructive-strong">
               <CardContent className="py-4 text-sm text-destructive-strong">
