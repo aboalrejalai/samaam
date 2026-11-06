@@ -21,9 +21,10 @@ export interface OverrideDialogProps {
   reason: string
   pending?: boolean
   onConfirm: (name: string) => void
+  children?: React.ReactNode
 }
 
-export function OverrideDialog({ reason, pending, onConfirm }: OverrideDialogProps) {
+export function OverrideDialog({ reason, pending, onConfirm, children }: OverrideDialogProps) {
   const { t } = useTranslation()
   const [open, setOpen] = useState(false)
   const [name, setName] = useState('')
@@ -32,9 +33,11 @@ export function OverrideDialog({ reason, pending, onConfirm }: OverrideDialogPro
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button variant="outline" className="w-full border-warning-strong text-warning-strong">
-          {t('console.overrideOpen')}
-        </Button>
+        {children ?? (
+          <Button variant="outline" className="w-full border-warning-strong text-warning-strong">
+            {t('console.overrideOpen')}
+          </Button>
+        )}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

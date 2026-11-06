@@ -1,21 +1,29 @@
 import { cn } from '@/lib/utils'
 
-/** The mark is the valve: a seat with a stem through it. */
-export function BrandMark({ className, ...props }: React.ComponentProps<'span'>) {
+/**
+ * Samaam mark: a contrast drop held at a closed gate, before it reaches the kidney.
+ * Three shapes, viewBox 0 0 64 64, blue #1D4ED8, amber #C8962E, no tile behind it,
+ * default size 36px (size-9).
+ */
+export function BrandMark({ className, ...props }: React.ComponentProps<'svg'>) {
   return (
-    <span
-      aria-hidden
-      className={cn(
-        'flex aspect-square size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground',
-        className,
-      )}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 64 64"
+      role="img"
+      aria-label="Samaam"
+      className={cn('size-9 shrink-0', className)}
       {...props}
     >
-      <svg viewBox="0 0 24 24" className="size-1/2" fill="none" aria-hidden>
-        <path d="M12 3v6m0 6v6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <circle cx="12" cy="12" r="3.4" stroke="currentColor" strokeWidth="2" />
-        <path d="M5 12h3.6m6.8 0H19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    </span>
+      <path
+        fill="#1D4ED8"
+        d="M42 4C54 4 62 17 62 32C62 47 54 60 42 60C33 60 27 54 27 47C27 41 36 39 36 32C36 25 27 23 27 17C27 10 33 4 42 4Z"
+      />
+      <rect x="22" y="21" width="6.5" height="22" rx="3.25" fill="#1D4ED8" />
+      <path
+        fill="#C8962E"
+        d="M9 19C9 19 17 29 17 35A8 8 0 0 1 1 35C1 29 9 19 9 19Z"
+      />
+    </svg>
   )
 }

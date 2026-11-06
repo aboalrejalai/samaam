@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router'
 import { BrandMark } from '@/components/BrandMark'
 import { LanguageToggle } from '@/components/LanguageToggle'
-import { ThemeToggle } from '@/components/ThemeToggle'
 import { Button } from '@/components/ui/button'
 import { APP_BASE } from '@/lib/routes'
 import { cn } from '@/lib/utils'
@@ -118,7 +117,6 @@ export function HomeHeader() {
 
           <div className="ms-auto flex items-center gap-1.5 sm:gap-2">
             <LanguageToggle />
-            <ThemeToggle className="hidden sm:inline-flex" />
             <Button asChild size="sm" className="ms-1">
               <Link to={APP_BASE}>
                 <LayoutDashboard data-icon="inline-start" aria-hidden />

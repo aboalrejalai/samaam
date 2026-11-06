@@ -36,9 +36,6 @@
     "language": "Language",
     "switchToArabic": "Switch to Arabic",
     "switchToEnglish": "Switch to English",
-    "theme": "Theme",
-    "themeLight": "Light theme",
-    "themeDark": "Dark theme",
     "awardChip": "3rd Prize · ITU",
     "awardTitle": "3rd Prize · ITU AI Readiness Hackathon",
     "awardLink": "About the team and the award"
@@ -213,7 +210,18 @@
     "overrideConfirm": "Approve and accept responsibility",
     "overrideCancel": "Cancel",
     "overrideRecorded": "Released under override by {{name}}",
-    "deviceOffline": "Could not reach the Samaam service."
+    "deviceOffline": "Could not reach the Samaam service.",
+    "heldForRadiologist": "Held for a named radiologist. Nothing reached the scanner.",
+    "heldForRadiologistDetail": "Dose above the national level, and eGFR {{egfr}} with no prophylaxis ordered.",
+    "pathTitle": "Path to the device",
+    "pathLocked": "Locked",
+    "pathExecuted": "Executed",
+    "legendEgfr": "eGFR, threshold {{threshold}}",
+    "legendAkiRisk": "Contrast AKI risk",
+    "legendRegion": "Scan region",
+    "pinTooltipEgfr": "Pin 1: eGFR {{val}} (threshold {{threshold}})",
+    "pinTooltipAki": "Pin 2: Contrast AKI risk {{val}}",
+    "pinTooltipRegion": "Pin 3: Scan region {{val}}"
   },
   "data": {
     "request": "Access request",
@@ -230,7 +238,22 @@
     "locked": "Session terminated. The incident is in the audit trail.",
     "noOverride": "No clinical override path",
     "loadBreach": "Load the exploitation attempt",
-    "awaiting": "No request submitted yet."
+    "awaiting": "No request submitted yet.",
+    "refusedTitle": "Refused. No clinician can authorise this.",
+    "recordsStayed": "records stayed where they are",
+    "recordsStayedDetail": "Health Data is Sensitive Data. Commercial outreach is not a lawful basis for processing it.",
+    "noOverrideDetail": "A consultant may accept clinical risk for a patient in their care. No clinician holds authority to authorise processing that the PDPL forbids.",
+    "consultantName": "Dr. A. Alharbi, Consultant Radiologist",
+    "lockedStatus": "Locked"
+  },
+  "rules": {
+    "national_drl": "National reference level",
+    "renal_prophylaxis": "Renal prophylaxis",
+    "metformin": "Metformin",
+    "nephrotoxic_meds": "Nephrotoxic medication",
+    "health_data_minimisation": "Data minimisation",
+    "lawful_basis": "Lawful basis",
+    "cross_border": "Cross-border transfer"
   },
   "kb": {
     "placeholder": "Ask about Saudi regulation — in Arabic or English",

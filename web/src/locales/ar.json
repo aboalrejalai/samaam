@@ -36,9 +36,6 @@
     "language": "اللغة",
     "switchToArabic": "التبديل إلى العربية",
     "switchToEnglish": "التبديل إلى الإنجليزية",
-    "theme": "السمة",
-    "themeLight": "السمة الفاتحة",
-    "themeDark": "السمة الداكنة",
     "awardChip": "المركز الثالث · ITU",
     "awardTitle": "المركز الثالث · هاكاثون جاهزية الذكاء الاصطناعي من ITU",
     "awardLink": "عن الفريق والجائزة"
@@ -213,7 +210,18 @@
     "overrideConfirm": "اعتماد وتحمّل المسؤولية",
     "overrideCancel": "إلغاء",
     "overrideRecorded": "أُطلقت بتجاوز من {{name}}",
-    "deviceOffline": "تعذّر الوصول إلى خدمة صمّام."
+    "deviceOffline": "تعذّر الوصول إلى خدمة صمّام.",
+    "heldForRadiologist": "مُعلّق بانتظار استشاري أشعة مُسمّى. لم يصل شيء إلى الماسح.",
+    "heldForRadiologistDetail": "الجرعة تتجاوز المستوى الوطني، والترشيح الكبيبي {{egfr}} دون طلب وقاية.",
+    "pathTitle": "المسار إلى الجهاز",
+    "pathLocked": "مُقفل",
+    "pathExecuted": "مُنفّذ",
+    "legendEgfr": "معدل الترشيح، الحد {{threshold}}",
+    "legendAkiRisk": "خطر الإصابة الكلوية الحادة",
+    "legendRegion": "منطقة الفحص",
+    "pinTooltipEgfr": "النقطة 1: معدل الترشيح {{val}} (الحد {{threshold}})",
+    "pinTooltipAki": "النقطة 2: خطر الإصابة الكلوية الحادة {{val}}",
+    "pinTooltipRegion": "النقطة 3: منطقة الفحص {{val}}"
   },
   "data": {
     "request": "طلب وصول",
@@ -230,7 +238,22 @@
     "locked": "أُنهيت الجلسة. سُجّلت الحادثة في سجل التدقيق.",
     "noOverride": "لا يوجد مسار تجاوز إكلينيكي",
     "loadBreach": "حمّل محاولة الاستغلال",
-    "awaiting": "لم يُرسل طلب بعد."
+    "awaiting": "لم يُرسل طلب بعد.",
+    "refusedTitle": "مرفوض. لا يملك أي طبيب صلاحية الإذن بهذا.",
+    "recordsStayed": "سجلات بقيت في مكانها",
+    "recordsStayedDetail": "البيانات الصحية بيانات حساسة. الترويج التجاري ليس أساساً نظامياً لمعالجتها.",
+    "noOverrideDetail": "يجوز للاستشاري قبول الخطر السريري لمريض تحت رعايته. لا يملك أي ممارس صحي صلاحية الإذن بمعالجة يحظرها نظام حماية البيانات الشخصية.",
+    "consultantName": "د. أ. الحربي، استشاري أشعة",
+    "lockedStatus": "مُقفل"
+  },
+  "rules": {
+    "national_drl": "المستوى المرجعي الوطني",
+    "renal_prophylaxis": "الوقاية الكلوية",
+    "metformin": "الميتفورمين",
+    "nephrotoxic_meds": "الأدوية السامة للكلية",
+    "health_data_minimisation": "تقليل البيانات",
+    "lawful_basis": "المسوغ النظامي",
+    "cross_border": "النقل عبر الحدود"
   },
   "kb": {
     "placeholder": "اسأل عن الأنظمة السعودية — بالعربية أو الإنجليزية",

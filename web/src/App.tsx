@@ -6,7 +6,6 @@ import { Toaster } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { dirOf, isLanguage, type Language } from '@/lib/i18n'
 import { queryClient } from '@/lib/query-client'
-import { ThemeProvider } from '@/lib/theme'
 import { router } from '@/router'
 
 export default function App() {
@@ -16,15 +15,13 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        {/* Radix positions popovers and tooltips from this, not from the DOM. */}
-        <Direction.DirectionProvider dir={direction}>
-          <TooltipProvider>
-            <RouterProvider router={router} />
-            <Toaster />
-          </TooltipProvider>
-        </Direction.DirectionProvider>
-      </ThemeProvider>
+      {/* Radix positions popovers and tooltips from this, not from the DOM. */}
+      <Direction.DirectionProvider dir={direction}>
+        <TooltipProvider>
+          <RouterProvider router={router} />
+          <Toaster />
+        </TooltipProvider>
+      </Direction.DirectionProvider>
     </QueryClientProvider>
   )
 }

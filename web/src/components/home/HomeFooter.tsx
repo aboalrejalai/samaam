@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { BrandMark } from '@/components/BrandMark'
 import { LanguageToggle } from '@/components/LanguageToggle'
 import { SyntheticNotice } from '@/components/SyntheticNotice'
-import { ThemeToggle } from '@/components/ThemeToggle'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { AWARD, LINKS, TEAM_MEMBERS } from './home-data'
@@ -120,7 +119,6 @@ export function HomeFooter() {
             <ColumnTitle>{t('home.footer.preferences')}</ColumnTitle>
             <div className="flex items-center gap-2">
               <LanguageToggle />
-              <ThemeToggle />
             </div>
           </div>
         </div>
