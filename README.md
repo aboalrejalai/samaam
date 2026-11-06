@@ -9,7 +9,7 @@ regulation.
 
 `ITU AI Readiness Hackathon — Kingdom of Saudi Arabia` · Health / Radiology track
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-all%20rights%20reserved-red.svg)](LICENSE)
 ![Award](https://img.shields.io/badge/ITU%20Hackathon-3rd%20Prize-gold)
 ![Standard](https://img.shields.io/badge/ITU--T-Y.3172-0ea5e9)
 ![Data](https://img.shields.io/badge/data-100%25%20synthetic-success)
@@ -309,9 +309,9 @@ docs/         Concept, hackathon guide, knowledge base, research passes
 
 ## License
 
-[MIT](LICENSE) — Copyright © 2026 Team Samaam
+[Source-available, all rights reserved](LICENSE) — Copyright © 2026 Team Samaam
 (Mohammed Nadher Abo Alrejal · Badour Alsehli · Haneen Saleh Alharbi · Norah Abdullah Alsahli).
 
-Open source does **not** mean public domain. The team retains copyright.
-Registration with the Saudi Authority for Intellectual Property (SAIP) is
-compatible with this license and strengthens formal evidence of authorship.
+This repository is public to read. It is **not** open source: using it, or
+entering it in any competition, incubator or investment, needs the written
+permission set out in [LICENSE](LICENSE).

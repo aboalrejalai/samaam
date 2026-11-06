@@ -232,6 +232,6 @@ as such, including the one that establishes there is no absolute threshold.
 | Guidance on Contrast-Associated AKI (2022) | Canadian Assoc. of Radiologists | https://car.ca/patient-care/practice-guidelines/ |
 | Y.3172 — ML architecture for future networks | ITU-T | https://itu.int/rec/T-REC-Y.3172/en |
 
-**Licence** MIT, no API keys in source. The knowledge base ships as
+**Licence** Source-available, all rights reserved; no API keys in source. The knowledge base ships as
 `kb/records/health-regulatory.json` — all 45 records with their citations — and
 `kb/sources/` holds the primary documents themselves.

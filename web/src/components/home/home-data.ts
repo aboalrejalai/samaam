@@ -387,7 +387,7 @@ export const TEAM_LEADER = TEAM_MEMBERS[0]
 // source: submission/TECHNICAL-REPORT.md:48-50; LICENSE
 export const LINKS = {
   repo: 'https://github.com/aboalrejal-ai/samaam',
-  license: 'MIT',
+  license: 'All rights reserved',
 } as const
 
 /**

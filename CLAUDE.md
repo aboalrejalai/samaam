@@ -24,7 +24,8 @@ cp .env.example .env                       # SAMAAM_LLM_API_KEY is optional
 .venv/bin/python run_demo.py 2                                  # one scenario
 .venv/bin/python run_demo.py 2 --override "Dr. X, Consultant"   # override path
 
-# frontend (web/) — dev server on :5173 (landing on /, system on /app), talks to :8000
+# frontend — dev server on :5173 (landing on /, system on /app), talks to :8000
+cd web
 npm install && npm run dev
 npm run typecheck
 npm run build                              # tsc -b && vite build → web/dist
@@ -87,8 +88,9 @@ React 19 · Vite · Tailwind v4 · shadcn/ui · TanStack Query · react-router v
 
 - **100% synthetic data.** Every UI screen and document carries `بيانات محاكاة لأغراض الهاكاثون فقط` (`SyntheticNotice` component; `SYNTHETIC_NOTICE` in `main.py`). Never add realistic patient records. Hospital site profiles in `main.py` deliberately have empty endpoints; don't invent hospital network addresses.
 - **Zero hallucination.** Never invent a law name, article number, threshold, or URL, whether in code, prompts, KB records, or docs. If the evidence isn't there, the answer is `INSUFFICIENT_EVIDENCE`.
-- The repository is public (MIT). Secrets come only from `.env` via `SAMAAM_*` env vars (`app/config.py`, pydantic-settings).
+- The repository is public to read but not open source; see `LICENSE`. Secrets come only from `.env` via `SAMAAM_*` env vars (`app/config.py`, pydantic-settings).
 - `submission/TECHNICAL-REPORT.md` must stay within 5 pages as a PDF.
+- **Award and team facts come from the certificate** in `docs/awards/`: names as spelled there, Mohammed Nadher Abo Alrejal as Team Leader, and "3rd Prize". The certificate gives no global rank, so never write "3rd globally"; "an international award from the ITU" is the accepted wording.
 
 ## Conventions
 
@@ -96,4 +98,4 @@ React 19 · Vite · Tailwind v4 · shadcn/ui · TanStack Query · react-router v
 - `changelog/CHANGELOG.md` (Arabic, `MAJOR.MINOR.PATCH`) records each completed phase, including what was verified and how.
 - `submission/slides.html` and `web/public/deck/index.html` are the same deck; the second is what `/slides` embeds. Keep them identical.
 - `reference/organizers/` is the organizers' reference code: read-only, never import from it.
-- `map/` is an Obsidian vault of per-node notes. `.obsidian/` and `Samaam/` are untracked vault artifacts.
+- `map/` is an Obsidian vault of per-node notes. `.obsidian/` and `Samaam/` are tracked vault files, not application code.

@@ -93,10 +93,10 @@
 **ليش يسأل:** يبي يتأكد إن المشروع قابل للتشغيل من المستودع العام، مو ديمو مقفول.
 
 **جوابك (EN):**
-> Public repo. MIT license. No API keys in the code. README has the steps. The model key is optional — without it, search and every stop still work. Only the text explanation is missing.
+> Public repo, source-available, all rights reserved. No API keys in the code. README has the steps. The model key is optional — without it, search and every stop still work. Only the text explanation is missing.
 
 **تفهمه (AR):**
-المستودع عام MIT بلا مفاتيح. الأوامر في README. مفتاح النموذج اختياري — بدونه البحث والتوقيف يشتغلان؛ يختفي الشرح النصي فقط.
+المستودع عام للاطلاع وكل الحقوق محفوظة، بلا مفاتيح. الأوامر في README. مفتاح النموذج اختياري — بدونه البحث والتوقيف يشتغلان؛ يختفي الشرح النصي فقط.
 
 **وش تضغط:**
 أشر لقسم Run في README أو افتح GitHub على الشاشة.
