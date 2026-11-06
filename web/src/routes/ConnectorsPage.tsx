@@ -1,11 +1,15 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router'
-import { AlertTriangle, Cable, CheckCircle2, CircleDashed, XCircle } from 'lucide-react'
-import { PageHeader } from '@/components/PageHeader'
-import { Badge } from '@/components/ui/badge'
+import {
+  AlertTriangle,
+  ArrowRight,
+  Check,
+  CircleDashed,
+  XCircle,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 import { APP_BASE } from '@/lib/routes'
@@ -14,38 +18,32 @@ import { useConnectorTest, useConnectors, useFhirPull } from '@/lib/queries'
 import type { ConnectorCard, ConnectorTestResult } from '@/types/api'
 
 /**
- * The C node, made visible.
+ * Connectors page (ported from boards/Connectors.dc.html).
  *
- * The question this screen exists to answer is the first one anyone asks:
- * *how does it attach to the scanner?* Not through a vendor API — no
- * manufacturer exposes one. A scanner asks, over DICOM, for its scheduled
- * work, and whoever answers that question decides what the technologist
- * sees. Samaam answers it.
- *
- * So these cards are not a settings form. Two of them hold live network
- * peers and their test buttons open real sockets; the modality card fills
- * itself in from the first query that arrives. Nothing here is saved state
- * pretending to be a connection.
+ * Premise card with the CT model, four device cards with model renders on pale blue tiles,
+ * patient FHIR pull with before/after states, and dynamic deployment profiles.
  */
 
-const STATE_TONE: Record<ConnectorCard['state'], string> = {
-  running: 'text-success-strong',
-  configured: 'text-success-strong',
-  discovered: 'text-success-strong',
-  local: 'text-muted-foreground',
-  awaiting: 'text-muted-foreground',
-  stopped: 'text-warning-strong',
-  error: 'text-destructive-strong',
+const CONNECTOR_IMAGES: Record<string, string> = {
+  fhir: '/models/records.webp',
+  mwl: '/models/valve.webp',
+  modality: '/models/ct-scanner.webp',
+  injector: '/models/injector.webp',
 }
 
-function StateIcon({ state }: { state: ConnectorCard['state'] }) {
-  const cls = cn('size-4 shrink-0', STATE_TONE[state])
-  // Shape carries the state as well as colour: red and amber are 3.7 ΔE apart
-  // under deuteranopia, so a dot alone would not distinguish them.
-  if (state === 'error') return <XCircle className={cls} aria-hidden />
-  if (state === 'stopped') return <AlertTriangle className={cls} aria-hidden />
-  if (state === 'awaiting' || state === 'local') return <CircleDashed className={cls} aria-hidden />
-  return <CheckCircle2 className={cls} aria-hidden />
+function getChipClass(state: ConnectorCard['state']) {
+  switch (state) {
+    case 'running':
+    case 'configured':
+    case 'discovered':
+      return 'chip-ok'
+    case 'stopped':
+      return 'chip-warn'
+    case 'error':
+      return 'chip-err'
+    default:
+      return ''
+  }
 }
 
 function TestOutcome({ result }: { result: ConnectorTestResult }) {
@@ -53,7 +51,7 @@ function TestOutcome({ result }: { result: ConnectorTestResult }) {
   return (
     <div
       className={cn(
-        'rounded-md border-s-2 px-3 py-2 text-xs',
+        'rounded-md border-s-2 px-3 py-2 text-xs mt-2',
         result.ok ? 'border-success-strong bg-muted' : 'border-destructive-strong bg-muted',
       )}
     >
@@ -81,7 +79,7 @@ function TestOutcome({ result }: { result: ConnectorTestResult }) {
 }
 
 export default function ConnectorsPage() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const { data, isLoading, isError } = useConnectors()
   const test = useConnectorTest()
@@ -89,23 +87,40 @@ export default function ConnectorsPage() {
   const [tested, setTested] = useState<Record<string, ConnectorTestResult>>({})
   const [patientId, setPatientId] = useState('137617795')
 
+  const useArabic = i18n.resolvedLanguage === 'ar'
+
   function runTest(id: string) {
     test.mutate(id, { onSuccess: (result) => setTested((prev) => ({ ...prev, [id]: result })) })
   }
 
   return (
-    <>
-      <PageHeader
-        title={t('pages.connectors.title')}
-        lead={t('pages.connectors.lead')}
-        endpoint="GET /connectors"
-      />
+    <div className="flex flex-col gap-5" id="connectors">
+      {/* Page head */}
+      <div className="flex flex-wrap items-end justify-between gap-3 sm:gap-6" data-id="head">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
+            {t('pages.connectors.title')}
+          </h1>
+          <p className="text-muted-foreground mt-1 text-sm sm:text-base">
+            {t('pages.connectors.lead')}
+          </p>
+        </div>
+      </div>
 
-      {/* The claim a judge will test first, stated before the cards. */}
-      <Card className="mb-6 border-s-2 border-primary">
-        <CardContent className="py-4 text-sm text-foreground/80">
+      {/* Premise card with the CT model */}
+      <Card
+        className="p-5 sm:p-6 bg-gradient-to-r from-sa-50 to-card grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(0,420px)] gap-6 items-center overflow-hidden border border-border"
+        data-id="premise"
+      >
+        <p className="text-base leading-relaxed text-foreground">
           {t('connectors.premise')}
-        </CardContent>
+        </p>
+        <img
+          src="/models/ct-scanner.webp"
+          alt="A CT scanner with an empty table."
+          className="w-full max-h-[190px] object-contain mx-auto"
+          data-id="premise.scanner"
+        />
       </Card>
 
       {isLoading && <Skeleton className="h-64 w-full" />}
@@ -117,65 +132,75 @@ export default function ConnectorsPage() {
         </Card>
       )}
 
-      <div className="grid gap-4 lg:grid-cols-2">
-        {data?.connectors.map((connector) => (
-          <Card key={connector.id}>
-            <CardHeader className="pb-3">
-              <div className="flex items-center gap-2">
-                <StateIcon state={connector.state} />
-                <CardTitle className="text-base">{t(`connectors.cards.${connector.id}`)}</CardTitle>
-                <Badge variant="outline" className="ms-auto text-xs">
-                  {t(`connectors.states.${connector.state}`)}
-                </Badge>
+      {/* Four device cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" data-id="cards">
+        {data?.connectors.map((connector) => {
+          const chipClass = getChipClass(connector.state)
+          const isOk = chipClass === 'chip-ok'
+          return (
+            <Card key={connector.id} className="p-4 border border-border" data-id={`card.${connector.id}`}>
+              <div className="grid grid-cols-[96px_minmax(0,1fr)] gap-4 items-start">
+                <span className="w-24 h-24 flex items-center justify-center bg-primary-subtle rounded-xl overflow-hidden shrink-0">
+                  <img
+                    src={CONNECTOR_IMAGES[connector.id] ?? '/models/records.webp'}
+                    alt=""
+                    className="max-w-[84px] max-h-[84px] w-auto h-auto object-contain"
+                  />
+                </span>
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h2 className="text-base font-semibold leading-tight text-foreground">
+                      {t(`connectors.cards.${connector.id}`)}
+                    </h2>
+                    <span className={cn('chip ms-auto', chipClass)}>
+                      {isOk && <Check className="size-3.5" aria-hidden />}
+                      {connector.state === 'error' && <XCircle className="size-3.5" aria-hidden />}
+                      {connector.state === 'stopped' && <AlertTriangle className="size-3.5" aria-hidden />}
+                      {(connector.state === 'awaiting' || connector.state === 'local') && (
+                        <CircleDashed className="size-3.5" aria-hidden />
+                      )}
+                      {t(`connectors.states.${connector.state}`)}
+                    </span>
+                  </div>
+                  <p dir="ltr" className="font-mono text-xs text-muted-foreground">
+                    {connector.standard}
+                  </p>
+                  <p dir="ltr" className="font-mono text-xs break-all text-foreground/80">
+                    {connector.endpoint ?? t('connectors.noEndpoint')}
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    {t(`connectors.notes.${connector.id}`)}
+                  </p>
+                  {connector.testable && (
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      className="w-fit mt-1 h-8 text-xs cursor-pointer"
+                      disabled={test.isPending}
+                      onClick={() => runTest(connector.id)}
+                    >
+                      {test.isPending && test.variables === connector.id
+                        ? t('connectors.testing')
+                        : t('connectors.test')}
+                    </Button>
+                  )}
+                  {tested[connector.id] && <TestOutcome result={tested[connector.id]} />}
+                </div>
               </div>
-              <p dir="ltr" className="pt-1 font-mono text-xs text-muted-foreground">
-                {connector.standard}
-              </p>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-3 text-sm">
-              <div>
-                <p className="text-xs font-medium text-muted-foreground">
-                  {t('connectors.endpoint')}
-                </p>
-                <p dir="ltr" className="pt-0.5 break-all font-mono text-foreground/80">
-                  {connector.endpoint ?? t('connectors.noEndpoint')}
-                </p>
-              </div>
-              <p className="text-xs text-muted-foreground">
-                {t(`connectors.notes.${connector.id}`)}
-              </p>
-              {connector.testable && (
-                <Button
-                  size="sm"
-                  variant="outline"
-                  disabled={test.isPending}
-                  onClick={() => runTest(connector.id)}
-                >
-                  {test.isPending && test.variables === connector.id
-                    ? t('connectors.testing')
-                    : t('connectors.test')}
-                </Button>
-              )}
-              {tested[connector.id] && <TestOutcome result={tested[connector.id]} />}
-            </CardContent>
-          </Card>
-        ))}
+            </Card>
+          )
+        })}
       </div>
 
-      {/* The part that makes the page a gateway rather than a form: a patient
-          arrives over the network and goes straight to the console. */}
-      <Card className="mt-6">
-        <CardHeader className="pb-3">
-          <CardTitle className="flex items-center gap-2 text-base">
-            <Cable className="size-4 text-primary" aria-hidden />
-            {t('connectors.pull.title')}
-          </CardTitle>
-          <p className="pt-1 text-xs text-muted-foreground">{t('connectors.pull.lead')}</p>
-        </CardHeader>
-        <CardContent className="flex flex-col gap-4 text-sm">
-          <div className="flex flex-wrap items-end gap-2">
-            <div className="min-w-0 flex-1">
-              <label htmlFor="fhir-id" className="text-xs text-muted-foreground">
+      {/* Pull a patient section */}
+      <section className="card rounded-2xl border border-border p-5 sm:p-6" aria-label={t('connectors.pull.title')} data-id="pull">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,340px)_minmax(0,1fr)] gap-6 items-start">
+          <div className="flex flex-col gap-2.5">
+            <h2 className="text-lg font-bold text-foreground">{t('connectors.pull.title')}</h2>
+            <p className="text-xs text-muted-foreground">{t('connectors.pull.lead')}</p>
+            <div className="flex flex-col gap-1.5 mt-1">
+              <label htmlFor="fhir-id" className="text-xs font-medium text-muted-foreground">
                 {t('connectors.pull.field')}
               </label>
               <Input
@@ -183,52 +208,55 @@ export default function ConnectorsPage() {
                 dir="ltr"
                 value={patientId}
                 onChange={(event) => setPatientId(event.target.value)}
-                className="mt-1 font-mono"
+                className="font-mono h-9"
               />
             </div>
             <Button
+              size="sm"
+              className="w-fit mt-1"
               disabled={pull.isPending || !patientId.trim()}
               onClick={() => pull.mutate(patientId.trim())}
             >
               {pull.isPending ? t('connectors.pull.pulling') : t('connectors.pull.submit')}
             </Button>
+            {pull.isError && (
+              <p className="text-xs text-destructive-strong mt-1">{t('connectors.pull.failed')}</p>
+            )}
           </div>
 
-          {pull.isError && (
-            <p className="text-sm text-destructive-strong">{t('connectors.pull.failed')}</p>
+          {/* Before pull: only muted prompt */}
+          {!pull.data && !pull.isError && (
+            <div className="flex items-center justify-center p-8 text-center text-sm text-muted-foreground border border-dashed rounded-xl min-h-[140px]">
+              {t('connectors.pull.prompt')}
+            </div>
           )}
 
+          {/* After pull: real readings */}
           {pull.data && (
-            <div className="flex flex-col gap-3">
-              {/* Raw beside derived, never derived alone: a computed number
-                  with no visible origin is a number nobody can check. */}
-              <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-md border bg-card px-3 py-2">
-                  <p className="text-xs font-medium text-muted-foreground">
-                    {t('connectors.pull.asSent')}
+            <div className="flex flex-col gap-3 min-w-0" data-id="pull.result">
+              <div className="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_28px_minmax(0,1fr)] gap-2.5 items-center">
+                <div className="p-3 bg-muted rounded-lg">
+                  <p className="text-xs text-muted-foreground">{t('connectors.pull.asSent')}</p>
+                  <p dir="ltr" className="font-mono text-xl font-semibold text-foreground">
+                    {pull.data.raw.creatinine?.value ?? '—'} {pull.data.raw.creatinine?.unit ?? ''}
                   </p>
-                  <p dir="ltr" className="pt-1 font-mono tabular-nums text-foreground">
-                    {pull.data.raw.creatinine?.value ?? '—'}{' '}
-                    {pull.data.raw.creatinine?.unit ?? ''}
-                  </p>
-                  <p dir="ltr" className="pt-1 font-mono text-xs text-muted-foreground">
-                    LOINC {pull.data.raw.creatinine?.loinc} ·{' '}
-                    {pull.data.raw.creatinine?.age_days != null
-                      ? t('connectors.pull.daysOld', {
-                          count: pull.data.raw.creatinine.age_days,
-                        })
-                      : '—'}
+                  <p dir="ltr" className="font-mono text-xs text-muted-foreground">
+                    LOINC {pull.data.raw.creatinine?.loinc ?? '2160-0'}
+                    {pull.data.raw.creatinine?.age_days != null && (
+                      <span> · {t('connectors.pull.daysOld', { count: pull.data.raw.creatinine.age_days })}</span>
+                    )}
                   </p>
                 </div>
-                <div className="rounded-md border bg-card px-3 py-2">
-                  <p className="text-xs font-medium text-muted-foreground">
-                    {t('connectors.pull.asComputed')}
-                  </p>
-                  <p dir="ltr" className="pt-1 font-mono tabular-nums text-foreground">
+                <div className="flex items-center justify-center text-muted-foreground">
+                  <ArrowRight className="size-5 rtl:rotate-180" aria-hidden />
+                </div>
+                <div className="p-3 bg-primary-subtle rounded-lg">
+                  <p className="text-xs text-muted-foreground">{t('connectors.pull.asComputed')}</p>
+                  <p dir="ltr" className="font-mono text-xl font-semibold text-foreground">
                     {pull.data.patient.serum_creatinine_umol_l ?? '—'} µmol/L
                   </p>
-                  <p dir="ltr" className="pt-1 font-mono text-xs text-muted-foreground">
-                    × {pull.data.raw.creatinine?.conversion_factor ?? '—'}
+                  <p dir="ltr" className="font-mono text-xs text-muted-foreground">
+                    × {pull.data.raw.creatinine?.conversion_factor ?? '88.4'}
                   </p>
                 </div>
               </div>
@@ -241,7 +269,7 @@ export default function ConnectorsPage() {
               </p>
 
               {pull.data.identifiers_withheld.length > 0 && (
-                <p className="rounded-md border-s-2 border-primary bg-primary/5 px-3 py-2 text-xs text-foreground/80">
+                <p className="text-xs text-muted-foreground">
                   {t('connectors.pull.withheld', {
                     fields: pull.data.identifiers_withheld.join(', '),
                   })}
@@ -256,40 +284,38 @@ export default function ConnectorsPage() {
 
               <Button
                 size="sm"
+                className="w-fit gap-1.5"
                 onClick={() =>
                   navigate(APP_BASE, { state: { pulledPatient: pull.data.patient } })
                 }
               >
                 {t('connectors.pull.openInConsole')}
+                <ArrowRight className="size-4 rtl:rotate-180" aria-hidden />
               </Button>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </section>
 
+      {/* Deployment profiles */}
       {data && (
-        <Card className="mt-6">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base">{t('connectors.sites.title')}</CardTitle>
-            <p className="pt-1 text-xs text-muted-foreground">{t('connectors.sites.note')}</p>
-          </CardHeader>
-          <CardContent>
-            <ul className="grid gap-2 sm:grid-cols-2">
-              {data.site_profiles.map((site) => (
-                <li key={site.id} className="rounded-md border px-3 py-2">
-                  <p className="text-sm text-foreground">{site.name_ar}</p>
-                  <p dir="ltr" className="text-xs text-muted-foreground">
-                    {site.name} · {site.city}
-                  </p>
-                  <p className="pt-1 text-xs text-muted-foreground">
-                    {t('connectors.sites.pending')}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+        <section className="card rounded-2xl border border-border p-5 sm:p-6" aria-label={t('connectors.sites.title')} data-id="sites">
+          <h2 className="text-lg font-bold text-foreground">{t('connectors.sites.title')}</h2>
+          <p className="text-xs text-muted-foreground mt-0.5 mb-3">{t('connectors.sites.note')}</p>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {data.site_profiles.map((site) => (
+              <li key={site.id} className="p-3 border border-border rounded-lg bg-card">
+                <p className="text-xs sm:text-sm font-semibold text-foreground">
+                  {useArabic ? site.name_ar : site.name}
+                </p>
+                <p className="text-xs text-muted-foreground mt-0.5">
+                  {site.city} · {t('connectors.sites.pending')}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
-    </>
+    </div>
   )
 }

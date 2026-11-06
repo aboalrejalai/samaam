@@ -289,13 +289,65 @@
       "history": "Search history",
       "empty": "Nothing searched yet.",
       "forget": "Remove from history"
+    },
+    "corpus": {
+      "title": "The corpus",
+      "records": "Regulatory records",
+      "verified": "Verified",
+      "sources": "Source passages",
+      "gaps": "Documented gaps"
     }
   },
   "gaps": {
     "finding": "What was found",
     "implication": "What it costs Samaam",
     "recommendation": "Recommendation to the regulator",
-    "lead": "Each gap rests on a documented absence of text, not on an assumption."
+    "lead": "Each gap rests on a documented absence of text, not on an assumption.",
+    "columns": {
+      "gap": "Gap",
+      "finding": "What was found",
+      "implication": "What it costs Samaam",
+      "recommendation": "Recommendation to the regulator"
+    },
+    "note": "Each gap rests on a documented absence of text, not on an assumption.",
+    "items": {
+      "GAP-01": {
+        "title": "Contrast thresholds exist. The gap moved to whether they bind.",
+        "finding": "The 2021 Ministry of Health protocol states the eGFR < 30 threshold, the metformin categories and the risk bands, but it is practice guidance. No text was found making it binding as the dose levels are.",
+        "implication": "Samaam cites a Saudi national protocol, and never presents it as a prohibition. It holds until an authorised person decides.",
+        "recommendation": "A decision linking the Ministry's radiology protocols to enforcement and accountability, as Royal Decree 60057 did for the reference levels."
+      },
+      "GAP-02": {
+        "title": "Liability when a tired technologist accepts an automated recommendation",
+        "finding": "SFDA requires studying human-computer interaction (MDS-G010) and human review safeguards (MDS-G027). No text says who carries responsibility when harm occurs.",
+        "implication": "The strongest gap in the project: a documented legislative void.",
+        "recommendation": "A text dividing responsibility between manufacturer, facility, technologist and consultant, with a documented digital signature before any safety alert is overridden."
+      },
+      "GAP-03": {
+        "title": "Reference levels bind, with no real-time enforcement",
+        "finding": "Royal Decree 60057 and Health Council Resolution 3/88 bind providers. MDS-G008 requires automatic dose recording and periodic reports to SFDA by email.",
+        "implication": "Enforcement is retrospective. It finds the breach after the patient was exposed.",
+        "recommendation": "Require radiology systems to check the reference level before imaging starts, not after. This is what Samaam provides."
+      },
+      "GAP-04": {
+        "title": "No cumulative dose ceiling for oncology patients",
+        "finding": "Reference levels are set per examination. No Saudi text sets a cumulative limit for patients imaged repeatedly in oncology follow-up.",
+        "implication": "Justification is applied scan by scan and does not see the patient's whole journey.",
+        "recommendation": "Require cumulative dose tracking across facilities in the unified health record."
+      },
+      "GAP-05": {
+        "title": "Device control is regulated more than clinical accountability",
+        "finding": "SFDA Rule 10 places software affecting radiology devices in class C. No text requires a physician's confirmation before kVp, mAs or contrast dose change, or records liability when alerts are ignored.",
+        "implication": "Samaam's registration path is clear. The operational governance layer is what is missing.",
+        "recommendation": "A regulation requiring every override to be recorded and tied to the identity of the authoriser."
+      },
+      "GAP-06": {
+        "title": "Data law is not medical-error law",
+        "finding": "The PDPL implementing regulation covers transparency of automated decisions. It does not say whether clinical judgement may be delegated to an automated system, or who pays compensation.",
+        "implication": "Relying on the PDPL alone to justify a medical system's safety is a method error.",
+        "recommendation": "An explicit link between the data protection law and the health professions regulations."
+      }
+    }
   },
   "audit": {
     "at": "Time",
@@ -312,6 +364,21 @@
       "OVERRIDE_REFUSED": "Override refused",
       "SECURITY_OVERRIDE": "Hard security block",
       "DATA_ACCESS_GRANTED": "Data access granted"
+    },
+    "filters": {
+      "all": "All events",
+      "overrides": "Overrides",
+      "security": "Security",
+      "worklist": "Worklist"
+    },
+    "detail": {
+      "title": "Selected event",
+      "selectPrompt": "Select an event to view details.",
+      "namedBy": "Named by",
+      "riskAccepted": "Risk accepted by name",
+      "reason": "Reason",
+      "failedChecks": "Failed checks",
+      "noDetail": "No additional details recorded."
     }
   },
   "readiness": {
@@ -320,7 +387,8 @@
     "metrics": "metrics",
     "ours": "Samaam maps here",
     "version": "Framework version {{v}}",
-    "lead": "The official ITU framework, unmodified. The three highlighted dimensions are the ones this gateway carries evidence for."
+    "lead": "The official ITU framework, unmodified. The three highlighted dimensions are the ones this gateway carries evidence for.",
+    "summary": "Framework {{v}} · {{factors}} factors · {{dimensions}} dimensions · {{metrics}} metrics"
   },
   "action": {
     "PROCEED": "Proceed",
@@ -405,7 +473,7 @@
       "fhir": "Read-only. Pulls the patient and their latest serum creatinine. The name, contact and address fields are never read.",
       "mwl": "Samaam answers the scanner’s C-FIND itself. Every entry is evaluated first: a blocked study is not served, so it never appears in the worklist — and both outcomes are written to the audit trail.",
       "modality": "Filled in by the first query that reaches the server, not typed by hand.",
-      "injector": "Volume, flow rate and iodine load are enforced by the policy node."
+      "injector": "Shown on the console with the request. Nothing is sent to it while the request is held."
     },
     "states": {
       "running": "Running",
@@ -428,7 +496,8 @@
       "daysOld": "{{count}} days old",
       "demographics": "Sex {{sex}} · age {{age}} · eGFR is computed downstream, never imported.",
       "withheld": "Present on the FHIR record and deliberately not read: {{fields}}.",
-      "openInConsole": "Open in the console"
+      "openInConsole": "Open in the console",
+      "prompt": "A live FHIR read from the configured server. Nothing is written back."
     },
     "sites": {
       "title": "Deployment profiles",

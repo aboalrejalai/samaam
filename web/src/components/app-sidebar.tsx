@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react'
 import { Direction } from 'radix-ui'
 import { useTranslation } from 'react-i18next'
-import { Link, useLocation } from 'react-router'
+import { Link } from 'react-router'
 import { BrandMark } from '@/components/BrandMark'
 import { ConnectionIndicator } from '@/components/ConnectionIndicator'
 import { NavMain } from '@/components/nav-main'
-import { KbSidebar } from '@/components/kb/KbSidebar'
 import {
   Sidebar,
   SidebarContent,
@@ -16,7 +14,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar'
-import { APP_BASE, NAV_ROUTES } from '@/lib/routes'
+import { NAV_ROUTES } from '@/lib/routes'
 
 /**
  * Adapted from the `sidebar-07` block: collapse-to-icon behaviour and the rail
@@ -27,12 +25,6 @@ import { APP_BASE, NAV_ROUTES } from '@/lib/routes'
  * group is gone.
  */
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { pathname } = useLocation()
-  const onKb = pathname.startsWith(`${APP_BASE}/kb`)
-  // Back swaps the panel for the nav without navigating, so the rest of the
-  // system stays reachable without losing the search. Leaving /kb resets it.
-  const [navShown, setNavShown] = useState(false)
-  useEffect(() => { if (!onKb) setNavShown(false) }, [onKb])
   const { t } = useTranslation()
   const direction = Direction.useDirection()
 
@@ -66,11 +58,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        {onKb && !navShown ? (
-          <KbSidebar onBack={() => setNavShown(true)} />
-        ) : (
-          <NavMain label={t('nav.group')} items={NAV_ROUTES} />
-        )}
+        <NavMain label={t('nav.group')} items={NAV_ROUTES} />
       </SidebarContent>
 
       <SidebarFooter>

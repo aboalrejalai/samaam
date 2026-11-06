@@ -104,19 +104,29 @@
 
     
     :root {
-      --background: oklch(0.99 0.002 95);
-      --foreground: oklch(0.22 0.02 255);
-      --card: oklch(1 0 0);
-      --muted: oklch(0.96 0.005 95);
-      --muted-foreground: oklch(0.45 0.02 255);
-      --border: oklch(0.88 0.01 255);
-      --primary: oklch(0.45 0.12 250);
-      --primary-strong: oklch(0.38 0.14 250);
-      --primary-foreground: oklch(0.99 0 0);
-      --danger: oklch(0.55 0.2 25);
-      --danger-strong: oklch(0.45 0.2 25);
-      --success-strong: oklch(0.42 0.12 150);
-      --warn-strong: oklch(0.55 0.14 75);
+      --sa-50: #eff6ff;
+      --sa-100: #dbeafe;
+      --sa-600: #1d4ed8;
+      --sa-700: #1e40af;
+      --sa-800: #1e3a8a;
+      --background: #fcfcfd;
+      --foreground: #0d121c;
+      --card: #ffffff;
+      --muted: #f3f4f6;
+      --muted-foreground: #4d5761;
+      --border: #e5e7eb;
+      --primary: #1d4ed8;
+      --primary-hover: #1e40af;
+      --primary-strong: #1e40af;
+      --primary-foreground: #ffffff;
+      --primary-subtle: #eff6ff;
+      --danger: #d92d20;
+      --danger-strong: #b42318;
+      --success-strong: #067647;
+      --warn-strong: #b54708;
+      --warning-bg: #fffaeb;
+      --warning-line: #fedf89;
+      --contrast-liquid: #c8962e;
       --radius: 0.625rem;
       --font: "IBM Plex Sans Arabic", system-ui, sans-serif;
       --chrome-h: 3.5rem;
@@ -260,29 +270,29 @@
       gap: clamp(1.25rem, 3vw, 2.5rem); align-items: center;
     }
     .pipeline {
-      display: flex; flex-direction: column; border: 1px solid var(--border);
-      border-radius: var(--radius); overflow: hidden; background: var(--card);
+      display: grid; grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 6px; border: none; background: transparent;
     }
     .node {
-      display: grid; grid-template-columns: 3.25rem 1fr; align-items: center;
-      gap: 0.85rem; padding: 0.55rem 0.9rem; border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 0.5rem 0.65rem; border-radius: 8px; background: var(--muted);
+      min-width: 0; border: 1px solid transparent;
     }
-    .node:last-child { border-bottom: none; }
     .node .sym {
-      font-weight: 600; font-size: 0.85rem; font-variant-numeric: tabular-nums;
-      letter-spacing: 0.04em; color: var(--muted-foreground);
+      font-weight: 700; font-size: 0.82rem; font-variant-numeric: tabular-nums;
+      color: var(--foreground);
     }
-    .node .lbl { font-size: 0.88rem; font-weight: 500; }
-    .node .sub { font-size: 0.72rem; color: var(--muted-foreground); margin-top: 0.1rem; }
+    .node .lbl { font-size: 0.78rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .node .sub { font-size: 0.68rem; color: var(--muted-foreground); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .node.p-node {
-      background: color-mix(in oklch, var(--danger) 8%, white);
-      border-block: 1px solid color-mix(in oklch, var(--danger) 35%, var(--border));
+      background: var(--primary); border-color: var(--primary);
     }
-    .node.p-node .sym { color: var(--danger-strong); font-weight: 700; }
-    .node.p-node .lbl { font-weight: 700; }
+    .node.p-node .sym, .node.p-node .lbl, .node.p-node .sub, .node.p-node .valve-closed {
+      color: var(--primary-foreground);
+    }
     .valve-closed {
       display: inline-flex; margin-inline-start: 0.5rem; font-size: 0.68rem;
-      font-weight: 600; color: var(--danger-strong); letter-spacing: 0.06em;
+      font-weight: 600; color: var(--primary-foreground); letter-spacing: 0.06em;
       text-transform: uppercase;
     }
     body.lang-ar .valve-closed { letter-spacing: 0; text-transform: none; }
@@ -501,11 +511,11 @@
 <body class="mode-slides lang-en">
   <header class="top-chrome">
     <a class="brand" href="#slides/1" id="brand-home">
-      <span class="mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none">
-          <path d="M12 3v6m0 6v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <circle cx="12" cy="12" r="3.4" stroke="currentColor" stroke-width="2"/>
-          <path d="M5 12h3.6m6.8 0H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <span class="mark" aria-hidden="true" style="background:transparent;width:auto;height:auto">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true" style="width:30px;height:30px;display:block">
+          <path style="fill:var(--primary)" d="M42 4C54 4 62 17 62 32C62 47 54 60 42 60C33 60 27 54 27 47C27 41 36 39 36 32C36 25 27 23 27 17C27 10 33 4 42 4Z"></path>
+          <rect style="fill:var(--primary)" x="22" y="21" width="6.5" height="22" rx="3.25"></rect>
+          <path style="fill:#c8962e" d="M9 19C9 19 17 29 17 35A8 8 0 0 1 1 35C1 29 9 19 9 19Z"></path>
         </svg>
       </span>
       <span class="brand-text">
@@ -540,9 +550,9 @@
     <!-- SLIDE 1 -->
     <section class="slide active" data-slide="1" aria-label="Slide 1">
       <div class="body">
-        <div class="split">
+        <p class="eyebrow"><span class="t en">Use case · Health / Radiology</span><span class="t ar">حالة الاستخدام · الصحة / الأشعة</span></p>
+        <div class="split" style="align-items:center;margin-bottom:0.75rem">
           <div>
-            <p class="eyebrow"><span class="t en">Use case · Health / Radiology</span><span class="t ar">حالة الاستخدام · الصحة / الأشعة</span></p>
             <h1>
               <span class="t en">A policy gate between the screen and the CT scanner.</span>
               <span class="t ar">بوابة سياسات بين الشاشة وجهاز الأشعة المقطعية.</span>
@@ -556,16 +566,19 @@
               <span class="t ar">نموذج الذكاء الاصطناعي يكتب الشرح النصي <em>بعد</em> القرار. عقدة <code>P</code> وحدها توقف التصوير. احذف النموذج؛ التوقيف يبقى.</span>
             </div>
           </div>
-          <div>
-            <div class="pipeline" aria-label="ITU-T Y.3172 pipeline">
-              <div class="node"><span class="sym">SRC</span><div><div class="lbl"><span class="t en">Source</span><span class="t ar">المصدر</span></div><div class="sub"><span class="t en">Saudi rules · fake patient data · scanner settings</span><span class="t ar">قواعد سعودية · بيانات مريض محاكاة · إعدادات الجهاز</span></div></div></div>
-              <div class="node"><span class="sym">C</span><div><div class="lbl"><span class="t en">Collector</span><span class="t ar">المجمّع</span></div><div class="sub"><span class="t en">HL7 FHIR R4 (read only) · DICOM work list</span><span class="t ar">HL7 FHIR R4 (قراءة فقط) · قائمة عمل DICOM</span></div></div></div>
-              <div class="node"><span class="sym">PP</span><div><div class="lbl"><span class="t en">Preprocessor</span><span class="t ar">المعالج الأولي</span></div><div class="sub"><span class="t en">PDPL Art. 23: drop name/ID · compute eGFR · local search</span><span class="t ar">PDPL م 23: حذف الاسم/الهوية · حساب eGFR · بحث محلي</span></div></div></div>
-              <div class="node"><span class="sym">M</span><div><div class="lbl"><span class="t en">Model</span><span class="t ar">النموذج</span></div><div class="sub"><span class="t en">Search + optional text — never decides the stop</span><span class="t ar">بحث + نص اختياري — لا يقرّر التوقيف</span></div></div></div>
-              <div class="node p-node"><span class="sym">P</span><div><div class="lbl"><span class="t en">Policy node</span><span class="t ar">عقدة السياسات</span> <span class="valve-closed"><span class="t en">valve shut</span><span class="t ar">الصمام مغلق</span></span></div><div class="sub"><span class="t en">Fixed rules · six results · cites by record id</span><span class="t ar">قواعد ثابتة · ست نتائج · استشهاد بالمعرّف</span></div></div></div>
-              <div class="node"><span class="sym">D</span><div><div class="lbl"><span class="t en">Distributor</span><span class="t ar">الموزّع</span></div><div class="sub"><span class="t en">Who said it · section · direct URL · audit log</span><span class="t ar">الجهة · القسم · رابط مباشر · سجل التدقيق</span></div></div></div>
-              <div class="node"><span class="sym">SINK</span><div><div class="lbl"><span class="t en">Sink</span><span class="t ar">المصارف</span></div><div class="sub"><span class="t en">Operator screen · fake device API — 200 or 403</span><span class="t ar">شاشة المشغّل · واجهة جهاز وهمية — 200 أو 403</span></div></div></div>
-            </div>
+          <div style="display:flex;align-items:center;justify-content:center">
+            <img src="../web/public/models/valve.webp" alt="The Samaam valve closed on the contrast line." style="max-width:100%;max-height:220px;width:auto;height:auto;object-contain:contain;margin-inline:auto;display:block" />
+          </div>
+        </div>
+        <div>
+          <div class="pipeline" aria-label="ITU-T Y.3172 pipeline">
+            <div class="node"><span class="sym">SRC</span><div><div class="lbl"><span class="t en">Source</span><span class="t ar">المصدر</span></div><div class="sub"><span class="t en">Saudi rules · fake patient data · scanner settings</span><span class="t ar">قواعد سعودية · بيانات مريض محاكاة · إعدادات الجهاز</span></div></div></div>
+            <div class="node"><span class="sym">C</span><div><div class="lbl"><span class="t en">Collector</span><span class="t ar">المجمّع</span></div><div class="sub"><span class="t en">HL7 FHIR R4 (read only) · DICOM work list</span><span class="t ar">HL7 FHIR R4 (قراءة فقط) · قائمة عمل DICOM</span></div></div></div>
+            <div class="node"><span class="sym">PP</span><div><div class="lbl"><span class="t en">Preprocessor</span><span class="t ar">المعالج الأولي</span></div><div class="sub"><span class="t en">PDPL Art. 23: drop name/ID · compute eGFR · local search</span><span class="t ar">PDPL م 23: حذف الاسم/الهوية · حساب eGFR · بحث محلي</span></div></div></div>
+            <div class="node"><span class="sym">M</span><div><div class="lbl"><span class="t en">Model</span><span class="t ar">النموذج</span></div><div class="sub"><span class="t en">Search + optional text — never decides the stop</span><span class="t ar">بحث + نص اختياري — لا يقرّر التوقيف</span></div></div></div>
+            <div class="node p-node"><span class="sym">P</span><div><div class="lbl"><span class="t en">Policy node</span><span class="t ar">عقدة السياسات</span> <span class="valve-closed"><span class="t en">valve shut</span><span class="t ar">الصمام مغلق</span></span></div><div class="sub"><span class="t en">Fixed rules · six results · cites by record id</span><span class="t ar">قواعد ثابتة · ست نتائج · استشهاد بالمعرّف</span></div></div></div>
+            <div class="node"><span class="sym">D</span><div><div class="lbl"><span class="t en">Distributor</span><span class="t ar">الموزّع</span></div><div class="sub"><span class="t en">Who said it · section · direct URL · audit log</span><span class="t ar">الجهة · القسم · رابط مباشر · سجل التدقيق</span></div></div></div>
+            <div class="node"><span class="sym">SINK</span><div><div class="lbl"><span class="t en">Sink</span><span class="t ar">المصارف</span></div><div class="sub"><span class="t en">Operator screen · fake device API — 200 or 403</span><span class="t ar">شاشة المشغّل · واجهة جهاز وهمية — 200 أو 403</span></div></div></div>
           </div>
         </div>
       </div>

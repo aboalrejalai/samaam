@@ -97,6 +97,7 @@ export interface KbRecord {
   note?: string
   /** How the chunk entered the corpus: a curated record, a gap, or PDF text. */
   kind?: 'record' | 'gap' | 'source_chunk'
+  basis?: Basis | null
 }
 
 export interface KbSearchHit extends KbRecord {
@@ -297,6 +298,24 @@ export const AUDIT_EVENTS = [
 ] as const
 export type AuditEvent = (typeof AUDIT_EVENTS)[number]
 
+export interface AuditDetailRisk {
+  rule: string
+  status?: CheckStatus
+  detail?: string
+  basis?: Basis | null
+  action?: Action
+  cites?: string[]
+}
+
+export interface AuditDetail {
+  accepted_risk?: AuditDetailRisk[]
+  failed?: string[]
+  reason?: string
+  action?: string
+  via?: string
+  [key: string]: unknown
+}
+
 export interface AuditEntry {
   at: string
   /** Widened past AuditEvent: the server may log events this build predates. */
@@ -304,7 +323,7 @@ export interface AuditEntry {
   worklist_id: string | null
   verdict: Verdict | string
   actor: string
-  detail: Record<string, unknown>
+  detail: AuditDetail
 }
 
 /* ── Scenarios ──────────────────────────────────────────────────────── */
