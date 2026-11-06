@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Samaam knowledge base</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="samaam.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inconsolata:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit}a:hover{color:inherit}
+.hit{display:flex;flex-direction:column;gap:6px;padding:16px 20px}
+.sug{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--border);background:var(--card);font-size:13px}
+.sug:hover{background:var(--muted)}
+.bar{height:6px;border-radius:999px;background:var(--muted);overflow:hidden;width:72px}
+.bar span{display:block;height:100%;background:var(--primary)}
+</style>
+</helmet>
+<div class="page">
+<svg class="sprite" aria-hidden="true"><defs>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+<symbol id="i-lib" viewBox="0 0 24 24"><path d="M16 6l4 14M12 6v14M8 8v12M4 4v16"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+<symbol id="i-scroll" viewBox="0 0 24 24"><path d="M15 12h-5M15 8h-5M19 17V5a2 2 0 0 0-2-2H4M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 14l4-4M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+<symbol id="i-pres" viewBox="0 0 24 24"><path d="M2 3h20M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3M7 21l5-5 5 5"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+<symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2M8.5 2h7M7 16h10"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+<symbol id="i-ok" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.34-4.34"/></symbol>
+</defs></svg>
+
+<div class="shell">
+  <aside class="sidebar" data-id="sidebar">
+    <a href="Main.dc.html" class="brand" aria-label="Samaam home">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path class="bm-blue" d="M42 4C54 4 62 17 62 32C62 47 54 60 42 60C33 60 27 54 27 47C27 41 36 39 36 32C36 25 27 23 27 17C27 10 33 4 42 4Z"></path><rect class="bm-blue" x="22" y="21" width="6.5" height="22" rx="3.25"></rect><path class="bm-amber" d="M9 19C9 19 17 29 17 35A8 8 0 0 1 1 35C1 29 9 19 9 19Z"></path></svg>
+      <span><span class="brand-name" lang="ar" style="display:block">صِمَام</span><span class="brand-latin" style="display:block">SAMAAM</span></span>
+    </a>
+    <p class="nav-group">Gateway</p>
+    <nav class="nav" aria-label="System">
+      <a href="Console-A.dc.html"><svg class="i i-20"><use href="#i-scan"></use></svg>Console</a>
+      <a href="Data-A.dc.html"><svg class="i i-20"><use href="#i-db"></use></svg>Data request</a>
+      <a href="Connectors.dc.html"><svg class="i i-20"><use href="#i-plug"></use></svg>Connectors</a>
+      <a href="Knowledge-Base.dc.html" class="on"><svg class="i i-20"><use href="#i-lib"></use></svg>Knowledge base</a>
+      <a href="Gaps.dc.html"><svg class="i i-20"><use href="#i-grid"></use></svg>Gap matrix</a>
+      <a href="Audit.dc.html"><svg class="i i-20"><use href="#i-scroll"></use></svg>Audit trail</a>
+      <a href="Readiness.dc.html"><svg class="i i-20"><use href="#i-gauge"></use></svg>Readiness</a>
+      <a href="Slides.dc.html"><svg class="i i-20"><use href="#i-pres"></use></svg>Slides</a>
+      <a href="About.dc.html"><svg class="i i-20"><use href="#i-award"></use></svg>Team &amp; award</a>
+    </nav>
+    <div class="sidebar-foot micro muted" data-id="sidebar.status">
+      <span style="display:flex;align-items:center;gap:8px"><span class="status-dot"></span>Service connected</span>
+      <span class="mono">45 · 6 · 1338</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar" data-id="topbar">
+      <button type="button" class="icon-btn" style="border:0" aria-label="Toggle sidebar"><svg class="i i-20"><use href="#i-panel"></use></svg></button>
+      <div class="notice"><svg class="i" style="width:14px;height:14px;color:var(--warning-strong)"><use href="#i-flask"></use></svg><span class="ar" lang="ar" dir="rtl">بيانات محاكاة لأغراض الهاكاثون فقط</span><span class="muted">Synthetic data, hackathon use only</span></div>
+      <a href="About.dc.html" class="chip chip-gold"><svg class="i" style="width:14px;height:14px"><use href="#i-trophy"></use></svg>3rd Prize · ITU</a>
+      <button type="button" class="icon-btn" aria-label="Switch to Arabic" lang="ar">ع</button>
+    </header>
+
+    <div class="content">
+      <section class="card" style="padding:24px;background:linear-gradient(90deg,var(--sa-50),var(--card) 75%);display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:24px;align-items:center;overflow:hidden" aria-label="Search" data-id="search">
+        <div style="display:flex;flex-direction:column;gap:14px;min-width:0">
+          <div>
+            <h1 class="page-title">Knowledge base</h1>
+            <p class="muted">Semantic retrieval over the verified Saudi regulatory corpus.</p>
+          </div>
+          <form style="display:flex;gap:8px" data-id="search.form">
+            <div style="position:relative;flex:1;min-width:0">
+              <svg class="i muted" style="position:absolute;top:14px;inset-inline-start:12px"><use href="#i-search"></use></svg>
+              <input class="input" aria-label="Search the knowledge base" style="height:44px;padding-inline-start:36px;font-size:15px" value="Is iodinated contrast forbidden when eGFR is below 30?">
+            </div>
+            <button type="button" class="btn btn-primary">Search</button>
+          </form>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center" data-id="search.filters">
+            <span class="micro muted">Search in</span>
+            <button type="button" class="sug" style="background:var(--primary);color:var(--primary-foreground);border-color:var(--primary)">Regulatory records</button>
+            <button type="button" class="sug">Source documents</button>
+            <button type="button" class="sug">Policy gaps</button>
+            <span style="display:inline-flex;align-items:center;gap:8px;margin-inline-start:auto" class="small"><span class="switch on" role="img" aria-label="On"></span>Verified records only</span>
+          </div>
+        </div>
+        <img src="/_blob/26b4af497bd14e72b117eca14c34acf3" alt="A vial of iodinated contrast medium." style="height:220px;width:auto;margin-inline:auto" data-id="search.vial">
+      </section>
+
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,320px);gap:20px;align-items:start" data-id="grid">
+        <div style="display:flex;flex-direction:column;gap:12px;min-width:0" data-id="results">
+          <p class="small muted">3 results · Retrieval, not conversation. No context is carried between queries.</p>
+
+          <article class="card hit" data-id="hit.prophylaxis">
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px">
+              <span class="mono small strong">MOH-CM-PROPHYLAXIS</span>
+              <span class="basis basis-protocol">NATIONAL_PROTOCOL</span>
+              <span style="margin-inline-start:auto;display:inline-flex;align-items:center;gap:8px" data-placeholder="true"><span class="bar"><span style="width:88%"></span></span><span class="mono micro muted">0.88 match</span></span>
+              <span class="chip chip-ok"><svg class="i" style="width:13px;height:13px"><use href="#i-ok"></use></svg>VERIFIED</span>
+            </div>
+            <h2 class="strong" style="font-size:15px;line-height:22px">Protocols on the Safe Use of Contrast Media in Radiology Departments</h2>
+            <p class="micro muted">Saudi Ministry of Health · Section 5.2, Prophylaxis, p. 22</p>
+            <p class="small">Patients eligible for prophylaxis include those with AKI or an eGFR &lt; 30 mL/min/1.73 m2 who are not subjected to maintenance dialysis. Prophylaxis is not indicated for the general population of patients with stable eGFR &gt;= 30 mL/min/1.73 m2.</p>
+            <a href="https://www.moh.gov.sa/en/Ministry/MediaCenter/Publications/Documents/Protocols-of-CM.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--primary);word-break:break-all">moh.gov.sa · Protocols-of-CM.pdf<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a>
+          </article>
+
+          <article class="card hit" data-id="hit.metformin">
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px">
+              <span class="mono small strong">MOH-CM-METFORMIN</span>
+              <span class="basis basis-protocol">NATIONAL_PROTOCOL</span>
+              <span style="margin-inline-start:auto;display:inline-flex;align-items:center;gap:8px" data-placeholder="true"><span class="bar"><span style="width:83%"></span></span><span class="mono micro muted">0.83 match</span></span>
+              <span class="chip chip-ok"><svg class="i" style="width:13px;height:13px"><use href="#i-ok"></use></svg>VERIFIED</span>
+            </div>
+            <h2 class="strong" style="font-size:15px;line-height:22px">Protocols on the Safe Use of Contrast Media in Radiology Departments</h2>
+            <p class="micro muted">Saudi Ministry of Health · Section 5.3, Metformin, p. 28</p>
+            <p class="small">Category II: In patients with AKI or severe CKD (eGFR &lt; 30 mL/min/1.73m2), metformin should be stopped at the time of (or prior to) the exam and suspended for 48 hours following the exam.</p>
+            <a href="https://www.moh.gov.sa/en/Ministry/MediaCenter/Publications/Documents/Protocols-of-CM.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--primary);word-break:break-all">moh.gov.sa · Protocols-of-CM.pdf<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a>
+          </article>
+
+          <article class="card hit" data-id="hit.drl">
+            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px">
+              <span class="mono small strong">SFDA-MDS-G008-DRL</span>
+              <span class="basis basis-law">STATUTORY</span>
+              <span style="margin-inline-start:auto;display:inline-flex;align-items:center;gap:8px" data-placeholder="true"><span class="bar"><span style="width:71%"></span></span><span class="mono micro muted">0.71 match</span></span>
+              <span class="chip chip-ok"><svg class="i" style="width:13px;height:13px"><use href="#i-ok"></use></svg>VERIFIED</span>
+            </div>
+            <h2 class="strong" style="font-size:15px;line-height:22px">National Diagnostic Reference Levels (MDS-G008), version 2.0</h2>
+            <p class="micro muted">SFDA · Annex (2), Table 1, p. 7</p>
+            <p class="small">Abdomen and pelvis, CT Abdomen &amp; Pelvis with and without contrast: CTDIvol 14 mGy, DLP 706 mGy-cm.</p>
+            <a href="https://www.sfda.gov.sa/sites/default/files/2023-02/NDRL-En.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--primary);word-break:break-all">sfda.gov.sa · NDRL-En.pdf<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a>
+          </article>
+        </div>
+
+        <aside style="display:flex;flex-direction:column;gap:16px;min-width:0" data-id="side">
+          <section class="card card-pad" aria-label="The corpus" data-id="side.corpus">
+            <p class="card-title" style="margin-bottom:8px">The corpus</p>
+            <dl>
+              <div style="display:flex;justify-content:space-between;gap:12px;padding-block:8px;border-top:1px solid var(--border)"><dt class="small muted">Regulatory records</dt><dd class="mono strong">45</dd></div>
+              <div style="display:flex;justify-content:space-between;gap:12px;padding-block:8px;border-top:1px solid var(--border)"><dt class="small muted">Verified</dt><dd class="mono strong">43</dd></div>
+              <div style="display:flex;justify-content:space-between;gap:12px;padding-block:8px;border-top:1px solid var(--border)"><dt class="small muted">Source passages</dt><dd class="mono strong">1,338</dd></div>
+              <div style="display:flex;justify-content:space-between;gap:12px;padding-block:8px;border-top:1px solid var(--border)"><dt class="small muted">Documented gaps</dt><dd class="mono strong">6</dd></div>
+            </dl>
+            <p class="micro muted" style="margin-top:8px">Unverified records exist but are never cited in a block.</p>
+          </section>
+          <section class="card card-pad" aria-label="Suggested questions" data-id="side.suggest">
+            <p class="card-title" style="margin-bottom:10px">Suggested questions</p>
+            <ul style="display:flex;flex-direction:column;gap:8px">
+              <li><a href="#s" class="small" style="color:var(--primary)">What is the national diagnostic reference level for abdomen and pelvis CT?</a></li>
+              <li><a href="#s" class="small" style="color:var(--primary)">When must metformin be held before iodinated contrast?</a></li>
+              <li><a href="#s" class="small" style="color:var(--primary)">May health patient data be transferred outside the Kingdom?</a></li>
+            </ul>
+          </section>
+          <section class="card card-pad" aria-label="Search history" data-id="side.history">
+            <p class="card-title" style="margin-bottom:6px">Search history</p>
+            <p class="small muted">Nothing searched yet.</p>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1040}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

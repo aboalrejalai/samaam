@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Samaam audit trail</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="samaam.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inconsolata:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit}a:hover{color:inherit}
+.code{display:block;font-family:var(--font-mono);font-size:12px;line-height:16px;color:var(--muted-foreground)}
+.flagged{font-weight:600;color:var(--warning-strong)}
+.pill{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;border:1px solid var(--border);background:var(--card);font-size:13px}
+.pill.on{background:var(--primary);border-color:var(--primary);color:var(--primary-foreground)}
+</style>
+</helmet>
+<div class="page">
+<svg class="sprite" aria-hidden="true"><defs>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+<symbol id="i-lib" viewBox="0 0 24 24"><path d="M16 6l4 14M12 6v14M8 8v12M4 4v16"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+<symbol id="i-scroll" viewBox="0 0 24 24"><path d="M15 12h-5M15 8h-5M19 17V5a2 2 0 0 0-2-2H4M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 14l4-4M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+<symbol id="i-pres" viewBox="0 0 24 24"><path d="M2 3h20M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3M7 21l5-5 5 5"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+<symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2M8.5 2h7M7 16h10"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+</defs></svg>
+
+<div class="shell">
+  <aside class="sidebar" data-id="sidebar">
+    <a href="Main.dc.html" class="brand" aria-label="Samaam home">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path class="bm-blue" d="M42 4C54 4 62 17 62 32C62 47 54 60 42 60C33 60 27 54 27 47C27 41 36 39 36 32C36 25 27 23 27 17C27 10 33 4 42 4Z"></path><rect class="bm-blue" x="22" y="21" width="6.5" height="22" rx="3.25"></rect><path class="bm-amber" d="M9 19C9 19 17 29 17 35A8 8 0 0 1 1 35C1 29 9 19 9 19Z"></path></svg>
+      <span><span class="brand-name" lang="ar" style="display:block">صِمَام</span><span class="brand-latin" style="display:block">SAMAAM</span></span>
+    </a>
+    <p class="nav-group">Gateway</p>
+    <nav class="nav" aria-label="System">
+      <a href="Console-A.dc.html"><svg class="i i-20"><use href="#i-scan"></use></svg>Console</a>
+      <a href="Data-A.dc.html"><svg class="i i-20"><use href="#i-db"></use></svg>Data request</a>
+      <a href="Connectors.dc.html"><svg class="i i-20"><use href="#i-plug"></use></svg>Connectors</a>
+      <a href="Knowledge-Base.dc.html"><svg class="i i-20"><use href="#i-lib"></use></svg>Knowledge base</a>
+      <a href="Gaps.dc.html"><svg class="i i-20"><use href="#i-grid"></use></svg>Gap matrix</a>
+      <a href="Audit.dc.html" class="on"><svg class="i i-20"><use href="#i-scroll"></use></svg>Audit trail</a>
+      <a href="Readiness.dc.html"><svg class="i i-20"><use href="#i-gauge"></use></svg>Readiness</a>
+      <a href="Slides.dc.html"><svg class="i i-20"><use href="#i-pres"></use></svg>Slides</a>
+      <a href="About.dc.html"><svg class="i i-20"><use href="#i-award"></use></svg>Team &amp; award</a>
+    </nav>
+    <div class="sidebar-foot micro muted" data-id="sidebar.status">
+      <span style="display:flex;align-items:center;gap:8px"><span class="status-dot"></span>Service connected</span>
+      <span class="mono">45 · 6 · 1338</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar" data-id="topbar">
+      <button type="button" class="icon-btn" style="border:0" aria-label="Toggle sidebar"><svg class="i i-20"><use href="#i-panel"></use></svg></button>
+      <div class="notice"><svg class="i" style="width:14px;height:14px;color:var(--warning-strong)"><use href="#i-flask"></use></svg><span class="ar" lang="ar" dir="rtl">بيانات محاكاة لأغراض الهاكاثون فقط</span><span class="muted">Synthetic data, hackathon use only</span></div>
+      <a href="About.dc.html" class="chip chip-gold"><svg class="i" style="width:14px;height:14px"><use href="#i-trophy"></use></svg>3rd Prize · ITU</a>
+      <button type="button" class="icon-btn" aria-label="Switch to Arabic" lang="ar">ع</button>
+    </header>
+
+    <div class="content">
+      <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px" data-id="head">
+        <div>
+          <h1 class="page-title">Audit trail</h1>
+          <p class="muted">Every decision, attributed and dated. What turns an override from an anonymous act into a named decision.</p>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px" data-id="head.filters">
+          <button type="button" class="pill on">All events</button>
+          <button type="button" class="pill">Overrides</button>
+          <button type="button" class="pill">Security</button>
+          <button type="button" class="pill">Worklist</button>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(290px,320px);gap:20px;align-items:start" data-id="grid">
+        <section class="card" style="overflow:hidden;min-width:0" aria-label="Events" data-id="table">
+          <div style="overflow-x:auto">
+            <table class="tbl" style="min-width:700px">
+              <thead><tr><th>Time</th><th>Event</th><th>Worklist</th><th>Verdict</th><th>Actor</th></tr></thead>
+              <tbody data-placeholder="true">
+                <tr><td class="mono micro">2026-11-07 09:41:18</td><td>Released to the device<span class="code">EXECUTED</span></td><td class="mono micro">MWL-SC-01</td><td class="mono micro">COMPLIANT</td><td class="small">system</td></tr>
+                <tr><td class="mono micro">2026-11-07 09:42:03</td><td>Withheld by the policy node<span class="code">BLOCKED</span></td><td class="mono micro">MWL-SC-02</td><td class="mono micro">VIOLATION</td><td class="small">system</td></tr>
+                <tr class="flag"><td class="mono micro">2026-11-07 09:44:27</td><td><span class="flagged">Released under override</span><span class="code">EXECUTED_UNDER_OVERRIDE</span></td><td class="mono micro">MWL-SC-02</td><td class="mono micro">VIOLATION</td><td class="small strong">Dr. A. Alharbi, Consultant Radiologist</td></tr>
+                <tr class="flag"><td class="mono micro">2026-11-07 09:46:52</td><td><span class="flagged">Hard security block</span><span class="code">SECURITY_OVERRIDE</span></td><td class="mono micro">DATA-REQ-UI</td><td class="mono micro">VIOLATION</td><td class="small">integration service account</td></tr>
+                <tr class="flag"><td class="mono micro">2026-11-07 09:46:52</td><td><span class="flagged">Override refused</span><span class="code">OVERRIDE_REFUSED</span></td><td class="mono micro">DATA-REQ-UI</td><td class="mono micro">VIOLATION</td><td class="small strong">Dr. A. Alharbi, Consultant Radiologist</td></tr>
+                <tr><td class="mono micro">2026-11-07 09:48:10</td><td><span class="code" style="font-size:13px;color:var(--foreground)">MWL_WITHHELD</span></td><td class="mono micro">MWL-SC-02</td><td class="mono micro">VIOLATION</td><td class="small">system</td></tr>
+                <tr><td class="mono micro">2026-11-07 09:48:10</td><td><span class="code" style="font-size:13px;color:var(--foreground)">MWL_SERVED</span></td><td class="mono micro">MWL-SC-01</td><td class="mono micro">COMPLIANT</td><td class="small">system</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <aside class="card card-pad" style="display:flex;flex-direction:column;gap:12px" aria-label="Selected event" data-id="detail">
+          <div class="section-head" style="margin:0"><p class="card-title">Release under override</p><span class="chip chip-warn mono">MWL-SC-02</span></div>
+          <img src="/_blob/ff0669040f0dfac6c5b5c1d4d1232cc5" alt="The patient's injured kidney." style="width:128px;margin-inline:auto" data-id="detail.kidney">
+          <div>
+            <p class="micro muted">Named by</p>
+            <p class="strong">Dr. A. Alharbi, Consultant Radiologist</p>
+          </div>
+          <div style="padding-top:10px;border-top:1px solid var(--border)">
+            <p class="micro muted" style="margin-bottom:6px">Risk accepted by name</p>
+            <ul style="display:flex;flex-direction:column;gap:6px">
+              <li style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="mono micro">national_drl</span><span class="basis basis-law">STATUTORY</span></li>
+              <li style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="mono micro">renal_prophylaxis</span><span class="basis basis-protocol">NATIONAL_PROTOCOL</span></li>
+              <li style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="mono micro">metformin</span><span class="basis basis-protocol">NATIONAL_PROTOCOL</span></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":730}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

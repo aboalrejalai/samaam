@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8">
+<title>Samaam console, Scan Suite</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="samaam.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inconsolata:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0f1724}
+a{color:inherit}a:hover{color:inherit}
+.suite{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1.5fr) minmax(0,.8fr) minmax(0,1.25fr);gap:0;align-items:stretch;border:1px solid var(--border);border-radius:var(--radius-2xl);background:var(--gray-0);overflow:hidden}
+.bay{display:flex;flex-direction:column;gap:8px;padding:16px;min-width:0;border-inline-start:1px solid var(--border)}
+.bay:first-child{border-inline-start:0}
+.bay-title{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px;line-height:20px;font-weight:600}
+.bay-img{flex:1;display:flex;align-items:center;justify-content:center;min-height:210px}
+.bay-img img{max-height:210px;width:auto;object-fit:contain}
+.read{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;font-size:13px;line-height:20px}
+.read dt{color:var(--muted-foreground)}
+.read dd{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:end}
+.breach{color:var(--destructive-strong);font-weight:600}
+</style>
+</helmet>
+<div class="page dark">
+<svg class="sprite" aria-hidden="true"><defs>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+<symbol id="i-lib" viewBox="0 0 24 24"><path d="M16 6l4 14M12 6v14M8 8v12M4 4v16"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+<symbol id="i-scroll" viewBox="0 0 24 24"><path d="M15 12h-5M15 8h-5M19 17V5a2 2 0 0 0-2-2H4M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 14l4-4M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+<symbol id="i-pres" viewBox="0 0 24 24"><path d="M2 3h20M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3M7 21l5-5 5 5"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2M8.5 2h7M7 16h10"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-xc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+</defs></svg>
+
+<div class="shell">
+  <nav class="rail" aria-label="System" data-id="rail">
+    <a href="#console" aria-label="Samaam home" style="margin-bottom:8px"><svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" style="fill:var(--primary)"></rect><g style="fill:none;stroke:#0b1220;stroke-width:2;stroke-linecap:round"><path d="M12 4v5.2M12 14.8V20"></path><circle cx="12" cy="12" r="3.2"></circle><path d="M4.6 12h3.4M16 12h3.4"></path></g></svg></a>
+    <a href="#console" class="on" aria-label="Console"><svg class="i i-20"><use href="#i-scan"></use></svg></a>
+    <a href="#d" aria-label="Data request"><svg class="i i-20"><use href="#i-db"></use></svg></a>
+    <a href="#c" aria-label="Connectors"><svg class="i i-20"><use href="#i-plug"></use></svg></a>
+    <a href="#k" aria-label="Knowledge base"><svg class="i i-20"><use href="#i-lib"></use></svg></a>
+    <a href="#g" aria-label="Gap matrix"><svg class="i i-20"><use href="#i-grid"></use></svg></a>
+    <a href="#a" aria-label="Audit trail"><svg class="i i-20"><use href="#i-scroll"></use></svg></a>
+    <a href="#r" aria-label="Readiness"><svg class="i i-20"><use href="#i-gauge"></use></svg></a>
+    <a href="#s" aria-label="Slides"><svg class="i i-20"><use href="#i-pres"></use></svg></a>
+    <a href="#t" aria-label="Team and award"><svg class="i i-20"><use href="#i-award"></use></svg></a>
+  </nav>
+
+  <div class="main">
+    <header class="topbar" data-id="topbar">
+      <h1 style="font-size:16px;line-height:24px;font-weight:600;white-space:nowrap">Technologist console</h1>
+      <span class="chip"><span class="mono">SC-02</span> Weak kidneys, dose above the limit</span>
+      <div class="notice"><svg class="i" style="width:14px;height:14px;color:var(--warning-strong)"><use href="#i-flask"></use></svg><span class="ar" lang="ar" dir="rtl">بيانات محاكاة لأغراض الهاكاثون فقط</span><span class="muted">Synthetic data</span></div>
+      <a href="#t" class="chip chip-gold"><svg class="i" style="width:14px;height:14px"><use href="#i-trophy"></use></svg>3rd Prize · ITU</a>
+      <button type="button" class="icon-btn" aria-label="Switch to Arabic" lang="ar">ع</button>
+      <button type="button" class="icon-btn" aria-label="Light theme"><svg class="i"><use href="#i-sun"></use></svg></button>
+    </header>
+
+    <div class="content" id="console">
+      <section class="suite" aria-label="The scan suite" data-id="suite">
+        <div class="bay" data-id="suite.console">
+          <p class="bay-title">Console <span class="chip chip-warn">Sent</span></p>
+          <dl class="read" style="margin-top:4px">
+            <dt>Region</dt><dd>abdomen_pelvis</dd>
+            <dt>kVp · mAs</dt><dd>120 · 400</dd>
+            <dt>CTDIvol</dt><dd class="breach">18.0 mGy</dd>
+            <dt>DLP</dt><dd class="breach">900 mGy·cm</dd>
+            <dt>Iohexol</dt><dd>150 mL</dd>
+            <dt>Prophylaxis</dt><dd>not ordered</dd>
+            <dt>Metformin</dt><dd>not held</dd>
+          </dl>
+          <button type="button" class="btn btn-outline btn-sm btn-full" style="margin-top:auto">Edit the request</button>
+        </div>
+        <div class="bay" style="background:var(--gray-25)" data-id="suite.valve">
+          <p class="bay-title">Samaam <span class="chip chip-err"><svg class="i" style="width:13px;height:13px"><use href="#i-lock"></use></svg>Closed</span></p>
+          <div class="bay-img"><img src="/_blob/d8a77dd84044646ddbd0b75c5acd66e2" alt="The valve closed, with contrast stopped on one side." style="max-height:none;width:100%"></div>
+          <div style="display:flex;align-items:baseline;gap:12px">
+            <span class="mono" style="font-size:44px;line-height:44px;font-weight:600;color:var(--destructive-strong)">403</span>
+            <span><span class="strong" style="display:block">Held for authorisation</span><span class="mono micro muted">VIOLATION · AUTHORISE</span></span>
+          </div>
+        </div>
+        <div class="bay" data-id="suite.injector">
+          <p class="bay-title">Injector <span class="chip">Idle</span></p>
+          <div class="bay-img"><img src="/_blob/26c5ec1220874f66f53fc6f03f520036" alt="A contrast injector waiting." style="opacity:.72"></div>
+          <p class="micro muted">Not armed</p>
+        </div>
+        <div class="bay" data-id="suite.scanner">
+          <p class="bay-title">CT scanner <span class="chip chip-err"><svg class="i" style="width:13px;height:13px"><use href="#i-lock"></use></svg>LOCKED</span></p>
+          <div class="bay-img"><img src="/_blob/80a4d29d6ac4bfeffc55e41e7ad5382a" alt="A CT scanner with an empty table." style="opacity:.72"></div>
+          <p class="micro muted">Entry withheld from the worklist</p>
+        </div>
+      </section>
+
+      <div style="display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr) minmax(0,1fr);gap:20px;align-items:stretch" data-id="grid">
+        <section class="card card-pad" style="display:flex;flex-direction:column;gap:12px;position:relative;overflow:hidden" aria-label="Patient" data-id="patient">
+          <div class="section-head" style="margin:0"><p class="card-title">Patient</p><span class="mono micro muted">F · 62 Y · 70 kg</span></div>
+          <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:center">
+            <img src="/_blob/ff0669040f0dfac6c5b5c1d4d1232cc5" alt="The patient's injured kidney." data-id="patient.kidney">
+            <div>
+              <p class="small muted">eGFR, CKD-EPI</p>
+              <p class="mono" style="font-size:44px;line-height:48px;font-weight:600;color:var(--destructive-strong)">19.1</p>
+              <p class="micro muted">Creatinine 229.8 µmol/L</p>
+            </div>
+          </div>
+          <div data-id="patient.scale">
+            <div style="display:flex;height:10px;border-radius:999px;overflow:hidden;position:relative;background:var(--muted)">
+              <span style="width:30%;background:var(--destructive)"></span>
+              <span style="flex:1;background:var(--gray-300)"></span>
+              <span style="position:absolute;left:19.1%;top:-3px;bottom:-3px;width:3px;background:var(--foreground);border-radius:2px"></span>
+            </div>
+            <div class="mono micro muted" style="display:flex;justify-content:space-between;margin-top:6px"><span>0</span><span>threshold 30</span><span>100</span></div>
+          </div>
+          <dl class="read">
+            <dt>Contrast AKI risk</dt><dd style="color:var(--warning-strong);font-weight:600">≈30%</dd>
+            <dt>Oxaliplatin</dt><dd>active FOLFOX</dd>
+            <dt>Metformin</dt><dd>1000 mg BD</dd>
+            <dt>Ibuprofen</dt><dd>PRN</dd>
+          </dl>
+        </section>
+
+        <section class="card card-pad" aria-label="Checks" data-id="checks">
+          <p class="card-title" style="margin-bottom:12px">Checks</p>
+          <ul>
+            <li class="check"><svg class="i i-20 check-ico ico-fail"><use href="#i-xc"></use></svg><div><div class="check-top"><span class="check-name">National reference level</span><span class="basis basis-law">STATUTORY</span></div><p class="small muted">Binding on providers by Royal Decree 60057.</p><a href="https://www.sfda.gov.sa/sites/default/files/2023-02/NDRL-En.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--sa-900)">SFDA-MDS-G008-DRL · p. 7<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a></div></li>
+            <li class="check"><svg class="i i-20 check-ico ico-fail"><use href="#i-xc"></use></svg><div><div class="check-top"><span class="check-name">Renal prophylaxis</span><span class="basis basis-protocol">NATIONAL_PROTOCOL</span></div><a href="https://www.moh.gov.sa/en/Ministry/MediaCenter/Publications/Documents/Protocols-of-CM.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--sa-900)">MOH-CM-PROPHYLAXIS · p. 22<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a></div></li>
+            <li class="check"><svg class="i i-20 check-ico ico-fail"><use href="#i-xc"></use></svg><div><div class="check-top"><span class="check-name">Metformin</span><span class="basis basis-protocol">NATIONAL_PROTOCOL</span></div><a href="https://www.moh.gov.sa/en/Ministry/MediaCenter/Publications/Documents/Protocols-of-CM.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--sa-900)">MOH-CM-METFORMIN · p. 28<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a></div></li>
+            <li class="check"><svg class="i i-20 check-ico ico-warn"><use href="#i-warn"></use></svg><div><div class="check-top"><span class="check-name">Nephrotoxic medication</span><span class="basis basis-protocol">NATIONAL_PROTOCOL</span></div><a href="https://www.moh.gov.sa/en/Ministry/MediaCenter/Publications/Documents/Protocols-of-CM.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--sa-900)">MOH-CM-NEPHROTOXIC · p. 24<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a></div></li>
+          </ul>
+        </section>
+
+        <div style="display:flex;flex-direction:column;gap:20px;min-width:0">
+          <section class="card card-pad" aria-label="Dose" data-id="dose">
+            <p class="card-title" style="margin-bottom:10px">Dose against the national level</p>
+            <div class="meter"><span class="muted">CTDIvol</span><span class="meter-track"><span class="meter-fill fill-breach" style="display:block;width:100%"></span></span><span class="mono breach">18.0 mGy</span></div>
+            <div class="meter"><span class="muted">National</span><span class="meter-track"><span class="meter-fill fill-limit" style="display:block;width:78%"></span></span><span class="mono">14</span></div>
+            <div class="meter"><span class="muted">Alternative</span><span class="meter-track"><span class="meter-fill fill-alt" style="display:block;width:72%"></span></span><span class="mono">13.0</span></div>
+            <div class="meter" style="margin-top:14px"><span class="muted">DLP</span><span class="meter-track"><span class="meter-fill fill-breach" style="display:block;width:100%"></span></span><span class="mono breach">900</span></div>
+            <div class="meter"><span class="muted">National</span><span class="meter-track"><span class="meter-fill fill-limit" style="display:block;width:78%"></span></span><span class="mono">706</span></div>
+            <div class="meter"><span class="muted">Alternative</span><span class="meter-track"><span class="meter-fill fill-alt" style="display:block;width:73%"></span></span><span class="mono">660</span></div>
+          </section>
+          <section class="card card-pad" style="background:var(--warning-bg);border-color:var(--warning-line);flex:1;display:flex;flex-direction:column;gap:10px" aria-label="Consultant override" data-id="override">
+            <p class="card-title">Consultant override</p>
+            <p class="small muted">A named consultant may release this acquisition and accept responsibility. The name goes into the audit trail.</p>
+            <div class="field"><label for="consultant">Consultant name</label><input id="consultant" class="input" placeholder="Full name and grade"></div>
+            <button type="button" class="btn btn-warn btn-full">Override and release</button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

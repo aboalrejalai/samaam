@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8">
+<title>Samaam data request, Border Line</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="samaam.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inconsolata:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0f1724}
+a{color:inherit}a:hover{color:inherit}
+.route{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(0,1.5fr) 64px minmax(0,.9fr);align-items:stretch;border:1px solid var(--border);border-radius:var(--radius-2xl);background:var(--gray-0);overflow:hidden}
+.stop{display:flex;flex-direction:column;gap:8px;padding:20px;min-width:0}
+.stop-title{font-size:13px;line-height:20px;font-weight:600}
+.link{display:flex;align-items:center;justify-content:center;position:relative}
+.link::before{content:"";position:absolute;inset-inline:0;top:50%;border-top:2px solid var(--contrast-liquid)}
+.read{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;font-size:13px;line-height:20px}
+.read dt{color:var(--muted-foreground)}
+.read dd{font-family:var(--font-mono);font-variant-numeric:tabular-nums;text-align:end}
+.step{display:grid;grid-template-columns:20px minmax(0,1fr);gap:12px;padding-bottom:16px;position:relative}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;inset-inline-start:9px;top:22px;bottom:2px;width:1px;background:var(--border)}
+.step:last-child::before{display:none}
+.tick{width:18px;height:18px;margin-top:2px;border-radius:999px;background:var(--gray-0);border:2px solid var(--gray-300);display:block}
+.tick.err{border-color:var(--destructive-strong)}
+</style>
+</helmet>
+<div class="page dark">
+<svg class="sprite" aria-hidden="true"><defs>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+<symbol id="i-lib" viewBox="0 0 24 24"><path d="M16 6l4 14M12 6v14M8 8v12M4 4v16"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+<symbol id="i-scroll" viewBox="0 0 24 24"><path d="M15 12h-5M15 8h-5M19 17V5a2 2 0 0 0-2-2H4M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 14l4-4M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+<symbol id="i-pres" viewBox="0 0 24 24"><path d="M2 3h20M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3M7 21l5-5 5 5"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2M8.5 2h7M7 16h10"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-xc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></symbol>
+</defs></svg>
+
+<div class="shell">
+  <nav class="rail" aria-label="System" data-id="rail">
+    <a href="#data" aria-label="Samaam home" style="margin-bottom:8px"><svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" style="fill:var(--primary)"></rect><g style="fill:none;stroke:#0b1220;stroke-width:2;stroke-linecap:round"><path d="M12 4v5.2M12 14.8V20"></path><circle cx="12" cy="12" r="3.2"></circle><path d="M4.6 12h3.4M16 12h3.4"></path></g></svg></a>
+    <a href="#x" aria-label="Console"><svg class="i i-20"><use href="#i-scan"></use></svg></a>
+    <a href="#data" class="on" aria-label="Data request"><svg class="i i-20"><use href="#i-db"></use></svg></a>
+    <a href="#c" aria-label="Connectors"><svg class="i i-20"><use href="#i-plug"></use></svg></a>
+    <a href="#k" aria-label="Knowledge base"><svg class="i i-20"><use href="#i-lib"></use></svg></a>
+    <a href="#g" aria-label="Gap matrix"><svg class="i i-20"><use href="#i-grid"></use></svg></a>
+    <a href="#a" aria-label="Audit trail"><svg class="i i-20"><use href="#i-scroll"></use></svg></a>
+    <a href="#r" aria-label="Readiness"><svg class="i i-20"><use href="#i-gauge"></use></svg></a>
+    <a href="#s" aria-label="Slides"><svg class="i i-20"><use href="#i-pres"></use></svg></a>
+    <a href="#t" aria-label="Team and award"><svg class="i i-20"><use href="#i-award"></use></svg></a>
+  </nav>
+
+  <div class="main">
+    <header class="topbar" data-id="topbar">
+      <h1 style="font-size:16px;line-height:24px;font-weight:600;white-space:nowrap">Data request</h1>
+      <span class="chip"><span class="mono">SC-03</span> Export records abroad for marketing</span>
+      <div class="notice"><svg class="i" style="width:14px;height:14px;color:var(--warning-strong)"><use href="#i-flask"></use></svg><span class="ar" lang="ar" dir="rtl">بيانات محاكاة لأغراض الهاكاثون فقط</span><span class="muted">Synthetic data</span></div>
+      <a href="#t" class="chip chip-gold"><svg class="i" style="width:14px;height:14px"><use href="#i-trophy"></use></svg>3rd Prize · ITU</a>
+      <button type="button" class="icon-btn" aria-label="Switch to Arabic" lang="ar">ع</button>
+      <button type="button" class="icon-btn" aria-label="Light theme"><svg class="i"><use href="#i-sun"></use></svg></button>
+    </header>
+
+    <div class="content" id="data">
+      <section class="route" aria-label="The route of the request" data-id="route">
+        <div class="stop" data-id="route.origin">
+          <p class="stop-title">Inside the Kingdom</p>
+          <img src="/_blob/a72c6a680267fb8c5b7864c6b89492da" alt="Sealed glass patient records." style="width:min(220px,100%);margin:auto" data-id="route.records">
+          <p><span class="mono" style="font-size:30px;line-height:36px;font-weight:600">4,200</span> <span class="small muted">oncology records</span></p>
+        </div>
+        <div class="link" aria-hidden="true"></div>
+        <div class="stop" style="background:var(--gray-25);border-inline:1px solid var(--border)" data-id="route.gate">
+          <p class="stop-title" style="display:flex;justify-content:space-between;align-items:center;gap:8px">Samaam <span class="chip chip-err"><svg class="i" style="width:13px;height:13px"><use href="#i-lock"></use></svg>Session terminated</span></p>
+          <img src="/_blob/d8a77dd84044646ddbd0b75c5acd66e2" alt="The valve closed." style="width:min(360px,100%);margin:auto" data-id="route.valve">
+          <div style="display:flex;align-items:baseline;gap:12px">
+            <span class="mono" style="font-size:44px;line-height:44px;font-weight:600;color:var(--destructive-strong)">403</span>
+            <span><span class="strong" style="display:block">Refused, no override path</span><span class="mono micro muted">VIOLATION · PROHIBITED</span></span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:center;position:relative" data-id="route.border">
+          <span aria-hidden="true" style="position:absolute;top:0;bottom:0;left:50%;border-inline-start:2px dashed var(--destructive-strong)"></span>
+          <span class="micro strong" style="position:relative;writing-mode:vertical-rl;background:var(--gray-0);padding:12px 0;color:var(--destructive-strong)">Kingdom boundary</span>
+        </div>
+        <div class="stop" style="justify-content:space-between" data-id="route.endpoint">
+          <p class="stop-title muted">Outside the Kingdom</p>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;color:var(--muted-foreground);padding-block:20px">
+            <svg class="i" style="width:48px;height:48px;stroke-width:1.5"><use href="#i-globe"></use></svg>
+            <p class="small">External analytics endpoint</p>
+          </div>
+          <p><span class="mono" style="font-size:30px;line-height:36px;font-weight:600">0</span> <span class="small muted">records received</span></p>
+        </div>
+      </section>
+
+      <div style="display:grid;grid-template-columns:minmax(0,300px) minmax(0,300px) minmax(0,1fr);gap:20px;align-items:stretch" data-id="grid">
+        <section class="card card-pad" aria-label="The request" data-id="request">
+          <div class="section-head"><p class="card-title">Access request</p><span class="chip chip-err">Locked</span></div>
+          <dl style="display:flex;flex-direction:column;gap:10px">
+            <div><dt class="micro muted">Requesting account</dt><dd class="small">integration service account</dd></div>
+            <div><dt class="micro muted">Action</dt><dd class="small">Bulk export of oncology patient records to an external endpoint</dd></div>
+            <div><dt class="micro muted">Stated purpose</dt><dd class="small">Targeted outreach for a private imaging centre campaign</dd></div>
+          </dl>
+          <dl class="read" style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">
+            <dt>Outside the Kingdom</dt><dd class="strong" style="color:var(--destructive-strong)">Yes</dd>
+            <dt>Delivery of care</dt><dd class="strong" style="color:var(--destructive-strong)">No</dd>
+          </dl>
+        </section>
+
+        <section class="card card-pad" aria-label="What happened" data-id="events">
+          <p class="card-title" style="margin-bottom:14px">In the audit trail</p>
+          <ol>
+            <li class="step"><span class="tick"></span><div><p class="small strong">Request inspected</p><p class="micro muted">Three statutory checks failed</p></div></li>
+            <li class="step"><span class="tick err"></span><div><p class="small strong">Hard security block</p><p class="mono micro muted">SECURITY_OVERRIDE</p></div></li>
+            <li class="step"><span class="tick err"></span><div><p class="small strong">Override refused</p><p class="mono micro muted">OVERRIDE_REFUSED</p><p class="micro muted">Dr. A. Alharbi, Consultant Radiologist</p></div></li>
+          </ol>
+        </section>
+
+        <section class="card card-pad" aria-label="Checks" data-id="checks">
+          <p class="card-title" style="margin-bottom:12px">Checks</p>
+          <ul>
+            <li class="check"><svg class="i i-20 check-ico ico-fail"><use href="#i-xc"></use></svg><div><div class="check-top"><span class="check-name">Data minimisation</span><span class="basis basis-law">STATUTORY</span></div><p class="small muted">Bulk access to Health Data, 4200 records, without a care purpose.</p><a href="https://sdaia.gov.sa/en/SDAIA/about/Documents/Personal%20Data%20English%20V2-23April2023-%20Reviewed-.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--sa-900)">PDPL-ART23 · Article 23(1-2)<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a></div></li>
+            <li class="check"><svg class="i i-20 check-ico ico-fail"><use href="#i-xc"></use></svg><div><div class="check-top"><span class="check-name">Lawful basis</span><span class="basis basis-law">STATUTORY</span></div><p class="small muted">Commercial outreach is not a lawful basis for processing Sensitive Data.</p><a href="https://sdaia.gov.sa/en/SDAIA/about/Documents/Personal%20Data%20English%20V2-23April2023-%20Reviewed-.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--sa-900)">PDPL-ART1-11 · Article 1(11)<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a></div></li>
+            <li class="check"><svg class="i i-20 check-ico ico-fail"><use href="#i-xc"></use></svg><div><div class="check-top"><span class="check-name">Cross-border transfer</span><span class="basis basis-law">STATUTORY</span></div><p class="small muted">Requires an adequate level of protection and the minimum amount of Personal Data needed.</p><a href="https://sdaia.gov.sa/en/SDAIA/about/Documents/Personal%20Data%20English%20V2-23April2023-%20Reviewed-.pdf" class="mono micro" style="display:inline-flex;align-items:center;gap:4px;color:var(--sa-900)">PDPL-ART29 · Article 29(2)(B-C)<svg class="i" style="width:12px;height:12px"><use href="#i-link"></use></svg></a></div></li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="verdict" aria-label="No clinical override path" data-id="override">
+        <div class="verdict-body">
+          <p class="verdict-title" style="font-size:16px;line-height:24px;color:var(--destructive-strong)">No clinical override path</p>
+          <p class="small">A consultant may accept clinical risk for a patient in their care. No clinician holds authority to authorise processing that the PDPL forbids.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":880}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{
+  "valve": {
+    "size": "1536x1024",
+    "prompt": "A single precision medical inline valve, the hero object of a product: a horizontal clear glass tube runs left to right through a machined brushed-titanium valve body at the centre, the valve body has a round collar with fine knurling and a slim glowing medical-blue status ring. Inside the glass, on the left of the valve, a pale amber iodinated contrast liquid fills the tube and stops exactly at a closed titanium iris shutter; to the right of the valve the glass tube is empty and dry. Three-quarter view from slightly above, the tube ends are cut clean and fully visible."
+  },
+  "kidney": {
+    "size": "1024x1024",
+    "prompt": "One anatomically accurate healthy human right kidney, external view, bean-shaped with a smooth deep red-brown fibrous capsule surface, the concave renal hilum facing the viewer's left. From the hilum emerge exactly three vessels: the red renal artery, the darker blue renal vein and the pale cream ureter running downward, each cut cleanly a short distance from the kidney. Fine surface capillaries. Anatomy atlas accuracy, three-quarter view."
+  },
+  "kidney-section": {
+    "size": "1024x1024",
+    "prompt": "One anatomically accurate human kidney shown as a clean coronal cut-away section, facing the viewer: outer fibrous capsule, paler granular renal cortex, darker striated triangular renal medullary pyramids, renal columns between them, minor and major calyces funnelling into a pale renal pelvis, with the ureter leaving downward and the renal artery and vein at the hilum on the left. Moist tissue, anatomy atlas accuracy, frontal view."
+  },
+  "kidney-injured": {
+    "size": "1024x1024",
+    "prompt": "One human kidney in chronic disease from chemotherapy injury, external view, same three-quarter pose with the renal hilum facing left and three short cut vessels: red artery, blue vein, pale ureter. The kidney is visibly shrunken with a pale, granular, slightly scarred and mottled surface, duller and less perfused than a healthy kidney, with a faint amber tint where iodinated contrast would accumulate. Clinical and not gory, anatomy atlas accuracy."
+  },
+  "liver": {
+    "size": "1024x1024",
+    "prompt": "One anatomically accurate healthy human liver, anterior view: large right lobe on the viewer's left, smaller tapered left lobe on the viewer's right, falciform ligament between them, the green gallbladder just visible below the right lobe's lower edge, a short cut portal vein in blue-violet and a cut hepatic artery in red below. Smooth glossy red-brown surface with subtle sheen, anatomy atlas accuracy."
+  },
+  "abdomen": {
+    "size": "1024x1536",
+    "prompt": "A translucent frosted-glass human torso from the upper chest to the pelvis, anterior view, gender neutral and with no face and no limbs, seen as a clinical anatomical model. Inside the clear glass body the true organs are shown solid and accurate: the liver on the viewer's left under the ribs, both kidneys with their ureters running down to the bladder, the abdominal aorta and inferior vena cava down the midline. The spine and pelvis are shown faintly in pale ghosted bone. The kidneys are the most saturated element. The glass body shell is pale cool blue."
+  },
+  "ct-scanner": {
+    "size": "1536x1024",
+    "prompt": "A modern hospital CT scanner shown as a clean product model: one large white ring-shaped gantry with a wide central bore and a slim medical-blue light line around the bore, and a long patient table on a pedestal sliding toward the bore, the table is empty. Fully generic industrial design with no manufacturer identity. Three-quarter view from the table end, showing the whole machine."
+  },
+  "injector": {
+    "size": "1024x1536",
+    "prompt": "A modern dual-head power contrast injector for CT shown as a clean product model: a white rolling pedestal on five casters, an articulated arm holding an injector head with two clear syringes side by side, one syringe filled with pale amber iodinated contrast and the other with clear saline, thin clear tubing looping down, a small blank dark control screen with nothing displayed. Fully generic industrial design with no manufacturer identity."
+  },
+  "records": {
+    "size": "1024x1024",
+    "prompt": "A sealed stack of exactly seven thin rectangular clear glass slabs representing patient records, each slab faintly etched with a grey axial CT slice image of an abdomen and no writing. The stack is clamped shut by one solid brushed-titanium bracket with a closed medical-blue glowing lock ring on its front face. Three-quarter view from above."
+  },
+  "contrast-vial": {
+    "size": "1024x1024",
+    "prompt": "One clear glass pharmacy vial of iodinated contrast medium with a titanium crimp cap and a medical-blue flip-top, filled with pale amber liquid, completely blank with no label, standing upright, with one small drop of the liquid suspended just above the cap. Three-quarter view."
+  }
+}

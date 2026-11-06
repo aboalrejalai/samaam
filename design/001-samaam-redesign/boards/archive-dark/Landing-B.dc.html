@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+<meta charset="utf-8">
+<title>Samaam landing, Reading Room</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="samaam.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inconsolata:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#0b1220}
+a{color:inherit}a:hover{color:inherit}
+.corner{position:absolute;font-family:var(--font-mono);font-size:14px;line-height:20px;color:var(--muted-foreground)}
+.corner b{color:var(--foreground);font-weight:600}
+.series{display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--border);border-radius:var(--radius-md);min-width:0;background:var(--gray-25)}
+.series.on{border-color:var(--primary)}
+.series img{width:44px;height:44px;object-fit:contain;flex:none}
+.dev-step{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;min-width:0}
+.dev-step img{height:190px;width:auto;object-fit:contain}
+.tb th{font-size:12px;line-height:16px;font-weight:500;color:var(--muted-foreground);text-align:start;padding:10px 12px;border-bottom:1px solid var(--border)}
+.tb td{padding:14px 12px;border-bottom:1px solid var(--border);font-size:14px;line-height:20px;vertical-align:middle}
+</style>
+</helmet>
+<div class="page dark">
+<svg class="sprite" aria-hidden="true"><defs>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2M8.5 2h7M7 16h10"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+<symbol id="i-xc" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></symbol>
+<symbol id="i-warn" viewBox="0 0 24 24"><path d="M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01"/></symbol>
+</defs></svg>
+
+<div class="site-notice" data-id="notice"><svg class="i" style="width:14px;height:14px"><use href="#i-flask"></use></svg><span lang="ar" dir="rtl" style="font-weight:500">بيانات محاكاة لأغراض الهاكاثون فقط</span><span class="muted">Synthetic data, hackathon use only</span></div>
+
+<header class="wrap site-head" data-id="header">
+  <a href="#top" class="brand" style="padding:0" aria-label="Samaam home">
+    <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true"><rect width="24" height="24" rx="5" style="fill:var(--primary)"></rect><g style="fill:none;stroke:#0b1220;stroke-width:2;stroke-linecap:round"><path d="M12 4v5.2M12 14.8V20"></path><circle cx="12" cy="12" r="3.2"></circle><path d="M4.6 12h3.4M16 12h3.4"></path></g></svg>
+    <span><span class="brand-name" lang="ar" style="display:block">صِمَام</span><span class="brand-latin" style="display:block">SAMAAM</span></span>
+  </a>
+  <nav class="site-nav" aria-label="Sections">
+    <a href="#before">How it works</a><a href="#rules">Rules</a><a href="#paths">Scenarios</a><a href="#award">Award</a>
+  </nav>
+  <a href="#award" class="chip chip-gold"><svg class="i" style="width:14px;height:14px"><use href="#i-trophy"></use></svg>3rd Prize · ITU</a>
+  <a href="#open" class="btn btn-primary">Open the dashboard</a>
+</header>
+
+<main id="top">
+  <section class="wrap" data-id="viewer">
+    <div style="position:relative;min-height:720px;border:1px solid var(--border);border-radius:var(--radius-2xl);background:var(--gray-0);overflow:hidden" data-id="viewer.frame">
+      <div aria-hidden="true" style="position:absolute;top:0;bottom:0;right:300px;width:1px;background:var(--gray-200)"></div>
+      <div aria-hidden="true" style="position:absolute;left:760px;right:0;top:360px;height:1px;background:var(--gray-200)"></div>
+      <img src="/_blob/ff0669040f0dfac6c5b5c1d4d1232cc5" alt="A shrunken, pale human kidney injured by chemotherapy." style="position:absolute;top:60px;right:96px;height:600px;width:auto" data-id="viewer.kidney">
+      <div class="hot" style="top:172px;right:440px;flex-direction:row-reverse"><span class="hot-dot"></span><span class="hot-line" style="width:48px"></span><span class="hot-label"><b style="color:var(--destructive-strong)">19.1</b><span class="mono">eGFR, threshold 30</span></span></div>
+      <div class="hot" style="top:520px;right:432px;flex-direction:row-reverse"><span class="hot-dot" style="border-color:var(--warning-strong)"></span><span class="hot-line" style="width:48px"></span><span class="hot-label"><b style="color:var(--warning-strong)">≈30%</b><span class="mono">contrast AKI risk</span></span></div>
+
+      <p class="corner" style="top:20px;left:24px"><b>SC-02</b> · simulated case<br>F · 62 Y · 70 kg<br>Oxaliplatin, metformin, ibuprofen</p>
+      <p class="corner" style="top:20px;right:24px;text-align:end">CT Chest, Abdomen &amp; Pelvis<br>kVp 120 · mAs 400<br>CTDIvol <b style="color:var(--destructive-strong)">18.0</b> mGy · DLP <b style="color:var(--destructive-strong)">900</b> mGy·cm</p>
+      <p class="corner" style="bottom:20px;right:24px;text-align:end">Iohexol 350 · 150 mL · 5.0 mL/s<br><b style="color:var(--destructive-strong)">403</b> · scanner locked</p>
+
+      <div style="position:absolute;left:24px;top:170px;width:min(640px,calc(100% - 48px));display:flex;flex-direction:column;gap:20px" data-id="viewer.copy">
+        <h1 class="h-hero" style="font-size:clamp(36px,4.5vw,58px)">The settings look normal. For this patient, they are not.</h1>
+        <p class="lead" style="max-width:520px">Samaam reads the patient's renal function, checks the scan settings against Saudi regulation, and answers 403 with the article and the issuing authority. The decision is deterministic code, not a language model.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a href="#open" class="btn btn-primary">Open the dashboard<svg class="i"><use href="#i-arrow"></use></svg></a>
+          <a href="#before" class="btn btn-outline">See how it works</a>
+        </div>
+      </div>
+    </div>
+
+    <nav aria-label="Anatomy series" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:8px;margin-top:8px" data-id="viewer.series">
+      <a href="#top" class="series on"><img src="/_blob/ff0669040f0dfac6c5b5c1d4d1232cc5" alt=""><span><span class="strong small" style="display:block">Injured kidney</span><span class="mono micro muted">eGFR 19.1</span></span></a>
+      <a href="#rules" class="series"><img src="/_blob/6b916d9a34d396c47462dc869fcb0fc1" alt=""><span><span class="strong small" style="display:block">Inside the kidney</span><span class="mono micro muted">Four rules</span></span></a>
+      <a href="#before" class="series"><img src="/_blob/6ec5069e5f57b43088b2613de7f37ada" alt=""><span><span class="strong small" style="display:block">Scan region</span><span class="mono micro muted">Abdomen and pelvis</span></span></a>
+      <a href="#paths" class="series"><img src="/_blob/597fa4cc26ee322bdf5b2282ee3ed32b" alt=""><span><span class="strong small" style="display:block">Same field of view</span><span class="mono micro muted">Liver, in the region</span></span></a>
+    </nav>
+  </section>
+
+  <section id="before" class="wrap sec" data-id="before">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:12px 72px;align-items:end">
+      <h2 class="h-sec">Most dose tools analyse what happened after exposure. Samaam acts before it.</h2>
+      <p class="lead">It stands between the technologist, the CT scanner and the contrast injector. The worklist entry is held before the settings reach either device.</p>
+    </div>
+    <ol style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:12px;margin-top:40px;align-items:end" data-id="before.line">
+      <li class="dev-step"><img src="/_blob/26b4af497bd14e72b117eca14c34acf3" alt="A vial of iodinated contrast." style="height:150px"><p class="strong">The order</p><p class="small muted">Iohexol, standard protocol</p></li>
+      <li class="dev-step"><img src="/_blob/d8a77dd84044646ddbd0b75c5acd66e2" alt="The closed Samaam valve." style="height:auto;width:100%;max-width:300px"><p class="strong" style="color:var(--sa-900)">Samaam</p><p class="small muted">Reads the file, decides, cites</p></li>
+      <li class="dev-step"><img src="/_blob/26c5ec1220874f66f53fc6f03f520036" alt="A contrast injector, not reached." style="opacity:0.6"><p class="strong">Injector</p><p class="small muted">Not reached</p></li>
+      <li class="dev-step"><img src="/_blob/80a4d29d6ac4bfeffc55e41e7ad5382a" alt="A CT scanner, not reached." style="height:auto;width:100%;max-width:240px;opacity:0.6"><p class="strong">CT scanner</p><p class="small muted">Locked, not reached</p></li>
+    </ol>
+  </section>
+
+  <section id="rules" class="rule-top" style="background:var(--gray-0)" data-id="rules">
+    <div class="wrap sec">
+      <h2 class="h-sec" style="max-width:760px">Four rules, each with its own legal weight</h2>
+      <p class="lead" style="max-width:680px;margin-top:12px">STATUTORY is binding by Royal Decree. NATIONAL_PROTOCOL is a Ministry of Health clinical protocol, not penal law. Samaam never blurs the two.</p>
+      <div style="overflow-x:auto;margin-top:28px">
+        <table class="tb" style="width:100%;min-width:760px;border-collapse:collapse" data-id="rules.table">
+          <thead><tr><th>Status</th><th>Rule</th><th>Measured</th><th>Limit</th><th>Basis</th><th>Record</th></tr></thead>
+          <tbody>
+            <tr><td><span class="chip chip-err">FAIL</span></td><td class="mono">national_drl</td><td class="mono" style="color:var(--destructive-strong)">18.0 mGy</td><td class="mono">14 mGy</td><td><span class="basis basis-law">STATUTORY</span></td><td class="mono muted">SFDA-MDS-G008-DRL</td></tr>
+            <tr><td><span class="chip chip-err">FAIL</span></td><td class="mono">renal_prophylaxis</td><td class="mono" style="color:var(--destructive-strong)">eGFR 19.1</td><td class="mono">30</td><td><span class="basis basis-protocol">NATIONAL_PROTOCOL</span></td><td class="mono muted">MOH-CM-PROPHYLAXIS</td></tr>
+            <tr><td><span class="chip chip-err">FAIL</span></td><td class="mono">metformin</td><td>Not held</td><td class="muted">Hold 48 hours</td><td><span class="basis basis-protocol">NATIONAL_PROTOCOL</span></td><td class="mono muted">MOH-CM-METFORMIN</td></tr>
+            <tr><td><span class="chip chip-warn">WARN</span></td><td class="mono">nephrotoxic_meds</td><td>Platinum, NSAID</td><td class="muted">Withhold if feasible</td><td><span class="basis basis-protocol">NATIONAL_PROTOCOL</span></td><td class="mono muted">MOH-CM-NEPHROTOXIC</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="paths" class="wrap sec" data-id="paths">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:48px 72px">
+      <article style="display:flex;flex-direction:column;gap:12px" data-id="paths.hold">
+        <p class="chip chip-warn" style="width:fit-content"><span class="mono">AUTHORISE</span></p>
+        <h2 class="h-sec">The scan is held, not forbidden</h2>
+        <p class="lead">No eGFR value forbids contrast outright. A named consultant can release the request, and the audit trail keeps that name.</p>
+      </article>
+      <article style="display:flex;flex-direction:column;gap:12px" data-id="paths.refuse">
+        <p class="chip chip-err" style="width:fit-content"><span class="mono">PROHIBITED</span></p>
+        <h2 class="h-sec">The export is refused, for everyone</h2>
+        <p class="lead">Patient records leaving the Kingdom against the PDPL end the session. No clinician can authorise that, so the override itself is refused.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="rule-top" style="background:var(--gray-0)" data-id="truth">
+    <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:24px 40px;padding-block:56px">
+      <div><p class="mono" style="font-size:44px;line-height:48px;font-weight:600">0</p><p class="small muted">language models in the decision</p></div>
+      <div><p class="mono" style="font-size:44px;line-height:48px;font-weight:600">45</p><p class="small muted">regulatory records, 43 verified</p></div>
+      <div><p class="mono" style="font-size:44px;line-height:48px;font-weight:600">29 ms</p><p class="small muted">refusal in the recorded demo, observed and not a guarantee</p></div>
+    </div>
+  </section>
+
+  <section id="award" class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;padding-block:28px" data-id="award">
+    <svg class="i" style="width:28px;height:28px;color:var(--warning-strong)"><use href="#i-trophy"></use></svg>
+    <p style="flex:1 1 320px;min-width:0"><span class="strong">3rd Prize</span> · ITU AI Readiness Hackathon, Kingdom of Saudi Arabia</p>
+    <a href="#open" class="btn btn-outline btn-sm">View the award</a>
+    <a href="#open" class="btn btn-outline btn-sm">Meet the team</a>
+  </section>
+
+  <section id="open" class="rule-top" data-id="cta">
+    <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:24px 72px;align-items:center;padding-block:56px">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <h2 class="h-sec">The gateway is running</h2>
+        <p class="lead">Open the dashboard, load SC-02, and send it to the device. You will get a 403 with the article and the authority.</p>
+      </div>
+      <div style="display:flex;justify-content:flex-end"><a href="#top" class="btn btn-primary">Open the dashboard<svg class="i"><use href="#i-arrow"></use></svg></a></div>
+    </div>
+  </section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2940}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

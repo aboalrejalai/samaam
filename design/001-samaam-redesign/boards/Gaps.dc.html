@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Samaam gap matrix</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="samaam.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inconsolata:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:inherit}a:hover{color:inherit}
+.gaps{display:grid;grid-template-columns:minmax(200px,1fr) minmax(0,1.25fr) minmax(0,1.05fr) minmax(0,1.15fr)}
+.gaps>div{padding:16px;border-top:1px solid var(--border);font-size:14px;line-height:21px}
+.gaps .hd{border-top:0;background:var(--gray-50);font-size:12px;line-height:16px;font-weight:500;color:var(--muted-foreground);padding-block:12px}
+.gaps .rec{background:var(--primary-subtle)}
+.gaps .hd.rec{background:var(--sa-100);color:var(--sa-800)}
+.gap-id{display:block;font-family:var(--font-mono);font-size:12px;line-height:16px;font-weight:600;color:var(--primary);margin-bottom:4px}
+.gap-title{font-weight:600}
+</style>
+</helmet>
+<div class="page">
+<svg class="sprite" aria-hidden="true"><defs>
+<symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></symbol>
+<symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></symbol>
+<symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+<symbol id="i-lib" viewBox="0 0 24 24"><path d="M16 6l4 14M12 6v14M8 8v12M4 4v16"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+<symbol id="i-scroll" viewBox="0 0 24 24"><path d="M15 12h-5M15 8h-5M19 17V5a2 2 0 0 0-2-2H4M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+<symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 14l4-4M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+<symbol id="i-pres" viewBox="0 0 24 24"><path d="M2 3h20M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3M7 21l5-5 5 5"/></symbol>
+<symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+<symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2M8.5 2h7M7 16h10"/></symbol>
+<symbol id="i-trophy" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2Z"/></symbol>
+</defs></svg>
+
+<div class="shell">
+  <aside class="sidebar" data-id="sidebar">
+    <a href="Main.dc.html" class="brand" aria-label="Samaam home">
+      <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path class="bm-blue" d="M42 4C54 4 62 17 62 32C62 47 54 60 42 60C33 60 27 54 27 47C27 41 36 39 36 32C36 25 27 23 27 17C27 10 33 4 42 4Z"></path><rect class="bm-blue" x="22" y="21" width="6.5" height="22" rx="3.25"></rect><path class="bm-amber" d="M9 19C9 19 17 29 17 35A8 8 0 0 1 1 35C1 29 9 19 9 19Z"></path></svg>
+      <span><span class="brand-name" lang="ar" style="display:block">صِمَام</span><span class="brand-latin" style="display:block">SAMAAM</span></span>
+    </a>
+    <p class="nav-group">Gateway</p>
+    <nav class="nav" aria-label="System">
+      <a href="Console-A.dc.html"><svg class="i i-20"><use href="#i-scan"></use></svg>Console</a>
+      <a href="Data-A.dc.html"><svg class="i i-20"><use href="#i-db"></use></svg>Data request</a>
+      <a href="Connectors.dc.html"><svg class="i i-20"><use href="#i-plug"></use></svg>Connectors</a>
+      <a href="Knowledge-Base.dc.html"><svg class="i i-20"><use href="#i-lib"></use></svg>Knowledge base</a>
+      <a href="Gaps.dc.html" class="on"><svg class="i i-20"><use href="#i-grid"></use></svg>Gap matrix</a>
+      <a href="Audit.dc.html"><svg class="i i-20"><use href="#i-scroll"></use></svg>Audit trail</a>
+      <a href="Readiness.dc.html"><svg class="i i-20"><use href="#i-gauge"></use></svg>Readiness</a>
+      <a href="Slides.dc.html"><svg class="i i-20"><use href="#i-pres"></use></svg>Slides</a>
+      <a href="About.dc.html"><svg class="i i-20"><use href="#i-award"></use></svg>Team &amp; award</a>
+    </nav>
+    <div class="sidebar-foot micro muted" data-id="sidebar.status">
+      <span style="display:flex;align-items:center;gap:8px"><span class="status-dot"></span>Service connected</span>
+      <span class="mono">45 · 6 · 1338</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar" data-id="topbar">
+      <button type="button" class="icon-btn" style="border:0" aria-label="Toggle sidebar"><svg class="i i-20"><use href="#i-panel"></use></svg></button>
+      <div class="notice"><svg class="i" style="width:14px;height:14px;color:var(--warning-strong)"><use href="#i-flask"></use></svg><span class="ar" lang="ar" dir="rtl">بيانات محاكاة لأغراض الهاكاثون فقط</span><span class="muted">Synthetic data, hackathon use only</span></div>
+      <a href="About.dc.html" class="chip chip-gold"><svg class="i" style="width:14px;height:14px"><use href="#i-trophy"></use></svg>3rd Prize · ITU</a>
+      <button type="button" class="icon-btn" aria-label="Switch to Arabic" lang="ar">ع</button>
+    </header>
+
+    <div class="content">
+      <section class="card" style="padding:20px 24px;background:linear-gradient(90deg,var(--sa-50),var(--card) 75%);display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:24px;align-items:center;overflow:hidden" aria-label="Gap matrix" data-id="head">
+        <div>
+          <h1 class="page-title">Gap matrix</h1>
+          <p class="muted">Where the regulation is silent, and what its silence costs.</p>
+          <p class="small muted" style="margin-top:6px">Each gap rests on a documented absence of text, not on an assumption.</p>
+        </div>
+        <img src="/_blob/e9b0f712ab77ac86e8f97f366f062136" alt="A healthy human kidney." style="height:132px;width:auto;margin-inline:auto" data-id="head.kidney">
+      </section>
+
+      <section class="card" style="overflow:hidden" aria-label="Six regulatory gaps" data-id="matrix">
+        <div class="gaps" role="table">
+          <div class="hd">Gap</div><div class="hd">What was found</div><div class="hd">What it costs Samaam</div><div class="hd rec">Recommendation to the regulator</div>
+
+          <div data-id="gap.01"><span class="gap-id">GAP-01</span><span class="gap-title">Contrast thresholds exist. The gap moved to whether they bind.</span></div>
+          <div>The 2021 Ministry of Health protocol states the eGFR &lt; 30 threshold, the metformin categories and the risk bands, but it is practice guidance. No text was found making it binding as the dose levels are.</div>
+          <div>Samaam cites a Saudi national protocol, and never presents it as a prohibition. It holds until an authorised person decides.</div>
+          <div class="rec">A decision linking the Ministry's radiology protocols to enforcement and accountability, as Royal Decree 60057 did for the reference levels.</div>
+
+          <div data-id="gap.02"><span class="gap-id">GAP-02</span><span class="gap-title">Liability when a tired technologist accepts an automated recommendation</span></div>
+          <div>SFDA requires studying human-computer interaction (MDS-G010) and human review safeguards (MDS-G027). No text says who carries responsibility when harm occurs.</div>
+          <div>The strongest gap in the project: a documented legislative void.</div>
+          <div class="rec">A text dividing responsibility between manufacturer, facility, technologist and consultant, with a documented digital signature before any safety alert is overridden.</div>
+
+          <div data-id="gap.03"><span class="gap-id">GAP-03</span><span class="gap-title">Reference levels bind, with no real-time enforcement</span></div>
+          <div>Royal Decree 60057 and Health Council Resolution 3/88 bind providers. MDS-G008 requires automatic dose recording and periodic reports to SFDA by email.</div>
+          <div>Enforcement is retrospective. It finds the breach after the patient was exposed.</div>
+          <div class="rec">Require radiology systems to check the reference level before imaging starts, not after. This is what Samaam provides.</div>
+
+          <div data-id="gap.04"><span class="gap-id">GAP-04</span><span class="gap-title">No cumulative dose ceiling for oncology patients</span></div>
+          <div>Reference levels are set per examination. No Saudi text sets a cumulative limit for patients imaged repeatedly in oncology follow-up.</div>
+          <div>Justification is applied scan by scan and does not see the patient's whole journey.</div>
+          <div class="rec">Require cumulative dose tracking across facilities in the unified health record.</div>
+
+          <div data-id="gap.05"><span class="gap-id">GAP-05</span><span class="gap-title">Device control is regulated more than clinical accountability</span></div>
+          <div>SFDA Rule 10 places software affecting radiology devices in class C. No text requires a physician's confirmation before kVp, mAs or contrast dose change, or records liability when alerts are ignored.</div>
+          <div>Samaam's registration path is clear. The operational governance layer is what is missing.</div>
+          <div class="rec">A regulation requiring every override to be recorded and tied to the identity of the authoriser.</div>
+
+          <div data-id="gap.06"><span class="gap-id">GAP-06</span><span class="gap-title">Data law is not medical-error law</span></div>
+          <div>The PDPL implementing regulation covers transparency of automated decisions. It does not say whether clinical judgement may be delegated to an automated system, or who pays compensation.</div>
+          <div>Relying on the PDPL alone to justify a medical system's safety is a method error.</div>
+          <div class="rec">An explicit link between the data protection law and the health professions regulations.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1140}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

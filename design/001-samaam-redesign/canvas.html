@@ -1,0 +1,231 @@
+<!doctype html>
+<!-- The design canvas: lays out every board listed in canvas.json, row by row.
+     Served by preview.sh (it fetches canvas.json and polls boards, so file:// will not work).
+     Do not edit per design; edit canvas.json instead. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design canvas</title>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #eceeed; --panel: #ffffff; --text: #1a1d1b; --muted: #687069;
+    --line: #d6dbd8; --accent: #1b8354; --pick: #e8590c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #141716; --panel: #1d211f; --text: #e9ecea; --muted: #98a19b; --line: #2e3431;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #141716; --panel: #1d211f; --text: #e9ecea; --muted: #98a19b; --line: #2e3431;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.5 system-ui, sans-serif; }
+  header {
+    position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 8px 16px;
+    align-items: center; padding: 10px max(16px, 2vw); background: var(--panel); border-bottom: 1px solid var(--line);
+  }
+  header h1 { font-size: 15px; margin: 0; margin-inline-end: auto; }
+  .group { display: flex; gap: 4px; align-items: center; }
+  .group span { color: var(--muted); margin-inline-end: 4px; }
+  header button {
+    font: inherit; padding: 4px 10px; border: 1px solid var(--line); border-radius: 6px;
+    background: transparent; color: var(--text); cursor: pointer;
+  }
+  header button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+  #pick[aria-pressed="true"] { background: var(--pick); border-color: var(--pick); }
+  #rows { padding: 40px max(16px, 2vw) 120px; display: grid; gap: 120px; }
+  .row h2 { font-size: 18px; margin: 0 0 16px; }
+  .boards { display: flex; flex-wrap: wrap; gap: 80px; align-items: flex-start; }
+  figure { margin: 0; }
+  figcaption { display: flex; gap: 8px; align-items: baseline; margin-bottom: 8px; }
+  figcaption b { font-size: 15px; }
+  figcaption a { color: var(--muted); text-decoration: none; }
+  figcaption a:hover { color: var(--accent); }
+  .note { color: var(--muted); max-width: 60ch; margin: 8px 0 0; }
+  .frame { overflow: hidden; border-radius: 8px; box-shadow: 0 1px 2px rgb(0 0 0 / .12), 0 8px 24px rgb(0 0 0 / .08); background: #fff; }
+  .frame iframe { border: 0; display: block; transform-origin: 0 0; }
+  #msg { padding: 40px max(16px, 2vw); color: var(--muted); }
+  #toast {
+    position: fixed; inset-block-end: 20px; inset-inline-start: 50%; transform: translateX(-50%);
+    background: var(--text); color: var(--bg); padding: 8px 14px; border-radius: 8px; opacity: 0; transition: opacity .2s;
+  }
+  #toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">Design canvas</h1>
+  <div class="group" role="group" aria-label="Zoom"><span>Zoom</span>
+    <button data-zoom="fit" aria-pressed="true">Fit</button>
+    <button data-zoom="0.5" aria-pressed="false">50%</button>
+    <button data-zoom="1" aria-pressed="false">100%</button>
+  </div>
+  <div class="group" role="group" aria-label="Theme"><span>Theme</span>
+    <button data-theme-btn="light" aria-pressed="true">Light</button>
+    <button data-theme-btn="dark" aria-pressed="false">Dark</button>
+  </div>
+  <button id="pick" aria-pressed="false" title="Hover shows data-id; click copies 'board / id'">Pick</button>
+</header>
+<div id="msg" hidden></div>
+<div id="rows"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+(function () {
+  var state = { zoom: "fit", theme: "light", pick: false, canvas: null, stamps: {} };
+  try {
+    var saved = JSON.parse(localStorage.getItem("kickoff-design-canvas") || "{}");
+    if (saved.zoom) state.zoom = saved.zoom;
+    if (saved.theme) state.theme = saved.theme;
+  } catch (e) {}
+
+  function save() {
+    try { localStorage.setItem("kickoff-design-canvas", JSON.stringify({ zoom: state.zoom, theme: state.theme })); } catch (e) {}
+  }
+
+  function toast(text) {
+    var t = document.getElementById("toast");
+    t.textContent = text; t.classList.add("show");
+    clearTimeout(toast.timer); toast.timer = setTimeout(function () { t.classList.remove("show"); }, 1600);
+  }
+
+  function src(board) {
+    return board.file + (board.file.indexOf("?") < 0 ? "?" : "&") + "theme=" + state.theme;
+  }
+
+  // Fit: one scale per row so the whole row fits the window; never below 0.25,
+  // so a long row wraps instead of turning into thumbnails.
+  function scaleFor(row) {
+    if (state.zoom !== "fit") return Number(state.zoom);
+    var avail = document.documentElement.clientWidth - 2 * Math.max(16, innerWidth * 0.02);
+    var boards = row.boards || [], sum = 0;
+    boards.forEach(function (b) { sum += b.w || 1440; });
+    var s = (avail - 80 * (boards.length - 1)) / sum;
+    return Math.min(1, Math.max(0.25, s));
+  }
+
+  function wirePick(iframe, board) {
+    var doc;
+    try { doc = iframe.contentDocument; } catch (e) { return; }
+    if (!doc) return;
+    var style = doc.createElement("style");
+    style.textContent = "[data-kd-pick] [data-id]:hover{outline:2px solid #e8590c!important;outline-offset:1px;cursor:copy}";
+    doc.head && doc.head.appendChild(style);
+    if (state.pick) doc.documentElement.setAttribute("data-kd-pick", "");
+    doc.addEventListener("mouseover", function (e) {
+      if (!state.pick) return;
+      var el = e.target.closest && e.target.closest("[data-id]");
+      iframe.title = el ? board.id + " / " + el.getAttribute("data-id") : board.id;
+    });
+    doc.addEventListener("click", function (e) {
+      if (!state.pick) return;
+      var el = e.target.closest && e.target.closest("[data-id]");
+      if (!el) return;
+      e.preventDefault(); e.stopPropagation();
+      var ref = board.id + " / " + el.getAttribute("data-id");
+      (navigator.clipboard ? navigator.clipboard.writeText(ref) : Promise.reject())
+        .then(function () { toast("Copied: " + ref); }, function () { toast(ref); });
+    }, true);
+  }
+
+  function render() {
+    var rows = document.getElementById("rows");
+    rows.textContent = "";
+    var c = state.canvas;
+    document.getElementById("title").textContent = c.title || "Design canvas";
+    document.title = c.title || "Design canvas";
+    (c.rows || []).forEach(function (r) {
+      if (!r.boards || !r.boards.length) return;
+      var row = document.createElement("section"); row.className = "row";
+      var h = document.createElement("h2"); h.textContent = r.title || ""; row.appendChild(h);
+      var wrap = document.createElement("div"); wrap.className = "boards";
+      var s = scaleFor(r);
+      r.boards.forEach(function (b) {
+        var w = b.w || 1440, hgt = b.h || 1000;
+        var fig = document.createElement("figure");
+        var cap = document.createElement("figcaption");
+        var name = document.createElement("b"); name.textContent = b.id + " · " + (b.name || b.file);
+        var open = document.createElement("a"); open.href = src(b); open.target = "_blank"; open.textContent = "↗"; open.title = "Open alone";
+        cap.appendChild(name); cap.appendChild(open);
+        var frame = document.createElement("div"); frame.className = "frame";
+        frame.style.width = Math.round(w * s) + "px"; frame.style.height = Math.round(hgt * s) + "px";
+        var ifr = document.createElement("iframe");
+        ifr.width = w; ifr.height = hgt; ifr.style.transform = "scale(" + s + ")";
+        ifr.src = src(b); ifr.dataset.file = b.file;
+        ifr.addEventListener("load", function () { wirePick(ifr, b); });
+        frame.appendChild(ifr);
+        fig.appendChild(cap); fig.appendChild(frame);
+        if (b.note) { var n = document.createElement("p"); n.className = "note"; n.textContent = b.note; fig.appendChild(n); }
+        wrap.appendChild(fig);
+      });
+      row.appendChild(wrap); rows.appendChild(row);
+    });
+  }
+
+  function load() {
+    return fetch("canvas.json", { cache: "no-store" }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(function (text) {
+      if (text === load.last) return false;
+      load.last = text; state.canvas = JSON.parse(text); return true;
+    });
+  }
+
+  // Reload a board whose file changed on disk (the agent edited it).
+  function poll() {
+    var frames = document.querySelectorAll("iframe[data-file]");
+    frames.forEach(function (ifr) {
+      fetch(ifr.dataset.file, { method: "HEAD", cache: "no-store" }).then(function (r) {
+        var stamp = r.headers.get("Last-Modified") + r.headers.get("Content-Length");
+        var key = ifr.dataset.file;
+        if (state.stamps[key] && state.stamps[key] !== stamp) ifr.src = ifr.src;
+        state.stamps[key] = stamp;
+      }).catch(function () {});
+    });
+    load().then(function (changed) { if (changed) render(); }).catch(function () {});
+  }
+
+  function setPressed(attr, value) {
+    document.querySelectorAll("[" + attr + "]").forEach(function (b) {
+      b.setAttribute("aria-pressed", String(b.getAttribute(attr) === value));
+    });
+  }
+
+  document.querySelectorAll("[data-zoom]").forEach(function (b) {
+    b.addEventListener("click", function () { state.zoom = b.dataset.zoom; setPressed("data-zoom", state.zoom); save(); render(); });
+  });
+  document.querySelectorAll("[data-theme-btn]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.theme = b.dataset.themeBtn; setPressed("data-theme-btn", state.theme);
+      document.documentElement.setAttribute("data-theme", state.theme); save(); render();
+    });
+  });
+  document.getElementById("pick").addEventListener("click", function () {
+    state.pick = !state.pick; this.setAttribute("aria-pressed", String(state.pick));
+    document.querySelectorAll("iframe").forEach(function (ifr) {
+      try {
+        var root = ifr.contentDocument.documentElement;
+        state.pick ? root.setAttribute("data-kd-pick", "") : root.removeAttribute("data-kd-pick");
+      } catch (e) {}
+    });
+    if (state.pick) toast("Pick on: click an element to copy its id");
+  });
+  addEventListener("resize", function () { if (state.zoom === "fit" && state.canvas) render(); });
+
+  setPressed("data-zoom", state.zoom); setPressed("data-theme-btn", state.theme);
+  document.documentElement.setAttribute("data-theme", state.theme);
+  load().then(function () {
+    render(); setInterval(poll, 2000);
+  }).catch(function () {
+    var m = document.getElementById("msg"); m.hidden = false;
+    m.textContent = "canvas.json could not be read. Open this page through preview.sh (http://localhost), not from disk.";
+  });
+})();
+</script>
+</body>
+</html>
