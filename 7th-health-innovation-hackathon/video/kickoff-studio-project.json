@@ -1,0 +1,8 @@
+{
+  "app": "Kickoff Studio",
+  "project": "Samaam film, Health Innovation Hackathon",
+  "projectId": "d689ccc6-1e52-4df8-ae24-01c6ed57b69e",
+  "editor": "http://localhost:5199/#/editor/d689ccc6-1e52-4df8-ae24-01c6ed57b69e",
+  "tracks": ["V1 Background", "V2 Screens", "V3 Tube and drop", "V4 Medical renders", "V5 Highlights and cursor", "V6 Titles", "V7 Captions", "V8 Simulated notice", "A1 Voice (19 clips)", "A2 Sound effects", "A3 Music"],
+  "source": "~/Desktop/Project/kickoff-motion/projects/samaam-hackathon7"
+}

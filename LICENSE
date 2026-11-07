@@ -7,8 +7,9 @@ Copyright (c) 2026 Team Samaam
   Norah Abdullah Alsahli
 
 This license applies to every version of Samaam from the commit that
-introduces this file onward. The project is public to read. It is not open
-source.
+introduces this file onward, and to everything in this repository: the code,
+the designs, the Samaam name and logo, the documents, the images, the films
+and the voice in them. The project is public to read. It is not open source.
 
 1. Viewing. You may view this repository and its published demo.
 
@@ -22,10 +23,22 @@ source.
    written permission of Mohammed Nadher Abo Alrejal, and he must be included
    as a named team member or party to that entry or agreement.
 
-4. Earlier versions. Versions published before this file were released under
+4. Judging. The organisers and judges of a competition that Team Samaam has
+   entered may copy and show the materials of that entry, for judging it only.
+
+5. Voice. The narration in the Samaam films is a cloned voice of Mohammed
+   Nadher Abo Alrejal. You may not reuse it, imitate it, clone it, or train a
+   model on it without his prior written permission.
+
+6. Third-party material. Material that belongs to others stays under its own
+   terms, including the regulatory documents in kb/sources/, the award
+   certificate, the fonts (SIL Open Font License) and the film's music and
+   sound effects (CC0).
+
+7. Earlier versions. Versions published before this file were released under
    the MIT License, and that license continues to apply to those versions only.
 
-5. No warranty. Samaam is a hackathon prototype. It is provided "as is",
+8. No warranty. Samaam is a hackathon prototype. It is provided "as is",
    without warranty of any kind, and is not cleared for clinical use. In no
    event shall the copyright holders be liable for any claim, damages or other
    liability arising from it.

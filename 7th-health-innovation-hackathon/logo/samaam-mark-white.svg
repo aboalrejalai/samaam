@@ -1,0 +1,6 @@
+<!-- One-colour Samaam mark for medical blue grounds. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Samaam">
+  <path fill="#FFFFFF" d="M42 4C54 4 62 17 62 32C62 47 54 60 42 60C33 60 27 54 27 47C27 41 36 39 36 32C36 25 27 23 27 17C27 10 33 4 42 4Z"/>
+  <rect x="22" y="21" width="6.5" height="22" rx="3.25" fill="#FFFFFF"/>
+  <path fill="#FFFFFF" d="M9 19C9 19 17 29 17 35A8 8 0 0 1 1 35C1 29 9 19 9 19Z"/>
+</svg>

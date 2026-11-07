@@ -97,5 +97,6 @@ React 19 · Vite · Tailwind v4 · shadcn/ui · TanStack Query · react-router v
 - Backend comments and docstrings are written in **Arabic**, frontend comments in English. Match the file you're in. Comments explain *why* a decision was made, often citing a document page, and are kept dense.
 - `changelog/CHANGELOG.md` (Arabic, `MAJOR.MINOR.PATCH`) records each completed phase, including what was verified and how.
 - `submission/slides.html` and `web/public/deck/index.html` are the same deck; the second is what `/slides` embeds. Keep them identical.
+- `7th-health-innovation-hackathon/` holds the current entry's film, images, PDF and logo. The film's editable source stays in `~/Desktop/Project/kickoff-motion/projects/samaam-hackathon7/`.
 - `reference/organizers/` is the organizers' reference code: read-only, never import from it.
 - `map/` is an Obsidian vault of per-node notes. `.obsidian/` and `Samaam/` are tracked vault files, not application code.

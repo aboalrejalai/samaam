@@ -11,6 +11,7 @@ regulation.
 
 [![License](https://img.shields.io/badge/license-all%20rights%20reserved-red.svg)](LICENSE)
 ![Award](https://img.shields.io/badge/ITU%20Hackathon-3rd%20Prize-gold)
+![Now competing](https://img.shields.io/badge/7th%20Health%20Innovation%20Hackathon-competing-1d4ed8)
 ![Standard](https://img.shields.io/badge/ITU--T-Y.3172-0ea5e9)
 ![Data](https://img.shields.io/badge/data-100%25%20synthetic-success)
 ![Keys](https://img.shields.io/badge/API%20keys-none%20in%20repo-success)
@@ -43,6 +44,34 @@ International Telecommunication Union for the innovation **Samaam**.
     width="720"
   />
 </p>
+
+---
+
+## Now competing — 7th Health Innovation Hackathon
+
+Team Samaam is taking part in the **Prototype Competition** of the **7th Health
+Innovation Hackathon**, with Samaam as its prototype. Everything made for this
+entry is in [`7th-health-innovation-hackathon/`](7th-health-innovation-hackathon/).
+
+**بالعربية —** يشارك فريق صمام حاليًا في مسابقة النماذج الأولية ضمن هاكاثون
+الابتكار الصحي السابع، وكل مواد المشاركة في المجلد نفسه.
+
+<p align="center">
+  <a href="7th-health-innovation-hackathon/video/samaam-film-master.mp4">
+    <img
+      src="7th-health-innovation-hackathon/video/samaam-poster.jpg"
+      alt="Samaam film poster"
+      width="720"
+    />
+  </a>
+</p>
+
+| | |
+| :--- | :--- |
+| **Film** | [2:52, English](7th-health-innovation-hackathon/video/samaam-film-master.mp4) · [form copy](7th-health-innovation-hackathon/video/samaam-film-under20mb.mp4) · [script](7th-health-innovation-hackathon/video/script.md) |
+| **Images** | [Ten English screens](7th-health-innovation-hackathon/images/) · [contact sheet](7th-health-innovation-hackathon/contact-sheet.png) |
+| **Concept brief** | [Four-page PDF](7th-health-innovation-hackathon/pdf/samaam-concept-brief.pdf) |
+| **Logo** | [Mark and lockup](7th-health-innovation-hackathon/logo/) |
 
 ---
 
@@ -286,6 +315,8 @@ scenarios/    The three demo cases, plus the questions put to the reviewing clin
 submission/   Technical report (5 pages)
 changelog/    Version history, every change
 docs/         Concept, hackathon guide, knowledge base, research passes
+design/       The approved redesign boards, renders and logo
+7th-health-innovation-hackathon/   Film, images, concept brief and logo for the current entry
 ```
 
 | Deliverable | |
@@ -293,6 +324,7 @@ docs/         Concept, hackathon guide, knowledge base, research passes
 | Technical report | [`submission/TECHNICAL-REPORT.md`](submission/TECHNICAL-REPORT.md) |
 | Demo video script | [`VIDEO-SCRIPT.md`](VIDEO-SCRIPT.md) |
 | Change log | [`changelog/CHANGELOG.md`](changelog/CHANGELOG.md) |
+| 7th Health Innovation Hackathon entry | [`7th-health-innovation-hackathon/`](7th-health-innovation-hackathon/) |
 
 ---
 
@@ -314,4 +346,5 @@ docs/         Concept, hackathon guide, knowledge base, research passes
 
 This repository is public to read. It is **not** open source: using it, or
 entering it in any competition, incubator or investment, needs the written
-permission set out in [LICENSE](LICENSE).
+permission set out in [LICENSE](LICENSE). The license also covers the designs,
+the logo, the images, the films and the voice in them.

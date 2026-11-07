@@ -20,5 +20,6 @@ design/
 reference/
 submission/
 changelog/
+7th-health-innovation-hackathon/
 *.md
 !requirements.txt
